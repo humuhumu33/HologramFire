@@ -1,0 +1,9 @@
+{
+  "name": "atlas-12288/ml2p/objective-tradeoff",
+  "version": "1.0.0",
+  "invariants": [
+    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
+    "witness_required","ml2p_objective_tradeoff","ml2p_power_first_class"
+  ],
+  "impl": "src/ml2p/objective/Tradeoff.ts"
+}

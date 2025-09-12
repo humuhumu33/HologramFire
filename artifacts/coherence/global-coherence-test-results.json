@@ -1,0 +1,108 @@
+{
+  "timestamp": "2025-09-11T14:37:50.385Z",
+  "totalTime": 26721,
+  "summary": {
+    "total": 13,
+    "passed": 1,
+    "failed": 12,
+    "successRate": 7.6923076923076925
+  },
+  "results": [
+    {
+      "test": "Basic Functionality",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false,
+        "summaryGenerated": false,
+        "commandOutput": "No output"
+      }
+    },
+    {
+      "test": "Oracle Mode: base",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Oracle Mode: enhanced",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Oracle Mode: ml-enhanced",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Oracle Mode: strict",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Oracle Mode: development",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Oracle Mode: middleware",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Component Validation: Blueprint Only",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Component Validation: Module Only",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Component Validation: Component Only",
+      "status": "FAIL",
+      "details": {
+        "reportGenerated": false
+      }
+    },
+    {
+      "test": "Performance and Caching",
+      "status": "FAIL",
+      "details": {
+        "withCacheTime": 1745,
+        "withoutCacheTime": 1749,
+        "cacheReportGenerated": false,
+        "noCacheReportGenerated": false
+      }
+    },
+    {
+      "test": "Error Handling: Invalid Mode",
+      "status": "FAIL",
+      "details": {
+        "error": "Should have failed with invalid mode"
+      }
+    },
+    {
+      "test": "Error Handling: Invalid Threshold",
+      "status": "PASS",
+      "details": {
+        "message": "Handled gracefully"
+      }
+    }
+  ]
+}

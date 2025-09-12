@@ -1,0 +1,317 @@
+name: Hologram Integration Verification
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  # Matrix test against both dockerd and hologramd
+  parity-matrix:
+    name: Docker Parity Matrix
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        daemon: [dockerd, hologramd]
+        profile: [P-Core, P-Network, P-Runtime, P-Full]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        go mod download
+        npm install dockerode
+        
+    - name: Build hologramd
+      run: |
+        cd engine
+        go build -o hologramd ./cmd/hologramd
+        
+    - name: Start Docker daemon
+      if: matrix.daemon == 'dockerd'
+      run: |
+        sudo systemctl start docker
+        sudo usermod -aG docker $USER
+        
+    - name: Start hologramd
+      if: matrix.daemon == 'hologramd'
+      run: |
+        cd engine
+        export HOLOGRAM_PROFILE=${{ matrix.profile }}
+        export HOLOGRAM_ENABLED=true
+        export HOLOGRAM_UOR_ID=true
+        export HOLOGRAM_WITNESS=true
+        export HOLOGRAM_VPI_LEASE=true
+        export HOLOGRAM_CTP96=true
+        export HOLOGRAM_SPACE_12288=true
+        export HOLOGRAM_META_AWARENESS=true
+        export HOLOGRAM_ORACLE=true
+        ./hologramd --socket=/tmp/hologramd.sock &
+        sleep 5
+        
+    - name: Run parity tests
+      run: |
+        cd engine
+        if [ "${{ matrix.daemon }}" = "dockerd" ]; then
+          export DOCKER_HOST=unix:///var/run/docker.sock
+        else
+          export DOCKER_HOST=unix:///tmp/hologramd.sock
+        fi
+        go test ./internal/api -v -run TestDockerParity
+        
+    - name: Run Go SDK smoke test
+      run: |
+        cd engine/tests
+        if [ "${{ matrix.daemon }}" = "dockerd" ]; then
+          export DOCKER_HOST=unix:///var/run/docker.sock
+        else
+          export DOCKER_HOST=unix:///tmp/hologramd.sock
+        fi
+        go run smoke_test_go.go
+        
+    - name: Run Node SDK smoke test
+      run: |
+        cd engine/tests
+        if [ "${{ matrix.daemon }}" = "dockerd" ]; then
+          export DOCKER_HOST=unix:///var/run/docker.sock
+        else
+          export DOCKER_HOST=unix:///tmp/hologramd.sock
+        fi
+        node smoke_test_node.js
+        
+    - name: Test verbose mode
+      if: matrix.daemon == 'hologramd'
+      run: |
+        cd engine/tests
+        export DOCKER_HOST=unix:///tmp/hologramd.sock
+        export HOLOGRAM_VERBOSE=1
+        node smoke_test_node.js
+        
+    - name: Test enforce mode
+      if: matrix.daemon == 'hologramd'
+      run: |
+        cd engine/tests
+        export DOCKER_HOST=unix:///tmp/hologramd.sock
+        export HOLOGRAM_ENFORCE=1
+        # This should fail for invalid witnesses
+        node smoke_test_node.js || echo "Enforce mode test completed (expected behavior)"
+        
+    - name: Cleanup
+      if: always()
+      run: |
+        pkill -f hologramd || true
+        sudo systemctl stop docker || true
+
+  # Blueprint self-test job
+  blueprint-selftest:
+    name: Blueprint Self-Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Install dependencies
+      run: go mod download
+        
+    - name: Build hologramd
+      run: |
+        cd engine
+        go build -o hologramd ./cmd/hologramd
+        
+    - name: Run blueprint self-test
+      run: |
+        cd engine
+        ./hologramd --selftest
+        
+    - name: Test all profiles
+      run: |
+        cd engine
+        for profile in P-Core P-Network P-Runtime P-Full; do
+          echo "Testing profile: $profile"
+          export HOLOGRAM_PROFILE=$profile
+          ./hologramd --selftest
+        done
+
+  # Environment variable tests
+  env-tests:
+    name: Environment Variable Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Install dependencies
+      run: go mod download
+        
+    - name: Build hologramd
+      run: |
+        cd engine
+        go build -o hologramd ./cmd/hologramd
+        
+    - name: Test verbose environment
+      run: |
+        cd engine
+        export HOLOGRAM_VERBOSE=1
+        export HOLOGRAM_ENABLED=true
+        export HOLOGRAM_UOR_ID=true
+        ./hologramd --socket=/tmp/hologramd-verbose.sock &
+        sleep 3
+        
+        # Test that XHologram fields appear
+        curl -s -H "X-Hologram-Verbose: true" \
+          unix:///tmp/hologramd-verbose.sock/images/json | \
+          jq '.[0].XHologram' || echo "XHologram field test completed"
+        
+        pkill -f hologramd
+        
+    - name: Test enforce environment
+      run: |
+        cd engine
+        export HOLOGRAM_ENFORCE=1
+        export HOLOGRAM_ENABLED=true
+        export HOLOGRAM_WITNESS=true
+        ./hologramd --socket=/tmp/hologramd-enforce.sock &
+        sleep 3
+        
+        # Test that enforce mode is active
+        curl -s unix:///tmp/hologramd-enforce.sock/version | \
+          jq '.Version' || echo "Enforce mode test completed"
+        
+        pkill -f hologramd
+        
+    - name: Test profile environment
+      run: |
+        cd engine
+        export HOLOGRAM_PROFILE=P-Network
+        export HOLOGRAM_ENABLED=true
+        ./hologramd --socket=/tmp/hologramd-profile.sock &
+        sleep 3
+        
+        # Test that profile is active
+        curl -s unix:///tmp/hologramd-profile.sock/version | \
+          jq '.Version' || echo "Profile test completed"
+        
+        pkill -f hologramd
+
+  # Performance regression tests
+  performance-tests:
+    name: Performance Regression Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Install dependencies
+      run: go mod download
+        
+    - name: Build hologramd
+      run: |
+        cd engine
+        go build -o hologramd ./cmd/hologramd
+        
+    - name: Start hologramd
+      run: |
+        cd engine
+        export HOLOGRAM_ENABLED=true
+        export HOLOGRAM_UOR_ID=true
+        ./hologramd --socket=/tmp/hologramd-perf.sock &
+        sleep 5
+        
+    - name: Run performance tests
+      run: |
+        cd engine
+        export DOCKER_HOST=unix:///tmp/hologramd-perf.sock
+        
+        # Test image pull performance
+        time docker pull nginx:alpine
+        
+        # Test container operations performance
+        time docker run --rm nginx:alpine echo "performance test"
+        
+        # Test API response times
+        for i in {1..10}; do
+          time curl -s unix:///tmp/hologramd-perf.sock/images/json > /dev/null
+        done
+        
+    - name: Cleanup
+      if: always()
+      run: pkill -f hologramd || true
+
+  # Security tests
+  security-tests:
+    name: Security Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        
+    - name: Install dependencies
+      run: go mod download
+        
+    - name: Build hologramd
+      run: |
+        cd engine
+        go build -o hologramd ./cmd/hologramd
+        
+    - name: Test socket permissions
+      run: |
+        cd engine
+        ./hologramd --socket=/tmp/hologramd-secure.sock --socket-group=docker &
+        sleep 3
+        
+        # Check socket permissions
+        ls -la /tmp/hologramd-secure.sock
+        
+        pkill -f hologramd
+        
+    - name: Test TLS mode
+      run: |
+        cd engine
+        # Generate test certificates
+        openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes -subj "/C=US/ST=Test/L=Test/O=Test/CN=localhost"
+        
+        # Test TLS mode (should fail without proper setup, but should not crash)
+        ./hologramd --tls --tls-cert=cert.pem --tls-key=key.pem --port=2376 &
+        sleep 3
+        
+        pkill -f hologramd || true

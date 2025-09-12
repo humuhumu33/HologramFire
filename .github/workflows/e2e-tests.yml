@@ -1,0 +1,205 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Compatibility mode tests (default)
+  compat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run compatibility tests
+        run: make compat
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hologramd-logs-compat
+          path: /tmp/hologramd.log
+
+  # Verbose mode tests
+  verbose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run verbose tests
+        run: make verbose
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hologramd-logs-verbose
+          path: /tmp/hologramd.log
+
+  # Enforce mode tests
+  enforce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run enforce tests
+        run: make enforce
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hologramd-logs-enforce
+          path: /tmp/hologramd.log
+
+  # Race detector tests
+  race:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run race detector tests
+        run: make race
+
+  # Performance benchmarks (non-blocking)
+  benchmarks:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run benchmarks
+        run: make bench
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results
+          path: benchmark.out
+
+  # CTP96 network tests
+  ctp96:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run CTP96 network tests
+        run: |
+          HOLOGRAM_NET=ctp96 ./build/hologramd & echo $$! > .pid; sleep 2; \
+          HOLOGRAM_NET=ctp96 go test ./tests/go -run CTP96 -count=1 -v; \
+          kill `cat .pid` 2>/dev/null || true; rm -f .pid
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hologramd-logs-ctp96
+          path: /tmp/hologramd.log
+
+  # Matrix test for different configurations
+  matrix-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mode: [compat, verbose, enforce]
+        go-version: ['1.21', '1.22']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Install Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build hologramd
+        run: make build
+
+      - name: Run tests for ${{ matrix.mode }}
+        run: make ${{ matrix.mode }}
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hologramd-logs-${{ matrix.mode }}-go${{ matrix.go-version }}
+          path: /tmp/hologramd.log

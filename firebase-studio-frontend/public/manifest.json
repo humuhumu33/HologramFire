@@ -1,0 +1,63 @@
+{
+  "name": "Firebase Studio - Full Stack AI Workspace",
+  "short_name": "Firebase Studio",
+  "description": "A modern, full-stack AI workspace with smooth UX inspired by Revolut Exchange",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#4285f4",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "developer", "utilities"],
+  "icons": [
+    {
+      "src": "/firebase-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Project",
+      "short_name": "New",
+      "description": "Create a new project",
+      "url": "/?action=new",
+      "icons": [{ "src": "/shortcut-new.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Open Project",
+      "short_name": "Open",
+      "description": "Open existing project",
+      "url": "/?action=open",
+      "icons": [{ "src": "/shortcut-open.png", "sizes": "96x96" }]
+    }
+  ]
+}

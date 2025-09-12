@@ -1,0 +1,11 @@
+{
+  "name": "rh-zeros-fixture",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "zetaZerosIm": [14.134725141734693, 21.022039638771556, 25.010857580145688],
+  "tau": { "rho1": 1e-12, "default": 1e-9 }
+}

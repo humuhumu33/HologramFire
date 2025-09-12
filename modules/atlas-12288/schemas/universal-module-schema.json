@@ -1,0 +1,45 @@
+{
+  "$id": "atlas-12288/schemas/universal-module-schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal Module Schema (minimal-Phase0)",
+  "type": "object",
+  "required": ["$id", "imports", "exports", "invariants", "implementation"],
+  "additionalProperties": true,
+  "properties": {
+    "$id": {
+      "type": "string",
+      "pattern": "^atlas-12288/[a-z0-9-/.]+$"
+    },
+    "imports": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^atlas-12288/[a-z0-9-/.]+$" },
+      "uniqueItems": true
+    },
+    "exports": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "page_conservation",
+          "cycle_conservation",
+          "resonance_classification",
+          "holographic_correspondence"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "implementation": {
+      "oneOf": [
+        { "type": "object", "required": ["native"], "properties": { "native": { "type": "string" } } },
+        { "type": "object", "required": ["wasm"],   "properties": { "wasm":   { "type": "string" } } },
+        { "type": "object", "required": ["proof"],  "properties": { "proof":  { "type": "string" } } }
+      ]
+    }
+  }
+}

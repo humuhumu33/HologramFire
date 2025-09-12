@@ -1,0 +1,79 @@
+{
+  "$id": "atlas-12288/infrastructure/infrastructure-uor-resolver",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/infrastructure/infrastructure-orchestrator",
+    "atlas-12288/crypto/ccm-hash",
+    "atlas-12288/monitoring/metrics"
+  ],
+  "exports": [
+    "infrastructure_uor_resolution",
+    "cross_modal_infrastructure_queries",
+    "infrastructure_dependency_graph_generation",
+    "infrastructure_component_discovery"
+  ],
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation",
+    "witness_required"
+  ],
+  "implementation": {
+    "native": "src/infrastructure/resolver/InfrastructureUORResolver.ts",
+    "type": "typescript_class",
+    "resolution_types": [
+      "database",
+      "network",
+      "storage",
+      "iac",
+      "component",
+      "deployment",
+      "dependency"
+    ],
+    "features": {
+      "caching": true,
+      "dependency_resolution": true,
+      "cross_modal_queries": true,
+      "performance_optimization": true
+    }
+  },
+  "holographic_correspondence": {
+    "reference_implementation": "hologram_generator_mini.py",
+    "correspondence_score": 1.0,
+    "self_reference": {
+      "enabled": true,
+      "type": "recursive_validation",
+      "depth": 3
+    }
+  },
+  "resonance_classification": {
+    "harmonic_frequencies": [12288, 4096, 1024, 256, 64],
+    "resonance_stability": 0.98,
+    "phase_relationships": {
+      "uor_resolution": "in_phase",
+      "cross_modal_queries": "harmonic",
+      "dependency_graph_generation": "resonant",
+      "component_discovery": "harmonic"
+    }
+  },
+  "cycle_conservation": {
+    "conservation_factor": 0.99,
+    "energy_efficiency": 0.97,
+    "resource_utilization": {
+      "cpu": "optimal",
+      "memory": "conserved",
+      "network": "efficient",
+      "resolution": "optimized"
+    }
+  },
+  "page_conservation": {
+    "memory_alignment": "optimal",
+    "fragmentation_factor": 0.01,
+    "page_efficiency": 0.98
+  },
+  "witness_required": {
+    "witness_types": ["execution", "integrity", "coherence", "resolution_consistency"],
+    "verification_depth": "full"
+  }
+}

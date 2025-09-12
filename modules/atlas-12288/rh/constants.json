@@ -1,0 +1,9 @@
+{
+  "name": "atlas-12288/rh/constants",
+  "version": "1.0.0",
+  "invariants": [
+    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
+    "witness_required","rh_constant_bank_consistency"
+  ],
+  "impl": "src/rh/Constants.ts"
+}

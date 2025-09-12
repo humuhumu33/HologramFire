@@ -1,0 +1,23 @@
+{
+  "name": "atlas-12288-supply-repro",
+  "$id": "atlas-12288/supply/repro",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "buildRepro",
+    "verifyRepro"
+  ],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence",
+    "reproducible_build",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/supply/repro/Repro.ts"
+  }
+}

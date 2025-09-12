@@ -1,0 +1,288 @@
+{
+  "timestamp": "2025-09-11T14:42:06.405Z",
+  "summary": {
+    "totalFiles": 68,
+    "coherentFiles": 68,
+    "warningFiles": 0,
+    "criticalFiles": 0,
+    "averageScore": 100,
+    "systemStatus": "EXCELLENT"
+  },
+  "fileScores": [
+    {
+      "file": "atlas-12288\\accumulator\\checkpoint.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\accumulator\\merkle.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\audit\\attacks.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\audit\\hardening.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\audit\\policy.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\audit\\report.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\blueprint\\blueprint.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\blueprint\\blueprint.schema.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\core\\conservation.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\core\\holography.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\core\\klein.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\core\\resonance.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\core\\structure.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\crypto\\alpha-attestation.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\crypto\\boundary-proof.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\crypto\\budget-receipt.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\crypto\\ccm-hash.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\crypto\\holo-signature.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\deploy\\fingerprint-binding.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\deploy\\import-verifier.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\deploy\\semver-policy.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\identity\\uor-id.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\logic\\proof.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\logic\\rl96.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\energy-semantics.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\fixtures\\devices.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\fixtures\\pareto.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\fixtures\\workloads.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\hw-portability.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\lifecycle-accounting.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\objective-tradeoff.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\ml2p\\predictor-map2physics.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\monitoring\\alerts.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\monitoring\\chaos.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\monitoring\\metrics.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\perf\\benches.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\perf\\harness.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\perf\\targets.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\persistence\\gc.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\persistence\\ledger.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\persistence\\snapshot.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\prime\\f.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\prime\\fixed-point.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\prime\\hilbert.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\prime\\hrf.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\prime\\proof.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\align.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\constants.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\fixtures\\gateway.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\fixtures\\mirror.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\fixtures\\targets.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\fixtures\\zeros.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\gateway.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\mirror.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\rh\\skew.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\runtime\\local-verifier.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\runtime\\vpi.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\schemas\\universal-module-schema.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\supply\\policy-guard.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\supply\\provenance.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\supply\\release-sign.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\supply\\repro.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\supply\\sbom.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\transport\\ctp-96.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\un\\distributions.window-entropy.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\un\\graphs.subgraph-counts.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\un\\matrices.block-det.json",
+      "score": 100
+    },
+    {
+      "file": "atlas-12288\\un\\strings.histogram.json",
+      "score": 100
+    }
+  ],
+  "recommendations": [
+    "System meets production coherence requirements"
+  ]
+}

@@ -1,0 +1,32 @@
+# .github/workflows/perf-matrix.yml
+name: perf-matrix
+on:
+  push: { branches: [ main ] }
+  workflow_dispatch:
+jobs:
+  perf:
+    strategy:
+      fail-fast: false
+      matrix: { os: [ubuntu-latest, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - name: Bench (attestation)
+        env:
+          NODE_OPTIONS: "--expose-gc"
+          # override if you have measured TDP/SoC watts:
+          HOLOGRAM_WATTS: "15"
+        run: npm run bench:ci
+      - name: Compare vs targets
+        run: npm run bench:compare:targets
+      - name: Long-run stability
+        env: { NODE_OPTIONS: "--expose-gc" }
+        run: npm run bench:longrun
+      - uses: actions/upload-artifact@v4
+        with:
+          name: perf-${{ matrix.os }}
+          path: artifacts/perf/*.json
+          retention-days: 14

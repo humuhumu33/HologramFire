@@ -1,0 +1,15 @@
+{
+  "name": "ml2p-devices-fixture",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "devices": [
+    { "cpu": "A", "clock": "3.2GHz", "node": "7nm" },
+    { "cpu": "B", "clock": "2.7GHz", "node": "12nm" },
+    { "gpu": "G1", "mem": "6GB" }
+  ],
+  "calibration": { "device": { "cpu": "A" }, "factor": 0.92 }
+}

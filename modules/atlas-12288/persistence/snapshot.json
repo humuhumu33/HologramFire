@@ -1,0 +1,24 @@
+{
+  "name": "atlas-12288-persistence-snapshot",
+  "$id": "atlas-12288/persistence/snapshot",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/core/holography",
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "createSnapshot",
+    "verifySnapshot"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "snapshot_integrity",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/persistence/snapshot/Snapshot.ts"
+  }
+}

@@ -1,0 +1,22 @@
+name: pss
+on:
+  push: { branches: [ main ] }
+  workflow_dispatch:
+jobs:
+  pss:
+    strategy:
+      fail-fast: false
+      matrix: { os: [ubuntu-latest, windows-latest] }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npm run stamp:blueprint
+      - run: npm test
+      - run: npm run validate atlas-12288/blueprint/blueprint.json
+      - name: (optional) verify proof digest
+        run: npm run proof:verify
+        env:
+          PSS_PROOF_DIGEST: ""

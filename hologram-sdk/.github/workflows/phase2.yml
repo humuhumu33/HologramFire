@@ -1,0 +1,261 @@
+name: Phase 2 - Docker Compatibility & Lifecycle
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  GO_VERSION: '1.21'
+  HOLOGRAM_TEST: 1
+
+jobs:
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-type: [compat, verbose, enforce, race, e2e]
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Run ${{ matrix.test-type }} tests
+      run: make ${{ matrix.test-type }}
+      env:
+        HOLOGRAM_VERBOSE: ${{ matrix.test-type == 'verbose' && '1' || '' }}
+        HOLOGRAM_ENFORCE: ${{ matrix.test-type == 'enforce' && '1' || '' }}
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.test-type }}
+        path: |
+          test-results/
+          *.log
+
+  benchmark:
+    name: Performance Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Run benchmarks
+      run: make bench
+    
+    - name: Upload benchmark results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-results
+        path: |
+          benchmark-results/
+          *.log
+
+  docker-compat:
+    name: Docker Compatibility
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Build hologramd
+      run: make build
+    
+    - name: Test Docker compatibility
+      run: make docker-compat
+    
+    - name: Upload compatibility results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-compat-results
+        path: |
+          compat-results/
+          *.log
+
+  build:
+    name: Build & Package
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [linux, windows, darwin]
+        arch: [amd64, arm64]
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Build hologramd
+      run: |
+        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o hologramd-${{ matrix.os }}-${{ matrix.arch }} ./engine/cmd/hologramd
+    
+    - name: Build buildx driver
+      run: |
+        GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o buildx-driver-hologram-${{ matrix.os }}-${{ matrix.arch }} ./tools/buildx-driver-hologram
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: hologramd-${{ matrix.os }}-${{ matrix.arch }}
+        path: |
+          hologramd-${{ matrix.os }}-${{ matrix.arch }}
+          buildx-driver-hologram-${{ matrix.os }}-${{ matrix.arch }}
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Run security scan
+      run: |
+        go install github.com/securecodewarrior/gosec/v2/cmd/gosec@latest
+        gosec ./...
+    
+    - name: Upload security results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-results
+        path: |
+          gosec-results.json
+          *.log
+
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Run linter
+      run: |
+        go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+        make lint
+    
+    - name: Check formatting
+      run: make fmt
+    
+    - name: Upload lint results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-results
+        path: |
+          lint-results/
+          *.log
+
+  integration:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Run integration tests
+      run: make e2e
+    
+    - name: Upload integration results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: integration-results
+        path: |
+          integration-results/
+          *.log
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [test, benchmark, docker-compat, build, security, lint, integration]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        cache: true
+    
+    - name: Install dependencies
+      run: make deps
+    
+    - name: Build release binaries
+      run: |
+        make build
+        make build-driver
+    
+    - name: Create release archive
+      run: |
+        tar -czf hologram-sdk-phase2.tar.gz \
+          engine/cmd/hologramd/hologramd \
+          tools/buildx-driver-hologram/buildx-driver-hologram \
+          README.md \
+          docs/
+    
+    - name: Upload release artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: hologram-sdk-phase2-release
+        path: hologram-sdk-phase2.tar.gz

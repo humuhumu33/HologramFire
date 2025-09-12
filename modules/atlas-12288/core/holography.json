@@ -1,0 +1,22 @@
+{
+  "name": "atlas-12288-core-holography",
+  "$id": "atlas-12288/core/holography",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/core/resonance",
+    "atlas-12288/core/conservation"
+  ],
+  "exports": [
+    "phi"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/core/holography/Phi.ts"
+  }
+}

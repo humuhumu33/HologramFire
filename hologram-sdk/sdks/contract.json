@@ -1,0 +1,110 @@
+{
+  "v": 1,
+  "methods": [
+    {
+      "name": "ccmHash",
+      "params": { "object": "any", "domain": "string" },
+      "result": { "digest": "string", "witness": "string" }
+    },
+    {
+      "name": "uorId",
+      "params": { "object": "any" },
+      "result": { "uor": "string", "resonance": "number", "witness": "string" }
+    },
+    {
+      "name": "proofVerify",
+      "params": { "budgets": "number[]" },
+      "result": { "ok": "boolean", "witness": "string" }
+    },
+    {
+      "name": "ctpVerify",
+      "params": { "frames": "any[]" },
+      "result": { "ok": "boolean", "witness": "string" }
+    },
+    {
+      "name": "version",
+      "params": {},
+      "result": { "sdk": "string", "contract": "number", "witness": "string" }
+    },
+    {
+      "name": "unEvaluate",
+      "params": { "spec": "any", "state": "any", "windows": "any[]" },
+      "result": { "value": "any", "witness": "string" }
+    },
+    {
+      "name": "unVerify",
+      "params": { "spec": "any", "state": "any", "kind": "string", "arg": "any" },
+      "result": { "ok": "boolean", "witness": "string" }
+    },
+    {
+      "name": "pss.hrf",
+      "params": {},
+      "result": { "hrf": "any", "witness": "string" }
+    },
+    {
+      "name": "pss.applyF",
+      "params": { "state": "any" },
+      "result": { "state": "any", "witness": "string" }
+    },
+    {
+      "name": "pss.fixedPoint",
+      "params": {},
+      "result": { "digest": "string" }
+    },
+    {
+      "name": "pss.verifyUnitary",
+      "params": {},
+      "result": { "ok": "boolean", "dev": "number", "witness": "string" }
+    },
+    {
+      "name": "rh.constants",
+      "params": {},
+      "result": { "alpha": "any", "witness": "string" }
+    },
+    {
+      "name": "rh.mirror",
+      "params": { "k": "number" },
+      "result": { "km": "number", "witness": "string" }
+    },
+    {
+      "name": "rh.align",
+      "params": { "windowScores": "any", "tolerance": "number" },
+      "result": { "k": "number", "reason": "string", "witness": "string" }
+    },
+    {
+      "name": "rh.skew",
+      "params": { "windowScores": "any", "k": "number" },
+      "result": { "delta": "number", "witness": "string" }
+    },
+    {
+      "name": "ml2p.beginSession",
+      "params": { "deviceMeta": "any" },
+      "result": { "sessionId": "string", "witness": "string" }
+    },
+    {
+      "name": "ml2p.recordPhase",
+      "params": { "sessionId": "string", "phase": "string", "j": "number", "meta": "any" },
+      "result": { "witness": "string" }
+    },
+    {
+      "name": "ml2p.finishSession",
+      "params": { "sessionId": "string" },
+      "result": { "totalJ": "number", "witness": "string" }
+    },
+    {
+      "name": "ml2p.buildObjective",
+      "params": { "points": "any" },
+      "result": { "pareto": "any", "witness": "string" }
+    },
+    {
+      "name": "ml2p.normalize",
+      "params": { "measurements": "any", "calibration": "any" },
+      "result": { "normalized": "any", "witness": "string" }
+    },
+    {
+      "name": "ml2p.predict",
+      "params": { "archFeatures": "any" },
+      "result": { "predJ": "number", "predAPRf1": "any", "witness": "string" }
+    }
+  ]
+}

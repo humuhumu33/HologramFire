@@ -1,0 +1,27 @@
+{
+  "name": "atlas-12288-audit-policy",
+  "$id": "atlas-12288/audit/policy",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/transport/ctp-96",
+    "atlas-12288/monitoring/metrics",
+    "atlas-12288/monitoring/alerts",
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "runAttack"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "forgery_resistance",
+    "holographic_correspondence",
+    "mitm_resistance",
+    "page_conservation",
+    "replay_resistance",
+    "resonance_classification",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/audit/policy/Policy.ts"
+  }
+}

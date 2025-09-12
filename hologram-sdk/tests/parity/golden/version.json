@@ -1,0 +1,32 @@
+{
+  "Version": "24.0.7",
+  "ApiVersion": "1.41",
+  "MinAPIVersion": "1.12",
+  "GitCommit": "dev",
+  "GoVersion": "1.21.0",
+  "Os": "linux",
+  "Arch": "amd64",
+  "KernelVersion": "5.4.0-74-generic",
+  "BuildTime": "2024-01-01T00:00:00.000000000+00:00",
+  "PkgVersion": "24.0.7",
+  "Components": [
+    {
+      "Name": "Engine",
+      "Version": "24.0.7",
+      "Details": {
+        "ApiVersion": "1.41",
+        "Arch": "amd64",
+        "BuildTime": "2024-01-01T00:00:00.000000000+00:00",
+        "Experimental": false,
+        "GitCommit": "dev",
+        "GoVersion": "1.21.0",
+        "KernelVersion": "5.4.0-74-generic",
+        "MinAPIVersion": "1.12",
+        "Os": "linux"
+      }
+    }
+  ],
+  "Platform": {
+    "Name": "Docker Engine - Community"
+  }
+}

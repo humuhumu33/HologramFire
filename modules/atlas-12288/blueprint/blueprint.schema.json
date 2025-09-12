@@ -1,0 +1,248 @@
+{
+  "$id": "atlas-12288/blueprint/blueprint.schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "atlas-12288 blueprint.schema (self-validating)",
+  "type": "object",
+  "required": [
+    "$id",
+    "$schema",
+    "self"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "$id": {
+      "const": "atlas-12288/blueprint/blueprint.schema"
+    },
+    "$schema": {
+      "type": "string",
+      "description": "Reference to the JSON Schema specification"
+    },
+    "modules": {
+      "type": "object",
+      "default": {},
+      "patternProperties": {
+        "^atlas-12288/": {
+          "type": "object",
+          "required": ["$id", "$schema", "imports", "exports", "invariants", "implementation"],
+          "properties": {
+            "$id": {
+              "type": "string",
+              "description": "Unique identifier for the module"
+            },
+            "$schema": {
+              "type": "string",
+              "description": "Reference to this schema"
+            },
+            "imports": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of imported module identifiers"
+            },
+            "exports": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of exported function identifiers"
+            },
+            "invariants": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "holographic_correspondence",
+                  "resonance_classification",
+                  "page_conservation",
+                  "cycle_conservation",
+                  "witness_required",
+                  "budget_algebra",
+                  "proof_composition",
+                  "attestation_integrity",
+                  "boundary_proof",
+                  "signature_binding",
+                  "roundtrip_preservation",
+                  "uor_identity",
+                  "ctp96_contract",
+                  "replay_protection",
+                  "runtime_contract",
+                  "sandbox_integrity",
+                  "local_verification",
+                  "resource_budget",
+                  "snapshot_integrity",
+                  "delta_proof",
+                  "ledger_append_only",
+                  "gc_safety",
+                  "accumulator_integrity",
+                  "exclusion_proof",
+                  "inclusion_proof",
+                  "cross_shard_consistency",
+                  "un_compositionality",
+                  "un_program_conservation",
+                  "un_symmetry_invariance",
+                  "un_window_measure",
+                  "un_witnessability",
+                  "pss_endofunctor_contract",
+                  "pss_fixed_point_witness",
+                  "pss_hrf_minimality",
+                  "pss_hilbert_axioms",
+                  "pss_unitary_evolution",
+                  "pss_formal_proof",
+                  "rh_constant_bank_consistency",
+                  "rh_mirror_involution",
+                  "rh_mirror_fixed_locus",
+                  "rh_alignment_determinism",
+                  "rh_alignment_tolerance",
+                  "rh_skew_witness",
+                  "rh_field7_gateway",
+                  "rh_acceptance_predicate",
+                  "ml2p_energy_units_joules",
+                  "ml2p_esml_locality",
+                  "ml2p_power_first_class",
+                  "ml2p_objective_tradeoff",
+                  "ml2p_hardware_portability",
+                  "ml2p_lifecycle_accounting",
+                  "ml2p_predictor_validation",
+                  "semver_backward_compat",
+                  "import_dag_acyclic",
+                  "witness_import_required",
+                  "module_fingerprint_binding",
+                  "budget_observability",
+                  "telemetry_integrity",
+                  "alert_on_violation",
+                  "chaos_fail_closed",
+                  "attack_witness",
+                  "dos_resistance",
+                  "forgery_resistance",
+                  "mitm_resistance",
+                  "replay_resistance",
+                  "quarantine_policy",
+                  "perf_witness",
+                  "latency_bound",
+                  "resource_ceiling",
+                  "compute_bound",
+                  "energy_bound",
+                  "throughput_bound",
+                  "scaling_envelope",
+                  "reproducible_build",
+                  "sbom_integrity",
+                  "provenance_chain",
+                  "release_signature",
+                  "policy_enforced"
+                ]
+              },
+              "description": "List of holographic invariants that must be maintained"
+            },
+            "implementation": {
+              "type": "object",
+              "oneOf": [
+                {
+                  "required": ["native"],
+                  "properties": {
+                    "native": {
+                      "type": "string",
+                      "description": "Path to native implementation"
+                    }
+                  }
+                },
+                {
+                  "required": ["proof"],
+                  "properties": {
+                    "proof": {
+                      "type": "string",
+                      "description": "Path to proof implementation"
+                    }
+                  }
+                }
+              ]
+            },
+            "un": {
+              "type": "object",
+              "description": "Universal Numbers configuration for UN modules",
+              "properties": {
+                "driver": {
+                  "type": "string",
+                  "description": "UN driver identifier"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "State representation"
+                },
+                "symmetry": {
+                  "type": "string",
+                  "description": "Symmetry group description"
+                },
+                "programs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "List of programs"
+                },
+                "scalars": {
+                  "type": "string",
+                  "description": "Scalar type"
+                },
+                "compose": {
+                  "type": "string",
+                  "description": "Composition operation"
+                },
+                "windows": {
+                  "type": "string",
+                  "description": "Window type"
+                }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "conformance": {
+      "type": "object",
+      "required": [
+        "profiles",
+        "acceptance"
+      ],
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "P-Core",
+              "P-Logic",
+              "P-Network",
+              "P-Full"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "acceptance": {
+          "type": "object"
+        }
+      }
+    },
+    "self": {
+      "type": "object",
+      "required": [
+        "fingerprint",
+        "$ref"
+      ],
+      "properties": {
+        "fingerprint": {
+          "type": "string"
+        },
+        "$ref": {
+          "const": "#"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "self": {
+    "fingerprint": "2e61d6386aad7e0fca0d057be6195eb0f277bfe5ab5c9e9bd08f55508f2d6f53",
+    "$ref": "#"
+  }
+}

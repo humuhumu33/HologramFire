@@ -1,0 +1,996 @@
+{
+  "name": "atlas-12288-blueprint",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification", 
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "$schema": "./blueprint.schema.json",
+  "$id": "atlas-12288/blueprint/blueprint.schema",
+  "conformance": {
+    "profiles": [
+      "P-Core",
+      "P-Logic",
+      "P-Network",
+      "P-Full"
+    ],
+    "acceptance": {
+      "phase": 14,
+      "gates": [
+        "G0",
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G9",
+        "G10",
+        "G11",
+        "G12",
+        "G13",
+        "G14",
+        "G-UN",
+        "G-PSS",
+        "G-RH",
+        "G-ML2P"
+      ]
+    }
+  },
+  "modules": {
+    "atlas-12288/core/structure": {
+      "$id": "atlas-12288/core/structure",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/resonance",
+        "atlas-12288/core/conservation",
+        "atlas-12288/core/holography"
+      ],
+      "exports": [
+        "constants"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/core/constants.ts"
+      }
+    },
+    "atlas-12288/core/resonance": {
+      "$id": "atlas-12288/core/resonance",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "classifyR96"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/core/resonance/R96.ts"
+      }
+    },
+    "atlas-12288/core/conservation": {
+      "$id": "atlas-12288/core/conservation",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "generateC768Schedule",
+        "verifyC768Schedule"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/core/conservation/C768.ts"
+      }
+    },
+    "atlas-12288/core/holography": {
+      "$id": "atlas-12288/core/holography",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/resonance",
+        "atlas-12288/core/conservation"
+      ],
+      "exports": [
+        "phi"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/core/holography/Phi.ts"
+      }
+    },
+    "atlas-12288/core/klein": {
+      "$id": "atlas-12288/core/klein",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/resonance"
+      ],
+      "exports": [
+        "Klein"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/core/klein/Klein.ts"
+      }
+    },
+    "atlas-12288/logic/rl96": {
+      "$id": "atlas-12288/logic/rl96",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/structure"
+      ],
+      "exports": [
+        "add",
+        "mul",
+        "sum",
+        "zero",
+        "one"
+      ],
+      "invariants": [
+        "budget_algebra",
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/logic/rl96/RL96.ts"
+      }
+    },
+    "atlas-12288/logic/proof": {
+      "$id": "atlas-12288/logic/proof",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/logic/rl96"
+      ],
+      "exports": [
+        "verifyProof",
+        "composeProofs",
+        "proofFromBudgets"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "proof_composition",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/logic/proof/Proof.ts"
+      }
+    },
+    "atlas-12288/crypto/ccm-hash": {
+      "$id": "atlas-12288/crypto/ccm-hash",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "ccmHash"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/crypto/ccm/CCMHash.ts"
+      }
+    },
+    "atlas-12288/crypto/alpha-attestation": {
+      "$id": "atlas-12288/crypto/alpha-attestation",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "alphaAttest",
+        "alphaVerify"
+      ],
+      "invariants": [
+        "attestation_integrity",
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/crypto/attestation/Alpha.ts"
+      }
+    },
+    "atlas-12288/crypto/boundary-proof": {
+      "$id": "atlas-12288/crypto/boundary-proof",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/holography",
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "buildBoundaryProof",
+        "verifyBoundaryProof"
+      ],
+      "invariants": [
+        "boundary_proof",
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/crypto/boundary/BoundaryProof.ts"
+      }
+    },
+    "atlas-12288/crypto/budget-receipt": {
+      "$id": "atlas-12288/crypto/budget-receipt",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/logic/proof",
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "buildReceipt",
+        "verifyReceipt"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "proof_composition",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/crypto/receipt/BudgetReceipt.ts"
+      }
+    },
+    "atlas-12288/crypto/holo-signature": {
+      "$id": "atlas-12288/crypto/holo-signature",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "holoSign",
+        "holoVerify"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "signature_binding",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/crypto/signature/HoloSig.ts"
+      }
+    },
+    "atlas-12288/identity/uor-id": {
+      "$id": "atlas-12288/identity/uor-id",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/resonance",
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "buildUorId",
+        "encodeUorId",
+        "decodeUorId"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "roundtrip_preservation",
+        "uor_identity",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/identity/UORID.ts"
+      }
+    },
+    "atlas-12288/transport/ctp-96": {
+      "$id": "atlas-12288/transport/ctp-96",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/resonance",
+        "atlas-12288/crypto/ccm-hash",
+        "atlas-12288/logic/proof",
+        "atlas-12288/crypto/budget-receipt"
+      ],
+      "exports": [
+        "makeOffer",
+        "makeCounter",
+        "makeAccept",
+        "makeData",
+        "SessionVerifier"
+      ],
+      "invariants": [
+        "ctp96_contract",
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "replay_protection",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/transport/ctp96/CTP96.ts"
+      }
+    },
+    "atlas-12288/runtime/vpi": {
+      "$id": "atlas-12288/runtime/vpi",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "VpiRegistry",
+        "estimateCost",
+        "makeWitness"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "runtime_contract",
+        "sandbox_integrity",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/runtime/vpi/VPI.ts"
+      }
+    },
+    "atlas-12288/runtime/local-verifier": {
+      "$id": "atlas-12288/runtime/local-verifier",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/runtime/vpi",
+        "atlas-12288/logic/proof",
+        "atlas-12288/transport/ctp-96"
+      ],
+      "exports": [
+        "LocalVerifier"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "local_verification",
+        "page_conservation",
+        "resonance_classification",
+        "resource_budget",
+        "runtime_contract",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/runtime/local/LocalVerifier.ts"
+      }
+    },
+    "atlas-12288/persistence/snapshot": {
+      "$id": "atlas-12288/persistence/snapshot",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/core/holography",
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "createSnapshot",
+        "verifySnapshot"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "snapshot_integrity",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/persistence/snapshot/Snapshot.ts"
+      }
+    },
+    "atlas-12288/persistence/ledger": {
+      "$id": "atlas-12288/persistence/ledger",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/crypto/ccm-hash",
+        "atlas-12288/identity/uor-id"
+      ],
+      "exports": [
+        "initLedger",
+        "appendEntry",
+        "verifyLedger",
+        "buildDeltaProof",
+        "verifyDeltaProof"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "delta_proof",
+        "holographic_correspondence",
+        "ledger_append_only",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/persistence/journal/Ledger.ts"
+      }
+    },
+    "atlas-12288/persistence/gc": {
+      "$id": "atlas-12288/persistence/gc",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/persistence/ledger"
+      ],
+      "exports": [
+        "planRetain",
+        "verifyRetainPlan"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "gc_safety",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/persistence/gc/GC.ts"
+      }
+    },
+    "atlas-12288/accumulator/merkle": {
+      "$id": "atlas-12288/accumulator/merkle",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/crypto/ccm-hash"
+      ],
+      "exports": [
+        "buildTree",
+        "proveInclusion",
+        "verifyInclusion",
+        "proveExclusion",
+        "verifyExclusion"
+      ],
+      "invariants": [
+        "accumulator_integrity",
+        "cycle_conservation",
+        "exclusion_proof",
+        "holographic_correspondence",
+        "inclusion_proof",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/accumulator/merkle/Merkle.ts"
+      }
+    },
+    "atlas-12288/accumulator/checkpoint": {
+      "$id": "atlas-12288/accumulator/checkpoint",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/accumulator/merkle"
+      ],
+      "exports": [
+        "makeCheckpoint",
+        "proveShard",
+        "verifyShard"
+      ],
+      "invariants": [
+        "accumulator_integrity",
+        "cross_shard_consistency",
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "ts:src/accumulator/checkpoint/Checkpoint.ts"
+      }
+    },
+    "atlas-12288/un/strings/histogram": {
+      "$id": "atlas-12288/un/strings/histogram",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "evaluate",
+        "verifySymmetry",
+        "verifyProgramConservation",
+        "verifyCompositionality"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "un_compositionality",
+        "un_program_conservation",
+        "un_symmetry_invariance",
+        "un_window_measure",
+        "un_witnessability",
+        "witness_required"
+      ],
+      "un": {
+        "driver": "strings.histogram",
+        "state": "strings/arrays",
+        "symmetry": "index_permutations",
+        "programs": [
+          "insert",
+          "delete",
+          "swap"
+        ],
+        "scalars": "N",
+        "compose": "add",
+        "windows": "contiguous_blocks"
+      },
+      "implementation": {
+        "proof": "ts:src/un/strings/Histogram.ts"
+      }
+    },
+    "atlas-12288/un/graphs/subgraph-counts": {
+      "$id": "atlas-12288/un/graphs/subgraph-counts",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "evaluate",
+        "verifySymmetry",
+        "verifyProgramConservation",
+        "verifyCompositionality"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "un_compositionality",
+        "un_program_conservation",
+        "un_symmetry_invariance",
+        "un_window_measure",
+        "un_witnessability",
+        "witness_required"
+      ],
+      "un": {
+        "driver": "graphs.subgraphCounts",
+        "state": "simple_graph",
+        "symmetry": "node_permutations",
+        "programs": [
+          "add_edge",
+          "del_edge"
+        ],
+        "scalars": "N",
+        "compose": "add",
+        "windows": "node_subsets"
+      },
+      "implementation": {
+        "proof": "ts:src/un/graphs/SubgraphCounts.ts"
+      }
+    },
+    "atlas-12288/un/matrices/block-det": {
+      "$id": "atlas-12288/un/matrices/block-det",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "evaluate",
+        "verifySymmetry",
+        "verifyProgramConservation",
+        "verifyCompositionality"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "un_compositionality",
+        "un_program_conservation",
+        "un_symmetry_invariance",
+        "un_window_measure",
+        "un_witnessability",
+        "witness_required"
+      ],
+      "un": {
+        "driver": "matrices.blockDet",
+        "state": "R^{n×n}",
+        "symmetry": "row_col_permutations",
+        "programs": [
+          "swap_rows",
+          "swap_cols"
+        ],
+        "scalars": "R",
+        "compose": "mul",
+        "windows": "block_diagonal"
+      },
+      "implementation": {
+        "proof": "ts:src/un/matrices/BlockDet.ts"
+      }
+    },
+    "atlas-12288/un/distributions/window-entropy": {
+      "$id": "atlas-12288/un/distributions/window-entropy",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "evaluate",
+        "verifySymmetry",
+        "verifyProgramConservation",
+        "verifyCompositionality"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "resonance_classification",
+        "un_compositionality",
+        "un_program_conservation",
+        "un_symmetry_invariance",
+        "un_window_measure",
+        "un_witnessability",
+        "witness_required"
+      ],
+      "un": {
+        "driver": "distributions.windowEntropy",
+        "state": "histogram_counts",
+        "symmetry": "index_permutations",
+        "programs": [
+          "swap",
+          "inc"
+        ],
+        "scalars": "R",
+        "compose": "add",
+        "windows": "contiguous_blocks"
+      },
+      "implementation": {
+        "proof": "ts:src/un/distributions/WindowEntropy.ts"
+      }
+    },
+    "atlas-12288/prime/f": {
+      "$id": "atlas-12288/prime/f",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "applyF"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "pss_endofunctor_contract",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "native": "src/prime/F.ts"
+      }
+    },
+    "atlas-12288/prime/fixed-point": {
+      "$id": "atlas-12288/prime/fixed-point",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/prime/f"
+      ],
+      "exports": [
+        "encode",
+        "decode",
+        "fixedPointDigest"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "pss_fixed_point_witness",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "native": "src/prime/FixedPoint.ts"
+      }
+    },
+    "atlas-12288/prime/hrf": {
+      "$id": "atlas-12288/prime/hrf",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "makeHRF",
+        "hrfWitness",
+        "minimalityCertificate"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "pss_hrf_minimality",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "native": "src/prime/HRF.ts"
+      }
+    },
+    "atlas-12288/prime/hilbert": {
+      "$id": "atlas-12288/prime/hilbert",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "verifyHilbertAxioms",
+        "isUnitary",
+        "zero",
+        "inner",
+        "norm2"
+      ],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "pss_hilbert_axioms",
+        "pss_unitary_evolution",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "native": "src/prime/Hilbert.ts"
+      }
+    },
+    "atlas-12288/prime/proof": {
+      "$id": "atlas-12288/prime/proof",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [],
+      "invariants": [
+        "cycle_conservation",
+        "holographic_correspondence",
+        "page_conservation",
+        "pss_formal_proof",
+        "resonance_classification",
+        "witness_required"
+      ],
+      "implementation": {
+        "proof": "proofs/pss/SPH_FixedPoint.olean"
+      }
+    },
+    "atlas-12288/rh/constants": {
+      "$id": "atlas-12288/rh/constants",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "alphaBank",
+        "verifyAlphaBank"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "rh_constant_bank_consistency"
+      ],
+      "implementation": {
+        "native": "src/rh/Constants.ts"
+      }
+    },
+    "atlas-12288/rh/mirror": {
+      "$id": "atlas-12288/rh/mirror",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "loadMirrorMap",
+        "mirrorOf",
+        "verifyInvolution"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "rh_mirror_involution",
+        "rh_mirror_fixed_locus"
+      ],
+      "implementation": {
+        "native": "src/rh/Mirror.ts"
+      }
+    },
+    "atlas-12288/rh/align": {
+      "$id": "atlas-12288/rh/align",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/rh/mirror"
+      ],
+      "exports": [
+        "align"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "rh_alignment_determinism",
+        "rh_alignment_tolerance"
+      ],
+      "implementation": {
+        "native": "src/rh/Align.ts"
+      }
+    },
+    "atlas-12288/rh/skew": {
+      "$id": "atlas-12288/rh/skew",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [
+        "atlas-12288/rh/mirror"
+      ],
+      "exports": [
+        "skew"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "rh_skew_witness"
+      ],
+      "implementation": {
+        "native": "src/rh/Skew.ts"
+      }
+    },
+    "atlas-12288/rh/gateway": {
+      "$id": "atlas-12288/rh/gateway",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "isF7Active",
+        "enforceGateway"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "rh_field7_gateway"
+      ],
+      "implementation": {
+        "native": "src/rh/Gateway.ts"
+      }
+    },
+    "atlas-12288/ml2p/energy-semantics": {
+      "$id": "atlas-12288/ml2p/energy-semantics",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "beginSession",
+        "recordPhase",
+        "finishSession"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "ml2p_energy_units_joules",
+        "ml2p_esml_locality",
+        "ml2p_power_first_class"
+      ],
+      "implementation": {
+        "native": "src/ml2p/energy/Semantics.ts"
+      }
+    },
+    "atlas-12288/ml2p/objective-tradeoff": {
+      "$id": "atlas-12288/ml2p/objective-tradeoff",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "buildPareto"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "ml2p_objective_tradeoff",
+        "ml2p_power_first_class"
+      ],
+      "implementation": {
+        "native": "src/ml2p/objective/Tradeoff.ts"
+      }
+    },
+    "atlas-12288/ml2p/hw-portability": {
+      "$id": "atlas-12288/ml2p/hw-portability",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "normalize"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "ml2p_hardware_portability"
+      ],
+      "implementation": {
+        "native": "src/ml2p/hardware/Portability.ts"
+      }
+    },
+    "atlas-12288/ml2p/lifecycle-accounting": {
+      "$id": "atlas-12288/ml2p/lifecycle-accounting",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "reconcile"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "ml2p_lifecycle_accounting",
+        "ml2p_power_first_class"
+      ],
+      "implementation": {
+        "native": "src/ml2p/lifecycle/Accounting.ts"
+      }
+    },
+    "atlas-12288/ml2p/predictor-map2physics": {
+      "$id": "atlas-12288/ml2p/predictor-map2physics",
+      "$schema": "../../schemas/universal-module-schema.json",
+      "imports": [],
+      "exports": [
+        "predict"
+      ],
+      "invariants": [
+        "page_conservation",
+        "cycle_conservation",
+        "resonance_classification",
+        "holographic_correspondence",
+        "witness_required",
+        "ml2p_predictor_validation",
+        "ml2p_power_first_class"
+      ],
+      "implementation": {
+        "native": "src/ml2p/predictor/MapToPhysics.ts"
+      }
+    }
+  },
+  "self": {
+    "fingerprint": "2e61d6386aad7e0fca0d057be6195eb0f277bfe5ab5c9e9bd08f55508f2d6f53",
+    "$ref": "#"
+  },
+  "$comment": "Phase 8 (Persistence) is an engineering adjunct under Implementation Spec; not a conformance profile."
+}

@@ -1,0 +1,13 @@
+{
+  "name": "ml2p-pareto-fixture",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "points": [
+    { "j": 1.2, "f1": 0.72 }, { "j": 1.0, "f1": 0.70 }, { "j": 0.8, "f1": 0.69 }
+  ],
+  "digest": "will-be-stamped-via-tests"
+}

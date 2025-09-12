@@ -1,0 +1,23 @@
+{
+  "name": "atlas-12288-supply-provenance",
+  "$id": "atlas-12288/supply/provenance",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "makeProvenance",
+    "verifyProvenance"
+  ],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence",
+    "provenance_chain",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/supply/provenance/Provenance.ts"
+  }
+}

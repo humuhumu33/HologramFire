@@ -1,0 +1,26 @@
+{
+  "name": "rh-targets-fixture",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "$comment": "RH fixture drift monitoring - fail CI if digests change without migration note",
+  "targets": {
+    "mirror.json": {
+      "digest": "0636979ab58188a502f8d74e08553ebd3847efc6ddb405c5e8d91e346961ee94",
+      "comment": "96-element involution with exactly 24 fixed points"
+    },
+    "zeros.json": {
+      "digest": "3e8730155e4de04b8c93215007b4f54eac2c195d54f466902df17735c8f755d9",
+      "comment": "Zeta zeros and tolerance settings (rho1=1e-12, default=1e-9)"
+    },
+    "gateway.json": {
+      "digest": "7c16cc73d3bf5a7d9d41bd651ad7d651dfa4d1e9e00141a24d6f64865f3d2042",
+      "comment": "96-element 0/1 array for field-7 gateway activation"
+    }
+  },
+  "lastUpdated": "2025-09-10T20:27:54.834Z",
+  "version": "1.0.0"
+}

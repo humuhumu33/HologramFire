@@ -1,0 +1,56 @@
+{
+  "$id": "hologram-sdk/modules/hologram-engine",
+  "$schema": "../schemas/universal-module-schema.json",
+  "imports": [],
+  "exports": ["hologram.engine.api", "hologram.engine.runtime", "hologram.engine.transport"],
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation",
+    "witness_required"
+  ],
+  "implementation": { 
+    "native": "engine/hologramd",
+    "type": "go_binary",
+    "docker_compatibility": true,
+    "api_endpoints": ["/_ping", "/version", "/info", "/images/json"],
+    "transport_protocols": ["unix_socket", "tcp", "http"]
+  },
+  "holographic_correspondence": {
+    "reference_implementation": "hologram_generator_mini.py",
+    "correspondence_score": 1.0,
+    "self_reference": {
+      "enabled": true,
+      "type": "recursive_validation",
+      "depth": 3
+    }
+  },
+  "resonance_classification": {
+    "harmonic_frequencies": [12288, 4096, 1024, 256],
+    "resonance_stability": 0.95,
+    "phase_relationships": {
+      "api_server": "in_phase",
+      "runtime_managers": "harmonic",
+      "transport_layer": "resonant"
+    }
+  },
+  "cycle_conservation": {
+    "conservation_factor": 0.98,
+    "energy_efficiency": 0.95,
+    "resource_utilization": {
+      "cpu": "optimal",
+      "memory": "conserved",
+      "network": "efficient"
+    }
+  },
+  "page_conservation": {
+    "memory_alignment": "optimal",
+    "fragmentation_factor": 0.02,
+    "page_efficiency": 0.97
+  },
+  "witness_required": {
+    "witness_types": ["execution", "integrity", "coherence"],
+    "verification_depth": "full"
+  }
+}

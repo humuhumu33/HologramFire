@@ -1,0 +1,15 @@
+{
+  "name": "atlas-12288-logic-proof",
+  "$id": "atlas-12288/logic/proof",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": ["atlas-12288/logic/rl96"],
+  "exports": ["verifyProof", "composeProofs", "proofFromBudgets"],
+  "invariants": ["proof_composition", "holographic_correspondence", "resonance_classification", "cycle_conservation", "page_conservation"],
+  "implementation": { "proof": "ts:src/logic/proof/Proof.ts" },
+  "lean_proofs": [
+    "proofs/generated/proof_composition.lean",
+    "proofs/generated/attestation_integrity.lean",
+    "proofs/generated/signature_binding.lean",
+    "proofs/generated/budget_algebra.lean"
+  ]
+}

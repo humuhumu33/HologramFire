@@ -1,0 +1,28 @@
+{
+  "name": "atlas-12288/un/strings/histogram",
+  "version": "1.0.0",
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "un_compositionality",
+    "un_program_conservation",
+    "un_symmetry_invariance",
+    "un_window_measure",
+    "un_witnessability",
+    "witness_required"
+  ],
+  "un": {
+    "driver": "strings.histogram",
+    "state": "strings/arrays",
+    "symmetry": "index_permutations",
+    "programs": [
+      "swap"
+    ],
+    "scalars": "N",
+    "compose": "add",
+    "windows": "contiguous_blocks"
+  },
+  "impl": "src/un/strings/Histogram.ts"
+}

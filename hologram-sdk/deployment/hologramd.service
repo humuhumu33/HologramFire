@@ -1,0 +1,39 @@
+[Unit]
+Description=Hologram Engine
+Documentation=https://github.com/hologram/hologram-sdk
+After=network.target
+Wants=network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/hologramd --host=unix --socket=/var/run/hologramd.sock --socket-group=docker --hologram-enabled --hologram-uor-id --hologram-witness
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGINT
+TimeoutStopSec=30
+Restart=always
+RestartSec=5
+RuntimeDirectory=hologramd
+PermissionsStartOnly=true
+
+# Security settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/run
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=32768
+
+# Environment
+Environment=HOLOGRAM_ENABLED=true
+Environment=HOLOGRAM_UOR_ID=true
+Environment=HOLOGRAM_WITNESS=true
+
+[Install]
+WantedBy=multi-user.target

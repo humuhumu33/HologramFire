@@ -1,0 +1,24 @@
+{
+  "name": "atlas-12288-monitoring-metrics",
+  "$id": "atlas-12288/monitoring/metrics",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "Metrics",
+    "withTiming"
+  ],
+  "invariants": [
+    "budget_observability",
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "telemetry_integrity",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/monitoring/metrics/Metrics.ts"
+  }
+}

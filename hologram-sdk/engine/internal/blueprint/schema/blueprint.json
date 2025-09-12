@@ -1,0 +1,229 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Hologram Blueprint Module Schema",
+  "description": "JSON schema for Hologram Blueprint module metadata and invariants",
+  "type": "object",
+  "required": ["name", "version", "invariants"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Module name",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "version": {
+      "type": "string",
+      "description": "Module version (semantic versioning)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Module description",
+      "maxLength": 500
+    },
+    "invariants": {
+      "type": "array",
+      "description": "List of architectural invariants that must be maintained",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Invariant name",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Invariant type",
+            "enum": ["conservation", "resonance", "boundary", "witness", "proof"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Invariant description"
+          },
+          "required": {
+            "type": "boolean",
+            "description": "Whether this invariant is required",
+            "default": false
+          },
+          "parameters": {
+            "type": "object",
+            "description": "Invariant-specific parameters",
+            "additionalProperties": true
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "witnesses": {
+      "type": "array",
+      "description": "List of witness bundles for verification",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "data"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Witness bundle ID",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "description": "Witness type",
+            "enum": ["ccm_hash", "alpha_attestation", "boundary_proof", "conservation_proof"]
+          },
+          "data": {
+            "type": "object",
+            "description": "Witness data",
+            "additionalProperties": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Witness creation timestamp"
+          },
+          "expires": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Witness expiration timestamp"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Witness signature for verification"
+          }
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Module dependencies",
+      "items": {
+        "type": "object",
+        "required": ["name", "version"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Dependency name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Required version range"
+          },
+          "optional": {
+            "type": "boolean",
+            "description": "Whether this dependency is optional",
+            "default": false
+          }
+        }
+      }
+    },
+    "conformance": {
+      "type": "object",
+      "description": "Conformance profile information",
+      "properties": {
+        "profile": {
+          "type": "string",
+          "description": "Conformance profile",
+          "enum": ["P-Core", "P-Network", "P-Runtime", "P-Full"]
+        },
+        "features": {
+          "type": "object",
+          "description": "Feature flags",
+          "properties": {
+            "uor_id": {
+              "type": "boolean",
+              "description": "UOR-ID support"
+            },
+            "witness": {
+              "type": "boolean",
+              "description": "Witness verification"
+            },
+            "vpi_lease": {
+              "type": "boolean",
+              "description": "VPI lease management"
+            },
+            "ctp96": {
+              "type": "boolean",
+              "description": "CTP-96 transport"
+            },
+            "space_12288": {
+              "type": "boolean",
+              "description": "12,288 space support"
+            },
+            "meta_awareness": {
+              "type": "boolean",
+              "description": "Meta-awareness"
+            },
+            "oracle": {
+              "type": "boolean",
+              "description": "Oracle integration"
+            }
+          }
+        },
+        "policies": {
+          "type": "object",
+          "description": "Policy settings",
+          "properties": {
+            "witness_required": {
+              "type": "boolean",
+              "description": "Witness required for operations"
+            },
+            "fail_closed": {
+              "type": "boolean",
+              "description": "Fail-closed policy"
+            },
+            "boundary_proof": {
+              "type": "boolean",
+              "description": "Boundary proof required"
+            },
+            "ccm_hash": {
+              "type": "boolean",
+              "description": "CCM-Hash required"
+            },
+            "alpha_attestation": {
+              "type": "boolean",
+              "description": "Alpha-Attestation required"
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional module metadata",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Module author"
+        },
+        "license": {
+          "type": "string",
+          "description": "Module license"
+        },
+        "repository": {
+          "type": "string",
+          "description": "Module repository URL"
+        },
+        "tags": {
+          "type": "array",
+          "description": "Module tags",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Module creation timestamp"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Module last update timestamp"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

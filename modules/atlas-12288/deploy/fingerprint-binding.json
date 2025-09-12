@@ -1,0 +1,23 @@
+{
+  "name": "atlas-12288-deploy-fingerprint-binding",
+  "$id": "atlas-12288/deploy/fingerprint-binding",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "bindImplementation",
+    "verifyBinding"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "module_fingerprint_binding",
+    "page_conservation",
+    "resonance_classification",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/deploy/fingerprint/Binding.ts"
+  }
+}

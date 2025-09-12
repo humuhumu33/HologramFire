@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  atlas-12288:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: sh -c "npm install && npm run stamp:blueprint && npm test && npm run validate atlas-12288/blueprint/blueprint.json"

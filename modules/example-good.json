@@ -1,0 +1,13 @@
+{
+  "$id": "atlas-12288/modules/example-good",
+  "$schema": "../schemas/universal-module-schema.json",
+  "imports": [],
+  "exports": ["example.good.fn"],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence"
+  ],
+  "implementation": { "native": "lib/example-good.so" }
+}

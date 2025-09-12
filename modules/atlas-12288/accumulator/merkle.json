@@ -1,0 +1,28 @@
+{
+  "name": "atlas-12288-accumulator-merkle",
+  "$id": "atlas-12288/accumulator/merkle",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "buildTree",
+    "proveInclusion",
+    "verifyInclusion",
+    "proveExclusion",
+    "verifyExclusion"
+  ],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence",
+    "accumulator_integrity",
+    "inclusion_proof",
+    "exclusion_proof",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/accumulator/merkle/Merkle.ts"
+  }
+}

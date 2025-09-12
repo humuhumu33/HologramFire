@@ -1,0 +1,100 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/dist/
+build/artifacts/
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+logs/
+hologramd*.log
+
+# Runtime files
+*.pid
+.pid
+*.tmp
+/tmp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary test files
+test-*.js
+test-*.py
+test-*.ps1
+*coherence*.json
+*report*.json
+*SUMMARY*.md
+*REPORT*.md
+
+# Performance artifacts (keep some, ignore others)
+artifacts/perf/*.json
+!artifacts/perf/targets.json
+
+# Coherence test results (keep organized, ignore scattered)
+*coherence*.json
+!artifacts/coherence/*.json
+
+# Atlas-12288 modules (now in modules/atlas-12288/)
+atlas-12288/
+!modules/atlas-12288/
+
+# Examples (now consolidated)
+chess-app/
+!examples/chess-app/
+
+# SDK consolidation
+sdk/
+!hologram-sdk/sdks/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Rust build artifacts
+target/
+Cargo.lock
+
+# Lean build artifacts
+*.olean
+*.c

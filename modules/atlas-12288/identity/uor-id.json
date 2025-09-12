@@ -1,0 +1,26 @@
+{
+  "name": "atlas-12288-identity-uor-id",
+  "$id": "atlas-12288/identity/uor-id",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/core/resonance",
+    "atlas-12288/crypto/ccm-hash"
+  ],
+  "exports": [
+    "buildUorId",
+    "encodeUorId",
+    "decodeUorId"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "roundtrip_preservation",
+    "uor_identity",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/identity/UORID.ts"
+  }
+}

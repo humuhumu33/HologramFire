@@ -1,0 +1,44 @@
+# Example containerd configuration with hologram snapshotter
+# Place this in /etc/containerd/config.toml
+
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri"]
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+        runtime_type = "io.containerd.runc.v2"
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+          SystemdCgroup = true
+
+# Hologram snapshotter configuration
+[plugins."io.containerd.snapshotter.v1.hologram"]
+  root_path = "/var/lib/containerd/hologram"
+  
+  # Optional: Configure enforce mode
+  # enforce = true
+  
+  # Optional: Configure verbose mode
+  # verbose = true
+  
+  # Optional: Configure CTP-96 endpoint
+  # ctp96_endpoint = "http://localhost:8080"
+  
+  # Optional: Configure witness endpoint
+  # witness_endpoint = "http://localhost:8081"
+
+# Default snapshotter (can be overridden per request)
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  snapshotter = "hologram"
+  default_runtime_name = "runc"
+
+# Logging configuration
+[debug]
+  level = "info"
+  address = ""
+  uid = 0
+  gid = 0
+
+[metrics]
+  address = "127.0.0.1:1338"
+  grpc_histogram = false

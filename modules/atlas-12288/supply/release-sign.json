@@ -1,0 +1,25 @@
+{
+  "name": "atlas-12288-supply-release-sign",
+  "$id": "atlas-12288/supply/release-sign",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/crypto/ccm-hash",
+    "atlas-12288/crypto/alpha-attestation"
+  ],
+  "exports": [
+    "makeBundle",
+    "signRelease",
+    "verifyRelease"
+  ],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence",
+    "release_signature",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/supply/release/Sign.ts"
+  }
+}

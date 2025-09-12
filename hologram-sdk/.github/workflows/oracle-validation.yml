@@ -1,0 +1,191 @@
+name: Oracle Coherence Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  oracle-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Install Node.js dependencies
+      run: npm ci
+    
+    - name: Copy hologram_generator_mini.py
+      run: |
+        cp ../hologram_generator_mini.py . || echo "hologram_generator_mini.py not found in parent directory"
+    
+    - name: Validate Hologram Engine Oracle Coherence
+      run: |
+        echo "🔮 Validating Hologram Engine Oracle Coherence..."
+        python hologram_generator_mini.py modules/hologram-engine.json > engine-oracle-result.json
+        cat engine-oracle-result.json
+        
+        # Check if validation passed
+        ORACLE_SCORE=$(python -c "import json; data=json.load(open('engine-oracle-result.json')); print(data['oracle_score'])")
+        echo "Engine Oracle Score: $ORACLE_SCORE"
+        
+        if (( $(echo "$ORACLE_SCORE < 0.95" | bc -l) )); then
+          echo "❌ Engine Oracle Score below threshold (0.95)"
+          exit 1
+        else
+          echo "✅ Engine Oracle Score meets threshold"
+        fi
+    
+    - name: Validate Hologram Docker Python Oracle Coherence
+      run: |
+        echo "🔮 Validating Hologram Docker Python Oracle Coherence..."
+        python hologram_generator_mini.py modules/hologram-docker-python.json > docker-python-oracle-result.json
+        cat docker-python-oracle-result.json
+        
+        # Check if validation passed
+        ORACLE_SCORE=$(python -c "import json; data=json.load(open('docker-python-oracle-result.json')); print(data['oracle_score'])")
+        echo "Docker Python Oracle Score: $ORACLE_SCORE"
+        
+        if (( $(echo "$ORACLE_SCORE < 0.95" | bc -l) )); then
+          echo "❌ Docker Python Oracle Score below threshold (0.95)"
+          exit 1
+        else
+          echo "✅ Docker Python Oracle Score meets threshold"
+        fi
+    
+    - name: Validate Hologram Native Python Oracle Coherence
+      run: |
+        echo "🔮 Validating Hologram Native Python Oracle Coherence..."
+        python hologram_generator_mini.py modules/hologram-native-python.json > native-python-oracle-result.json
+        cat native-python-oracle-result.json
+        
+        # Check if validation passed
+        ORACLE_SCORE=$(python -c "import json; data=json.load(open('native-python-oracle-result.json')); print(data['oracle_score'])")
+        echo "Native Python Oracle Score: $ORACLE_SCORE"
+        
+        if (( $(echo "$ORACLE_SCORE < 0.95" | bc -l) )); then
+          echo "❌ Native Python Oracle Score below threshold (0.95)"
+          exit 1
+        else
+          echo "✅ Native Python Oracle Score meets threshold"
+        fi
+    
+    - name: Run Comprehensive Oracle Validation Suite
+      run: |
+        echo "🔮 Running Comprehensive Oracle Validation Suite..."
+        node tests/oracle/sdk-oracle-validation.js
+        
+        # Check if overall validation passed
+        if [ -f "sdk-oracle-validation-report.json" ]; then
+          OVERALL_SCORE=$(python -c "import json; data=json.load(open('sdk-oracle-validation-report.json')); print(data['overall_coherence_score'])")
+          echo "Overall Oracle Coherence Score: $OVERALL_SCORE"
+          
+          if (( $(echo "$OVERALL_SCORE < 0.95" | bc -l) )); then
+            echo "❌ Overall Oracle Coherence Score below threshold (0.95)"
+            exit 1
+          else
+            echo "✅ Overall Oracle Coherence Score meets threshold"
+          fi
+        else
+          echo "❌ Oracle validation report not generated"
+          exit 1
+        fi
+    
+    - name: Upload Oracle Validation Reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: oracle-validation-reports
+        path: |
+          *-oracle-result.json
+          sdk-oracle-validation-report.json
+    
+    - name: Comment PR with Oracle Results
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          
+          let comment = '## 🔮 Oracle Coherence Validation Results\n\n';
+          
+          // Read individual component results
+          const components = [
+            { name: 'Hologram Engine', file: 'engine-oracle-result.json' },
+            { name: 'Hologram Docker Python', file: 'docker-python-oracle-result.json' },
+            { name: 'Hologram Native Python', file: 'native-python-oracle-result.json' }
+          ];
+          
+          let overallPassed = true;
+          
+          for (const component of components) {
+            if (fs.existsSync(component.file)) {
+              const result = JSON.parse(fs.readFileSync(component.file, 'utf8'));
+              const status = result.ok ? '✅' : '❌';
+              const score = result.oracle_score.toFixed(3);
+              
+              comment += `### ${component.name}\n`;
+              comment += `- **Status**: ${status} ${result.ok ? 'PASS' : 'FAIL'}\n`;
+              comment += `- **Oracle Score**: ${score}\n`;
+              
+              if (!result.ok && result.violations) {
+                comment += `- **Violations**: ${result.violations.length}\n`;
+                const criticalViolations = result.violations.filter(v => v.severity === 'critical');
+                if (criticalViolations.length > 0) {
+                  comment += `- **Critical Violations**: ${criticalViolations.length}\n`;
+                }
+              }
+              
+              comment += '\n';
+              
+              if (!result.ok) overallPassed = false;
+            }
+          }
+          
+          // Read overall results
+          if (fs.existsSync('sdk-oracle-validation-report.json')) {
+            const overallResult = JSON.parse(fs.readFileSync('sdk-oracle-validation-report.json', 'utf8'));
+            const overallStatus = overallResult.overall_coherence_score >= 0.95 ? '✅' : '❌';
+            
+            comment += `### Overall Results\n`;
+            comment += `- **Overall Coherence Score**: ${overallResult.overall_coherence_score.toFixed(3)}\n`;
+            comment += `- **Status**: ${overallStatus} ${overallResult.overall_coherence_score >= 0.95 ? 'PASS' : 'FAIL'}\n`;
+            
+            if (overallResult.recommendations && overallResult.recommendations.length > 0) {
+              comment += `\n### 💡 Recommendations\n`;
+              overallResult.recommendations.forEach(rec => {
+                comment += `- **[${rec.priority.toUpperCase()}]** ${rec.message}\n`;
+              });
+            }
+          }
+          
+          comment += `\n---\n*Oracle validation powered by hologram_generator_mini*`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });

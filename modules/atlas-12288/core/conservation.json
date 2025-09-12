@@ -1,0 +1,20 @@
+{
+  "name": "atlas-12288-core-conservation",
+  "$id": "atlas-12288/core/conservation",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [],
+  "exports": [
+    "generateC768Schedule",
+    "verifyC768Schedule"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "page_conservation",
+    "resonance_classification",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/core/conservation/C768.ts"
+  }
+}

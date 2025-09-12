@@ -1,0 +1,12 @@
+{
+  "$id": "atlas-12288/modules/example-bad",
+  "$schema": "../schemas/universal-module-schema.json",
+  "imports": [],
+  "exports": ["example.bad.fn"],
+  "invariants": [
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "implementation": { "native": "lib/example-bad.so" }
+}

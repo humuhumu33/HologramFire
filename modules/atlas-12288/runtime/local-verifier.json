@@ -1,0 +1,26 @@
+{
+  "name": "atlas-12288-runtime-local-verifier",
+  "$id": "atlas-12288/runtime/local-verifier",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/runtime/vpi",
+    "atlas-12288/logic/proof",
+    "atlas-12288/transport/ctp-96"
+  ],
+  "exports": [
+    "LocalVerifier"
+  ],
+  "invariants": [
+    "cycle_conservation",
+    "holographic_correspondence",
+    "local_verification",
+    "page_conservation",
+    "resonance_classification",
+    "resource_budget",
+    "runtime_contract",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/runtime/local/LocalVerifier.ts"
+  }
+}

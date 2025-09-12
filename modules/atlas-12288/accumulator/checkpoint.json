@@ -1,0 +1,25 @@
+{
+  "name": "atlas-12288-accumulator-checkpoint",
+  "$id": "atlas-12288/accumulator/checkpoint",
+  "$schema": "../../schemas/universal-module-schema.json",
+  "imports": [
+    "atlas-12288/accumulator/merkle"
+  ],
+  "exports": [
+    "makeCheckpoint",
+    "proveShard",
+    "verifyShard"
+  ],
+  "invariants": [
+    "page_conservation",
+    "cycle_conservation",
+    "resonance_classification",
+    "holographic_correspondence",
+    "accumulator_integrity",
+    "cross_shard_consistency",
+    "witness_required"
+  ],
+  "implementation": {
+    "proof": "ts:src/accumulator/checkpoint/Checkpoint.ts"
+  }
+}

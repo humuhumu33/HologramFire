@@ -1,0 +1,5591 @@
+{
+  "blueprint": {
+    "ok": true,
+    "oracle_score": 0.9650000000000003,
+    "valid": true,
+    "score": 0.9650000000000003,
+    "violations": [],
+    "invariantVerifications": [
+      {
+        "invariant": "cycle_conservation",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "cycle_conservation"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "holographic_correspondence",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "holographic_correspondence"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "page_conservation",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "page_conservation"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "resonance_classification",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "resonance_classification"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "witness_required",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "witness_required"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "budget_algebra",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "budget_algebra"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "proof_composition",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "proof_composition"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "attestation_integrity",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "attestation_integrity"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "boundary_proof",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "boundary_proof"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "signature_binding",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "signature_binding"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "roundtrip_preservation",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "roundtrip_preservation"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "uor_identity",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "uor_identity"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ctp96_contract",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ctp96_contract"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "replay_protection",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "replay_protection"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "runtime_contract",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "runtime_contract"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "sandbox_integrity",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "sandbox_integrity"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "local_verification",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "local_verification"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "resource_budget",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "resource_budget"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "snapshot_integrity",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "snapshot_integrity"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "delta_proof",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "delta_proof"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ledger_append_only",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ledger_append_only"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "gc_safety",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "gc_safety"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "accumulator_integrity",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "accumulator_integrity"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "exclusion_proof",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "exclusion_proof"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "inclusion_proof",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "inclusion_proof"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "cross_shard_consistency",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "cross_shard_consistency"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "un_compositionality",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "un_compositionality"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "un_program_conservation",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "un_program_conservation"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "un_symmetry_invariance",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "un_symmetry_invariance"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "un_window_measure",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "un_window_measure"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "un_witnessability",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "un_witnessability"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_endofunctor_contract",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_endofunctor_contract"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_fixed_point_witness",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_fixed_point_witness"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_hrf_minimality",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_hrf_minimality"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_hilbert_axioms",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_hilbert_axioms"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_unitary_evolution",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_unitary_evolution"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "pss_formal_proof",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "pss_formal_proof"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_constant_bank_consistency",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_constant_bank_consistency"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_mirror_involution",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_mirror_involution"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_mirror_fixed_locus",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_mirror_fixed_locus"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_alignment_determinism",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_alignment_determinism"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_alignment_tolerance",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_alignment_tolerance"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_skew_witness",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_skew_witness"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "rh_field7_gateway",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "rh_field7_gateway"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_energy_units_joules",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_energy_units_joules"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_esml_locality",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_esml_locality"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_power_first_class",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_power_first_class"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_objective_tradeoff",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_objective_tradeoff"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_hardware_portability",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_hardware_portability"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_lifecycle_accounting",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_lifecycle_accounting"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      },
+      {
+        "invariant": "ml2p_predictor_validation",
+        "verified": true,
+        "confidence": 0.95,
+        "evidence": {
+          "verified": true,
+          "invariant": "ml2p_predictor_validation"
+        },
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.95
+        },
+        "execution_time_ms": 0
+      }
+    ],
+    "adaptiveScoring": {
+      "overallScore": 0.9650000000000003,
+      "components": [
+        {
+          "name": "invariants",
+          "score": 0.9500000000000006,
+          "weight": 0.4,
+          "details": "51 invariants verified",
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9500000000000006
+          },
+          "confidence": 0.9500000000000006,
+          "evidence": {
+            "verified": true
+          }
+        },
+        {
+          "name": "violations",
+          "score": 1,
+          "weight": 0.3,
+          "details": "0 violations found",
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 1
+          },
+          "confidence": 1,
+          "evidence": {
+            "violations": 0
+          }
+        },
+        {
+          "name": "base_score",
+          "score": 0.95,
+          "weight": 0.3,
+          "details": "Base holographic coherence score",
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.95
+          },
+          "confidence": 0.95,
+          "evidence": {
+            "base": true
+          }
+        }
+      ],
+      "recommendations": [],
+      "holographic_correspondence": {
+        "verified": true,
+        "confidence": 0.9650000000000003
+      },
+      "confidence": 0.9650000000000003,
+      "threshold": 0.95,
+      "recommendation": "No recommendations",
+      "adaptive_factors": {
+        "overallScore": 0.9650000000000003,
+        "componentCount": 3
+      }
+    },
+    "calibrationState": {
+      "isCalibrated": true,
+      "lastCalibration": "2025-09-11T11:13:31.288Z",
+      "actions": [],
+      "performance": {
+        "averageResponseTime": 100,
+        "throughput": 1000,
+        "accuracy": 0.95,
+        "stability": 0.98
+      },
+      "holographic_fingerprint": "d1650854822c79ee043997743207e61ce607d7a950a5c3fc27a114ebbacb845d",
+      "targets": {},
+      "feedback": [],
+      "performanceHistory": [],
+      "adaptiveFactors": {
+        "calibrated": true
+      }
+    },
+    "holographicFingerprint": "5ffb458b4b58558f25a34a01fe1ec4cf421d3ee9d59c467dd5ae3751fb3a45bf",
+    "holographic_fingerprint": "5ffb458b4b58558f25a34a01fe1ec4cf421d3ee9d59c467dd5ae3751fb3a45bf",
+    "referenceFingerprint": {
+      "digest": "5ffb458b4b58558f25a34a01fe1ec4cf421d3ee9d59c467dd5ae3751fb3a45bf"
+    },
+    "execution_time_ms": 4,
+    "holographic_correspondence": {
+      "verified": true,
+      "confidence": 0.9650000000000003
+    }
+  },
+  "modules": [
+    {
+      "path": "atlas-12288/core/structure.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.291Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "7dc117bb27f1cdf8b43fcb28c41216ecfb08c38567e3219a21df29f928a4f971",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "9552aeffa5a4df39c5e5c47e36bb9f021637a76bec46c6fbfe579e81993efa31",
+        "holographic_fingerprint": "9552aeffa5a4df39c5e5c47e36bb9f021637a76bec46c6fbfe579e81993efa31",
+        "referenceFingerprint": {
+          "digest": "9552aeffa5a4df39c5e5c47e36bb9f021637a76bec46c6fbfe579e81993efa31"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/core/holography.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.292Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "a2e1082a417c7f1f4d59410e476277c4f1948e59d073ffa02305aee61e169ca6",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "b6986b012db3feca673a73d6caab6b546e5b60225a8a0d3c3507388afaf45998",
+        "holographic_fingerprint": "b6986b012db3feca673a73d6caab6b546e5b60225a8a0d3c3507388afaf45998",
+        "referenceFingerprint": {
+          "digest": "b6986b012db3feca673a73d6caab6b546e5b60225a8a0d3c3507388afaf45998"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/core/resonance.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.292Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "a2e1082a417c7f1f4d59410e476277c4f1948e59d073ffa02305aee61e169ca6",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "d0078ec73a2f48a294ad9c8cadad0b7ec056fc19fa0996b8a75cb30d51153042",
+        "holographic_fingerprint": "d0078ec73a2f48a294ad9c8cadad0b7ec056fc19fa0996b8a75cb30d51153042",
+        "referenceFingerprint": {
+          "digest": "d0078ec73a2f48a294ad9c8cadad0b7ec056fc19fa0996b8a75cb30d51153042"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/core/conservation.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.293Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "9d4b463a877e3f7d57988963531842676651d6104f2aaeb3b2eb03c5bbf48214",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "cc64b557845f48436885e9c7c69ce232d514e2df066ee21f59a047f16bff9bec",
+        "holographic_fingerprint": "cc64b557845f48436885e9c7c69ce232d514e2df066ee21f59a047f16bff9bec",
+        "referenceFingerprint": {
+          "digest": "cc64b557845f48436885e9c7c69ce232d514e2df066ee21f59a047f16bff9bec"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/crypto/ccm-hash.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.294Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "f84a2e11aa14a931f04bfb444d995c61e3985b628981abcf6d253e78eab42737",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "64672eddc6799ba72f20cd429fe6403768ed341e3031021e5b2c16db6f82a652",
+        "holographic_fingerprint": "64672eddc6799ba72f20cd429fe6403768ed341e3031021e5b2c16db6f82a652",
+        "referenceFingerprint": {
+          "digest": "64672eddc6799ba72f20cd429fe6403768ed341e3031021e5b2c16db6f82a652"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/crypto/alpha-attestation.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "attestation_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "attestation_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.295Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "360bfc2b4f679a71a7868c5298dc3b48c9b72b5e2d30589f173492bdb0b418e1",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "d628cf5fc03951ba987004b3de80bedf6fb1391ae97219f3825ba4669b2b4dfb",
+        "holographic_fingerprint": "d628cf5fc03951ba987004b3de80bedf6fb1391ae97219f3825ba4669b2b4dfb",
+        "referenceFingerprint": {
+          "digest": "d628cf5fc03951ba987004b3de80bedf6fb1391ae97219f3825ba4669b2b4dfb"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/crypto/holo-signature.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "signature_binding",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "signature_binding"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.295Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "360bfc2b4f679a71a7868c5298dc3b48c9b72b5e2d30589f173492bdb0b418e1",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "78ffdd8348c3cada776f0d4894fb83ed360cd6d4418a59f3aabf3e0ccedd5ebc",
+        "holographic_fingerprint": "78ffdd8348c3cada776f0d4894fb83ed360cd6d4418a59f3aabf3e0ccedd5ebc",
+        "referenceFingerprint": {
+          "digest": "78ffdd8348c3cada776f0d4894fb83ed360cd6d4418a59f3aabf3e0ccedd5ebc"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/logic/proof.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "proof_composition",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "proof_composition"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.296Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "4258c97461384bcc270354e398bdd61d38dd954f41589d7b5ce015a1a3570dba",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "06df639c2251d741d201b2aefec407de40959c16161a8e1c232335999dbcd5da",
+        "holographic_fingerprint": "06df639c2251d741d201b2aefec407de40959c16161a8e1c232335999dbcd5da",
+        "referenceFingerprint": {
+          "digest": "06df639c2251d741d201b2aefec407de40959c16161a8e1c232335999dbcd5da"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/logic/rl96.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "budget_algebra",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "budget_algebra"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "5 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.296Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "4258c97461384bcc270354e398bdd61d38dd954f41589d7b5ce015a1a3570dba",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "6fc80049ce23c349732566c1b2a1af1e4518aa5570709f9236b5aaf4679252dd",
+        "holographic_fingerprint": "6fc80049ce23c349732566c1b2a1af1e4518aa5570709f9236b5aaf4679252dd",
+        "referenceFingerprint": {
+          "digest": "6fc80049ce23c349732566c1b2a1af1e4518aa5570709f9236b5aaf4679252dd"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/identity/uor-id.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "roundtrip_preservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "roundtrip_preservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "uor_identity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "uor_identity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.297Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "c464c13264acef64ebffee1d1ba1eb46a1f1ffe50f1d76210946c64f741cace9",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "645854f37e835805f745f74db5ecf735b800f4c47d23332f82fb5e3ac2e4c452",
+        "holographic_fingerprint": "645854f37e835805f745f74db5ecf735b800f4c47d23332f82fb5e3ac2e4c452",
+        "referenceFingerprint": {
+          "digest": "645854f37e835805f745f74db5ecf735b800f4c47d23332f82fb5e3ac2e4c452"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/accumulator/merkle.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "accumulator_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "accumulator_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "inclusion_proof",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "inclusion_proof"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "exclusion_proof",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "exclusion_proof"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "8 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.297Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "c464c13264acef64ebffee1d1ba1eb46a1f1ffe50f1d76210946c64f741cace9",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "af7eeb640f979a63ed2a16a5a77ca7f4378004418390d1b55e36becdadaffd9e",
+        "holographic_fingerprint": "af7eeb640f979a63ed2a16a5a77ca7f4378004418390d1b55e36becdadaffd9e",
+        "referenceFingerprint": {
+          "digest": "af7eeb640f979a63ed2a16a5a77ca7f4378004418390d1b55e36becdadaffd9e"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/accumulator/checkpoint.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "accumulator_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "accumulator_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cross_shard_consistency",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cross_shard_consistency"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.297Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "c464c13264acef64ebffee1d1ba1eb46a1f1ffe50f1d76210946c64f741cace9",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "6e41d1970bab364e5935c8f2e0f1541496f7f154d90deb5b09d6cea2e70258e7",
+        "holographic_fingerprint": "6e41d1970bab364e5935c8f2e0f1541496f7f154d90deb5b09d6cea2e70258e7",
+        "referenceFingerprint": {
+          "digest": "6e41d1970bab364e5935c8f2e0f1541496f7f154d90deb5b09d6cea2e70258e7"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/persistence/ledger.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "delta_proof",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "delta_proof"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "ledger_append_only",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "ledger_append_only"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.298Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "e534ddc7f83cc18b6e4b5ba191af206428cceef9f71aeebf737e2691a14820b2",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "f554c967caca1a6b7b8209c349018294a57950551c3e84a07dc6bfe32dc4356e",
+        "holographic_fingerprint": "f554c967caca1a6b7b8209c349018294a57950551c3e84a07dc6bfe32dc4356e",
+        "referenceFingerprint": {
+          "digest": "f554c967caca1a6b7b8209c349018294a57950551c3e84a07dc6bfe32dc4356e"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/persistence/snapshot.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "snapshot_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "snapshot_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.299Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "8d283c8f9f8239e3b5e486de7f1a09be7a706b2aeb36fe122bcb669f8f5a8265",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "433e2c7f1555ca49c8f558f6c498d8e9d13c9d2296a4e38d2c321ce11e041086",
+        "holographic_fingerprint": "433e2c7f1555ca49c8f558f6c498d8e9d13c9d2296a4e38d2c321ce11e041086",
+        "referenceFingerprint": {
+          "digest": "433e2c7f1555ca49c8f558f6c498d8e9d13c9d2296a4e38d2c321ce11e041086"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/monitoring/metrics.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "budget_observability",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "budget_observability"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "telemetry_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "telemetry_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.299Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "8d283c8f9f8239e3b5e486de7f1a09be7a706b2aeb36fe122bcb669f8f5a8265",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "c0cfeb1bb09e927101b61824be0d38e245f05b210cb02e61d6204bd248082e06",
+        "holographic_fingerprint": "c0cfeb1bb09e927101b61824be0d38e245f05b210cb02e61d6204bd248082e06",
+        "referenceFingerprint": {
+          "digest": "c0cfeb1bb09e927101b61824be0d38e245f05b210cb02e61d6204bd248082e06"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/monitoring/alerts.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "alert_on_violation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "alert_on_violation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.300Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "a36c8388db2a4718c8f424b8be3a3fd8e779c2e728554268684533ef31c0ddc9",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "5545781b73ac5e178ec6291f4301167aceb45eb9e34dfe4a3b0e3bee64fb4e61",
+        "holographic_fingerprint": "5545781b73ac5e178ec6291f4301167aceb45eb9e34dfe4a3b0e3bee64fb4e61",
+        "referenceFingerprint": {
+          "digest": "5545781b73ac5e178ec6291f4301167aceb45eb9e34dfe4a3b0e3bee64fb4e61"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/transport/ctp-96.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "ctp96_contract",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "ctp96_contract"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "replay_protection",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "replay_protection"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.300Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "a36c8388db2a4718c8f424b8be3a3fd8e779c2e728554268684533ef31c0ddc9",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "98961a5e5bf9c2d8bf0bfc78f83eecf025a7257d4b687925f379163e1aeb4811",
+        "holographic_fingerprint": "98961a5e5bf9c2d8bf0bfc78f83eecf025a7257d4b687925f379163e1aeb4811",
+        "referenceFingerprint": {
+          "digest": "98961a5e5bf9c2d8bf0bfc78f83eecf025a7257d4b687925f379163e1aeb4811"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/runtime/vpi.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "runtime_contract",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "runtime_contract"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "sandbox_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "sandbox_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.300Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "1c21ee292999d4ec013535b47ca4ec4587a059aa927c03a670fca1c91db5a4bf",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "baf761abf92475d676e02095a51ff8354486572260b8e016c06e26b194832453",
+        "holographic_fingerprint": "baf761abf92475d676e02095a51ff8354486572260b8e016c06e26b194832453",
+        "referenceFingerprint": {
+          "digest": "baf761abf92475d676e02095a51ff8354486572260b8e016c06e26b194832453"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/runtime/local-verifier.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "local_verification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "local_verification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resource_budget",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resource_budget"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "runtime_contract",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "runtime_contract"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "8 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.302Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "cc879880eb4707c1bf06f69f106a00e8c71898284d4fee04ef3ba27aacb9857a",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "d1b4da9a38041e1a2838f27616e0fe57b147ab5e3fc38c8dd3c7135c667c95ea",
+        "holographic_fingerprint": "d1b4da9a38041e1a2838f27616e0fe57b147ab5e3fc38c8dd3c7135c667c95ea",
+        "referenceFingerprint": {
+          "digest": "d1b4da9a38041e1a2838f27616e0fe57b147ab5e3fc38c8dd3c7135c667c95ea"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/supply/sbom.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "sbom_integrity",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "sbom_integrity"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.302Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "cc879880eb4707c1bf06f69f106a00e8c71898284d4fee04ef3ba27aacb9857a",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "bbe9655f9b9f491e8a3c9a350a677270cb54f9a6464e3afba0136a42897c3693",
+        "holographic_fingerprint": "bbe9655f9b9f491e8a3c9a350a677270cb54f9a6464e3afba0136a42897c3693",
+        "referenceFingerprint": {
+          "digest": "bbe9655f9b9f491e8a3c9a350a677270cb54f9a6464e3afba0136a42897c3693"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/supply/provenance.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "provenance_chain",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "provenance_chain"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.303Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "52d28ce61f8b520d1eaf12c964124dc55f9fd04c3d0073cf573829c0fe5a8210",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "941219cf294c0dc6a2d195765d46b87fd415775f867dc32700b0dec9e1e7090d",
+        "holographic_fingerprint": "941219cf294c0dc6a2d195765d46b87fd415775f867dc32700b0dec9e1e7090d",
+        "referenceFingerprint": {
+          "digest": "941219cf294c0dc6a2d195765d46b87fd415775f867dc32700b0dec9e1e7090d"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/audit/attacks.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9649999999999999,
+        "valid": true,
+        "score": 0.9649999999999999,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "attack_witness",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "attack_witness"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "dos_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "dos_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "forgery_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "forgery_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "mitm_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "mitm_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "replay_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "replay_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9649999999999999,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.95,
+              "weight": 0.4,
+              "details": "10 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9649999999999999
+          },
+          "confidence": 0.9649999999999999,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9649999999999999,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.303Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "52d28ce61f8b520d1eaf12c964124dc55f9fd04c3d0073cf573829c0fe5a8210",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "e0bc91af947d33dcceee035ed2bd285015607c130990cc57cd3870060a0b4b76",
+        "holographic_fingerprint": "e0bc91af947d33dcceee035ed2bd285015607c130990cc57cd3870060a0b4b76",
+        "referenceFingerprint": {
+          "digest": "e0bc91af947d33dcceee035ed2bd285015607c130990cc57cd3870060a0b4b76"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9649999999999999
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/audit/hardening.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "dos_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "dos_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "quarantine_policy",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "quarantine_policy"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "7 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.303Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "52d28ce61f8b520d1eaf12c964124dc55f9fd04c3d0073cf573829c0fe5a8210",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "dee16d92d91bd5c00eeca6bb888e6df21a38f870ba715892c9bc8ff3e1abda6c",
+        "holographic_fingerprint": "dee16d92d91bd5c00eeca6bb888e6df21a38f870ba715892c9bc8ff3e1abda6c",
+        "referenceFingerprint": {
+          "digest": "dee16d92d91bd5c00eeca6bb888e6df21a38f870ba715892c9bc8ff3e1abda6c"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/audit/policy.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "forgery_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "forgery_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "mitm_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "mitm_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "replay_resistance",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "replay_resistance"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "8 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.304Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "09154495ceb8831212622998c52a7a721318ccf85210d5ee4e486a76ca6c5483",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "9a4e8589798f2f7fc6d2a84bff8ec195f47d15effb81ad57ef112fa32c85f86a",
+        "holographic_fingerprint": "9a4e8589798f2f7fc6d2a84bff8ec195f47d15effb81ad57ef112fa32c85f86a",
+        "referenceFingerprint": {
+          "digest": "9a4e8589798f2f7fc6d2a84bff8ec195f47d15effb81ad57ef112fa32c85f86a"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    },
+    {
+      "path": "atlas-12288/audit/report.json",
+      "result": {
+        "ok": true,
+        "oracle_score": 0.9650000000000001,
+        "valid": true,
+        "score": 0.9650000000000001,
+        "violations": [],
+        "invariantVerifications": [
+          {
+            "invariant": "attack_witness",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "attack_witness"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "cycle_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "cycle_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "holographic_correspondence",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "holographic_correspondence"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "page_conservation",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "page_conservation"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "resonance_classification",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "resonance_classification"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          },
+          {
+            "invariant": "witness_required",
+            "verified": true,
+            "confidence": 0.95,
+            "evidence": {
+              "verified": true,
+              "invariant": "witness_required"
+            },
+            "holographic_correspondence": {
+              "verified": true,
+              "confidence": 0.95
+            },
+            "execution_time_ms": 0
+          }
+        ],
+        "adaptiveScoring": {
+          "overallScore": 0.9650000000000001,
+          "components": [
+            {
+              "name": "invariants",
+              "score": 0.9500000000000001,
+              "weight": 0.4,
+              "details": "6 invariants verified",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.9500000000000001
+              },
+              "confidence": 0.9500000000000001,
+              "evidence": {
+                "verified": true
+              }
+            },
+            {
+              "name": "violations",
+              "score": 1,
+              "weight": 0.3,
+              "details": "0 violations found",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 1
+              },
+              "confidence": 1,
+              "evidence": {
+                "violations": 0
+              }
+            },
+            {
+              "name": "base_score",
+              "score": 0.95,
+              "weight": 0.3,
+              "details": "Base holographic coherence score",
+              "holographic_correspondence": {
+                "verified": true,
+                "confidence": 0.95
+              },
+              "confidence": 0.95,
+              "evidence": {
+                "base": true
+              }
+            }
+          ],
+          "recommendations": [],
+          "holographic_correspondence": {
+            "verified": true,
+            "confidence": 0.9650000000000001
+          },
+          "confidence": 0.9650000000000001,
+          "threshold": 0.95,
+          "recommendation": "No recommendations",
+          "adaptive_factors": {
+            "overallScore": 0.9650000000000001,
+            "componentCount": 3
+          }
+        },
+        "calibrationState": {
+          "isCalibrated": true,
+          "lastCalibration": "2025-09-11T11:13:31.304Z",
+          "actions": [],
+          "performance": {
+            "averageResponseTime": 100,
+            "throughput": 1000,
+            "accuracy": 0.95,
+            "stability": 0.98
+          },
+          "holographic_fingerprint": "09154495ceb8831212622998c52a7a721318ccf85210d5ee4e486a76ca6c5483",
+          "targets": {},
+          "feedback": [],
+          "performanceHistory": [],
+          "adaptiveFactors": {
+            "calibrated": true
+          }
+        },
+        "holographicFingerprint": "ebdc8e4635a5204a6b67455b66c020fe436304884ee39479c06e9c9e92e4030f",
+        "holographic_fingerprint": "ebdc8e4635a5204a6b67455b66c020fe436304884ee39479c06e9c9e92e4030f",
+        "referenceFingerprint": {
+          "digest": "ebdc8e4635a5204a6b67455b66c020fe436304884ee39479c06e9c9e92e4030f"
+        },
+        "execution_time_ms": 1,
+        "holographic_correspondence": {
+          "verified": true,
+          "confidence": 0.9650000000000001
+        }
+      }
+    }
+  ],
+  "crossModule": [
+    {
+      "module1": "atlas-12288/core/structure.json",
+      "module2": "atlas-12288/core/holography.json",
+      "coherent": true,
+      "scores": [
+        0.9649999999999999,
+        0.9649999999999999
+      ]
+    },
+    {
+      "module1": "atlas-12288/crypto/ccm-hash.json",
+      "module2": "atlas-12288/crypto/alpha-attestation.json",
+      "coherent": true,
+      "scores": [
+        0.9649999999999999,
+        0.9650000000000001
+      ]
+    },
+    {
+      "module1": "atlas-12288/accumulator/merkle.json",
+      "module2": "atlas-12288/accumulator/checkpoint.json",
+      "coherent": true,
+      "scores": [
+        0.9650000000000001,
+        0.9650000000000001
+      ]
+    },
+    {
+      "module1": "atlas-12288/logic/proof.json",
+      "module2": "atlas-12288/logic/rl96.json",
+      "coherent": true,
+      "scores": [
+        0.9649999999999999,
+        0.9649999999999999
+      ]
+    },
+    {
+      "module1": "atlas-12288/monitoring/metrics.json",
+      "module2": "atlas-12288/monitoring/alerts.json",
+      "coherent": true,
+      "scores": [
+        0.9650000000000001,
+        0.9650000000000001
+      ]
+    }
+  ],
+  "overall": {
+    "averageScore": 0.9649999999999999,
+    "minScore": 0.9649999999999999,
+    "maxScore": 0.9650000000000003,
+    "totalViolations": 0,
+    "violationsByType": {},
+    "violationsBySeverity": {
+      "critical": 0,
+      "warning": 0,
+      "info": 0
+    },
+    "systemHealth": "excellent"
+  },
+  "violations": [],
+  "recommendations": []
+}

@@ -1,0 +1,5 @@
+{
+  "count": 1000,
+  "seed": 12648430,
+  "note": "Deterministic UOR fixtures; regenerate via src/identity/fixtures/gen.ts if needed."
+}

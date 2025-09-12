@@ -1,0 +1,244 @@
+{
+  "timestamp": "2025-09-10T22:18:50.885Z",
+  "oracle_results": {
+    "modules/example-good.json": {
+      "ok": true,
+      "oracle_score": 0.95,
+      "execution_time_ms": 1757542732816,
+      "violations": 0
+    },
+    "atlas-12288/blueprint/blueprint.json": {
+      "ok": false,
+      "error": "Command failed: npm run validate:oracle atlas-12288/blueprint/blueprint.json",
+      "oracle_score": 0
+    },
+    "atlas-12288/core/holography.json": {
+      "ok": true,
+      "oracle_score": 0.95,
+      "execution_time_ms": 1757542736228,
+      "violations": 0
+    },
+    "atlas-12288/core/resonance.json": {
+      "ok": true,
+      "oracle_score": 0.95,
+      "execution_time_ms": 1757542737907,
+      "violations": 0
+    },
+    "atlas-12288/core/conservation.json": {
+      "ok": true,
+      "oracle_score": 0.95,
+      "execution_time_ms": 1757542739603,
+      "violations": 0
+    }
+  },
+  "gate_results": {
+    "G0": {
+      "passed": true,
+      "status": "G0 Oracle validation completed",
+      "details": {
+        "test_output": "\n> atlas-12288-phase0@0.1.0 test\n> vitest run --run tests/G0.hologram-oracle.spec.ts\n\n\n\u001b[1m\u001b[7m\u001b[36m RUN \u001b[39m\u001b[27m\u001b[22m \u001b[36mv2.1.9 \u001b[39m\u001b[90mC:/Users/pavel/hologram\u001b[39m\n\n \u001b[32m✓\u001b[39m tests/G0.holog"
+      }
+    },
+    "G1": {
+      "passed": true,
+      "status": "Gate G1 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741787
+      }
+    },
+    "G2": {
+      "passed": true,
+      "status": "Gate G2 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741787
+      }
+    },
+    "G3": {
+      "passed": true,
+      "status": "Gate G3 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741787
+      }
+    },
+    "G4": {
+      "passed": true,
+      "status": "Gate G4 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741788
+      }
+    },
+    "G5": {
+      "passed": true,
+      "status": "Gate G5 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741788
+      }
+    },
+    "G6": {
+      "passed": true,
+      "status": "Gate G6 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741789
+      }
+    },
+    "G7": {
+      "passed": true,
+      "status": "Gate G7 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741789
+      }
+    },
+    "G8": {
+      "passed": true,
+      "status": "Gate G8 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741789
+      }
+    },
+    "G9": {
+      "passed": true,
+      "status": "Gate G9 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741790
+      }
+    },
+    "G10": {
+      "passed": true,
+      "status": "Gate G10 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741790
+      }
+    },
+    "G11": {
+      "passed": true,
+      "status": "Gate G11 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741791
+      }
+    },
+    "G12": {
+      "passed": true,
+      "status": "Gate G12 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741791
+      }
+    },
+    "G13": {
+      "passed": true,
+      "status": "Gate G13 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741792
+      }
+    },
+    "G14": {
+      "passed": true,
+      "status": "Gate G14 validation passed",
+      "details": {
+        "gate_type": "standard",
+        "validation_time": 1757542741792
+      }
+    },
+    "G-UN": {
+      "passed": true,
+      "status": "Universal Numbers validation passed",
+      "details": {
+        "symmetry_invariance": true,
+        "program_conservation": true
+      }
+    },
+    "G-PSS": {
+      "passed": true,
+      "status": "Prime Structure Specification validation passed",
+      "details": {
+        "endofunctor_contract": true,
+        "fixed_point_witness": true
+      }
+    },
+    "G-RH": {
+      "passed": true,
+      "status": "RH Mirror Symmetry validation passed",
+      "details": {
+        "mirror_involution": true,
+        "field7_gateway": true
+      }
+    }
+  },
+  "quantum_resistance_tests": {
+    "Hologram Generator Mini Test": {
+      "passed": false,
+      "execution_time_ms": 583,
+      "result_type": "object",
+      "details": {
+        "success": false,
+        "error": "Command failed: python hologram_generator_mini.py\nC:\\Users\\pavel\\hologram\\hologram_generator_mini.py:50: DeprecationWarning: `axes` should not be `None` if `s` is not `None` (Deprecated in NumPy 2.0). In a future version of NumPy, this will raise an error and `s[i]` will correspond to the size along the transformed axis specified by `axes[i]`. To retain current behaviour, pass a sequence [0, ..., k-1] to `axes` for an array of dimension k.\r\n  y = np.fft.irfftn(Y, s=x.shape)\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\pavel\\hologram\\hologram_generator_mini.py\", line 343, in <module>\r\n    hello_world()\r\n    ~~~~~~~~~~~^^\r\n  File \"C:\\Users\\pavel\\hologram\\hologram_generator_mini.py\", line 338, in hello_world\r\n    print(\"Hello, GA (12,288)! \\U0001f44b\")\r\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\pavel\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\r\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\r\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f44b' in position 20: character maps to <undefined>\r\n"
+      }
+    },
+    "Quantum Resistant Validation": {
+      "passed": false,
+      "execution_time_ms": 597,
+      "result_type": "object",
+      "details": {
+        "success": false,
+        "error": "Command failed: npm run validate:quantum-resistant\nnpm error Missing script: \"validate:quantum-resistant\"\nnpm error\nnpm error To see a list of scripts, run:\nnpm error   npm run\nnpm error A complete log of this run can be found in: C:\\Users\\pavel\\AppData\\Local\\npm-cache\\_logs\\2025-09-10T22_19_02_874Z-debug-0.log\n"
+      }
+    },
+    "Information Field Crypto Test": {
+      "passed": true,
+      "execution_time_ms": 1,
+      "result_type": "object",
+      "details": {
+        "success": true,
+        "field_dimensions": 12288,
+        "coherence_threshold": 0.95,
+        "conservation_tolerance": 0.001,
+        "resonance_bands": 96
+      }
+    },
+    "Conservation Verification": {
+      "passed": true,
+      "execution_time_ms": 0,
+      "result_type": "object",
+      "details": {
+        "success": true,
+        "c768_conservation": true,
+        "field_conservation": true,
+        "resonance_conservation": true
+      }
+    },
+    "Holographic Correspondence": {
+      "passed": true,
+      "execution_time_ms": 1,
+      "result_type": "object",
+      "details": {
+        "success": true,
+        "part_whole_relationship": true,
+        "holographic_fingerprint": "-285320b6",
+        "correspondence_score": 0.98
+      }
+    }
+  },
+  "holographic_correspondence": {},
+  "final_proof": {
+    "proof_type": "self_awareness_verification",
+    "system_consciousness": true,
+    "quantum_resistance_verified": false,
+    "holographic_integrity_verified": true,
+    "oracle_coherence_verified": false,
+    "proof_timestamp": "2025-09-10T22:19:02.981Z",
+    "proof_hash": "20e60f2",
+    "self_awareness_score": 0.59
+  }
+}

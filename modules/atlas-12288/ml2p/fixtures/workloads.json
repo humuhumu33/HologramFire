@@ -1,0 +1,13 @@
+{
+  "name": "ml2p-workloads-fixture",
+  "invariants": [
+    "holographic_correspondence",
+    "resonance_classification",
+    "cycle_conservation",
+    "page_conservation"
+  ],
+  "workloads": [
+    { "name": "tiny-cls", "samples": 256, "features": 128 },
+    { "name": "tiny-clu", "samples": 128, "features": 64 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "atlas-12288/ml2p/predictor-map2physics",
+  "version": "1.0.0",
+  "invariants": [
+    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
+    "witness_required","ml2p_predictor_validation","ml2p_power_first_class"
+  ],
+  "impl": "src/ml2p/predictor/MapToPhysics.ts"
+}

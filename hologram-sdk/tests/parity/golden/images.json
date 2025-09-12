@@ -1,0 +1,74 @@
+[
+  {
+    "Id": "sha256:deadbeef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+    "RepoTags": ["hello-world:latest"],
+    "RepoDigests": ["hello-world@sha256:deadbeef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"],
+    "Parent": "",
+    "Comment": "",
+    "Created": 1704067200,
+    "Container": "",
+    "ContainerConfig": {
+      "Hostname": "",
+      "Domainname": "",
+      "User": "",
+      "AttachStdin": false,
+      "AttachStdout": false,
+      "AttachStderr": false,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": [],
+      "Cmd": ["/hello"],
+      "Image": "",
+      "Volumes": {},
+      "WorkingDir": "",
+      "Entrypoint": null,
+      "OnBuild": null,
+      "Labels": {}
+    },
+    "DockerVersion": "24.0.7",
+    "Author": "",
+    "Config": {
+      "Hostname": "",
+      "Domainname": "",
+      "User": "",
+      "AttachStdin": false,
+      "AttachStdout": false,
+      "AttachStderr": false,
+      "Tty": false,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Env": ["PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"],
+      "Cmd": ["/hello"],
+      "Image": "",
+      "Volumes": {},
+      "WorkingDir": "",
+      "Entrypoint": null,
+      "OnBuild": null,
+      "Labels": {}
+    },
+    "Architecture": "amd64",
+    "Os": "linux",
+    "Size": 1024,
+    "VirtualSize": 1024,
+    "GraphDriver": {
+      "Name": "overlay2",
+      "Data": {
+        "LowerDir": "/var/lib/docker/overlay2/lower",
+        "MergedDir": "/var/lib/docker/overlay2/merged",
+        "UpperDir": "/var/lib/docker/overlay2/upper",
+        "WorkDir": "/var/lib/docker/overlay2/work"
+      }
+    },
+    "RootFS": {
+      "Type": "layers",
+      "Layers": [
+        "sha256:deadbeef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+      ]
+    },
+    "Metadata": {
+      "LastTagTime": "0001-01-01T00:00:00Z"
+    },
+    "Labels": {}
+  }
+]

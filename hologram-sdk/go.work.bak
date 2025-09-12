@@ -1,0 +1,9 @@
+go 1.21
+
+use (
+    ./engine
+    ./sdks/go/compat
+    ./sdks/go/sdk
+    ./tools/buildx-driver-hologram
+    ./tools/cli
+)

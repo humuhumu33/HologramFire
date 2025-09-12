@@ -1,0 +1,10 @@
+{
+  "v": 1,
+  "languages": {
+    "node":  { "status": "ready",  "cli": "node_modules/.bin/ts-node.cmd --transpile-only sdk/ref/cli.ts" },
+    "python":{ "status": "stub",   "cli": "python3 -m hologram_sdk --delegate" },
+    "go":    { "status": "stub",   "cli": "go run ./sdk/go/cmd/hologram" },
+    "rust":  { "status": "stub",   "cli": "cargo run --manifest-path sdk/rust/Cargo.toml" },
+    "c":     { "status": "stub",   "cli": "node sdk/c/hologram.cjs" }
+  }
+}
