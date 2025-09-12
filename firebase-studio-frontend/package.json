@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run build:spa-fallback",
+    "build:spa-fallback": "cp dist/index.html dist/404.html",
     "preview": "vite preview --port 3000",
     "serve": "vite preview --port 3000",
     "serve:simple": "node serve.js",

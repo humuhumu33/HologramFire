@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // Use relative paths for GitHub Pages compatibility
+  base: '/HologramFire/firebase-studio-frontend/', // GitHub Pages base path
   server: {
     port: 3000,
     open: true,

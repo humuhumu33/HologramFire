@@ -4,13 +4,10 @@ const DYNAMIC_CACHE = 'firebase-studio-dynamic-v1';
 
 // Static assets to cache
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/src/main.tsx',
-  '/src/App.tsx',
-  '/src/index.css',
-  '/firebase-icon.svg',
-  '/manifest.json',
+  '/HologramFire/firebase-studio-frontend/',
+  '/HologramFire/firebase-studio-frontend/index.html',
+  '/HologramFire/firebase-studio-frontend/firebase-icon.svg',
+  '/HologramFire/firebase-studio-frontend/manifest.json',
   'https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap'
 ];
 
@@ -88,7 +85,7 @@ self.addEventListener('fetch', (event) => {
             })
             .catch(() => {
               // Return offline page if available
-              return caches.match('/index.html');
+              return caches.match('/HologramFire/firebase-studio-frontend/index.html');
             });
         })
     );
@@ -153,8 +150,8 @@ self.addEventListener('push', (event) => {
     const data = event.data.json();
     const options = {
       body: data.body,
-      icon: '/firebase-icon.svg',
-      badge: '/firebase-icon.svg',
+      icon: '/HologramFire/firebase-studio-frontend/firebase-icon.svg',
+      badge: '/HologramFire/firebase-studio-frontend/firebase-icon.svg',
       vibrate: [100, 50, 100],
       data: {
         dateOfArrival: Date.now(),
@@ -164,12 +161,12 @@ self.addEventListener('push', (event) => {
         {
           action: 'explore',
           title: 'Open App',
-          icon: '/firebase-icon.svg'
+          icon: '/HologramFire/firebase-studio-frontend/firebase-icon.svg'
         },
         {
           action: 'close',
           title: 'Close',
-          icon: '/firebase-icon.svg'
+          icon: '/HologramFire/firebase-studio-frontend/firebase-icon.svg'
         }
       ]
     };
@@ -186,7 +183,7 @@ self.addEventListener('notificationclick', (event) => {
   
   if (event.action === 'explore') {
     event.waitUntil(
-      clients.openWindow('/')
+      clients.openWindow('/HologramFire/firebase-studio-frontend/')
     );
   }
 });

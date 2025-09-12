@@ -2,29 +2,29 @@
   "name": "Firebase Studio - Full Stack AI Workspace",
   "short_name": "Firebase Studio",
   "description": "A modern, full-stack AI workspace with smooth UX inspired by Revolut Exchange",
-  "start_url": "/",
+  "start_url": "/HologramFire/firebase-studio-frontend/?source=pwa",
   "display": "standalone",
   "background_color": "#f8f9fa",
   "theme_color": "#4285f4",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "/HologramFire/firebase-studio-frontend/",
   "lang": "en",
   "categories": ["productivity", "developer", "utilities"],
   "icons": [
     {
-      "src": "/firebase-icon.svg",
+      "src": "/HologramFire/firebase-studio-frontend/firebase-icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-192.png",
+      "src": "/HologramFire/firebase-studio-frontend/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512.png",
+      "src": "/HologramFire/firebase-studio-frontend/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -32,13 +32,13 @@
   ],
   "screenshots": [
     {
-      "src": "/screenshot-desktop.png",
+      "src": "/HologramFire/firebase-studio-frontend/screenshot-desktop.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "/screenshot-mobile.png",
+      "src": "/HologramFire/firebase-studio-frontend/screenshot-mobile.png",
       "sizes": "390x844",
       "type": "image/png",
       "form_factor": "narrow"
@@ -49,15 +49,15 @@
       "name": "New Project",
       "short_name": "New",
       "description": "Create a new project",
-      "url": "/?action=new",
-      "icons": [{ "src": "/shortcut-new.png", "sizes": "96x96" }]
+      "url": "/HologramFire/firebase-studio-frontend/?action=new",
+      "icons": [{ "src": "/HologramFire/firebase-studio-frontend/shortcut-new.png", "sizes": "96x96" }]
     },
     {
       "name": "Open Project",
       "short_name": "Open",
       "description": "Open existing project",
-      "url": "/?action=open",
-      "icons": [{ "src": "/shortcut-open.png", "sizes": "96x96" }]
+      "url": "/HologramFire/firebase-studio-frontend/?action=open",
+      "icons": [{ "src": "/HologramFire/firebase-studio-frontend/shortcut-open.png", "sizes": "96x96" }]
     }
   ]
 }
