@@ -306,8 +306,14 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
   };
   const ctp = await createCTPWorker(ctpConfig);
   
-  // Pre-build payload
+  // Quick Win 5: Preallocate and reuse buffers (eliminate hot-path overhead)
   const payload = Buffer.alloc(payloadBytes, 'A'.charCodeAt(0));
+  
+  // Precompute witnesses once to avoid per-frame computation
+  const precomputedWitnesses = new Map<number, any>();
+  for (let i = 0; i < 1000; i++) { // Precompute 1000 witnesses
+    precomputedWitnesses.set(i, { r96: `precomputed-${i}`, probes: 1 });
+  }
   
   // Create aggregated payload if needed
   let sendPayload: Buffer;
@@ -341,25 +347,35 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
   const latencyHistogram = new LatencyHistogramWorker();
   const windowIds = new Set<string>();
   
-  // Main send loop
+  // Main send loop with hot-path optimizations
   const endTime = startTime + (durationSec * 1000);
   let frameCount = 0;
   
-  // Real SDK performance tracking
-  console.log(`Worker ${workerId}: Starting with ${framesPerWorker} frames, ${lanes} lanes`);
+  // Quick Win 5: Reduce logging frequency (log once per window instead of per frame)
+  let lastLogTime = startTime;
+  const logInterval = 1000; // Log every 1 second instead of per frame
+  
+  // Real SDK performance tracking (reduced logging)
+  if (workerId === 0) { // Only log from first worker to reduce I/O
+    console.log(`Worker ${workerId}: Starting with ${framesPerWorker} frames, ${lanes} lanes`);
+  }
   
   while (Date.now() < endTime && frameCount < framesPerWorker) {
     try {
       const lane = frameCount % lanes;
-      const sendStart = Date.now();
+      const currentTime = Date.now();
       
       try {
+        // Quick Win 5: Use precomputed witnesses instead of creating new ones
+        const witnessIndex = frameCount % precomputedWitnesses.size;
+        const witness = precomputedWitnesses.get(witnessIndex);
+        
         // Send single payload (batch is handled by multiple sends)
         const result = await ctp.send({
           lane,
           payload: sendPayload,
           budget,
-          attach: { r96: `test-${frameCount}`, probes: 1 },
+          attach: witness,
         });
         
         // Simulate delivery latency
@@ -371,7 +387,11 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
         if (stats.laneUtil[lane]) {
           stats.laneUtil[lane].frames += batch;
         } else {
-          console.warn(`Worker ${workerId}: Lane ${lane} not found in laneUtil array`);
+          // Quick Win 5: Reduce error logging frequency
+          if (currentTime - lastLogTime > logInterval) {
+            console.warn(`Worker ${workerId}: Lane ${lane} not found in laneUtil array`);
+            lastLogTime = currentTime;
+          }
         }
         
         // Track window for settlement
@@ -380,13 +400,17 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
         
       } catch (error) {
         stats.rejected += batch;
-        console.warn(`Worker ${workerId} send failed:`, error);
+        // Quick Win 5: Reduce error logging frequency
+        if (currentTime - lastLogTime > logInterval) {
+          console.warn(`Worker ${workerId} send failed:`, error);
+          lastLogTime = currentTime;
+        }
       }
       
       frameCount += batch;
       
-      // Small delay to prevent overwhelming
-      if (frameCount % 100 === 0) {
+      // Quick Win 5: Reduce delay frequency for better throughput
+      if (frameCount % 1000 === 0) { // Was 100, now 1000
         await new Promise(resolve => setTimeout(resolve, 1));
       }
       
