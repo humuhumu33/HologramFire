@@ -1,9 +1,0 @@
-{
-  "name": "atlas-12288/ml2p/hw-portability",
-  "version": "1.0.0",
-  "invariants": [
-    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
-    "witness_required","ml2p_hardware_portability"
-  ],
-  "impl": "src/ml2p/hardware/Portability.ts"
-}

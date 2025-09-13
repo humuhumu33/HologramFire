@@ -1,0 +1,102 @@
+{
+  "v": 1,
+  "ts": "2025-09-10T19:14:05.272Z",
+  "host": {
+    "node": "v22.19.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "repo": {
+    "commit": "unknown"
+  },
+  "blueprint": {
+    "digest": "01f368121e222463a445ae2091839fa4940867277d1dbd8c3b2a6095746c475c"
+  },
+  "config": {
+    "runs": 1,
+    "warmup": 0,
+    "iters": 60,
+    "itersTransport": 1
+  },
+  "results": [
+    {
+      "name": "ccmHash",
+      "iters": 60,
+      "nsTotal": 571600,
+      "nsPerOp": 9526.666666666666,
+      "opsPerSec": 104968.50944716585,
+      "p50": 3300,
+      "p95": 17600,
+      "p99": 58500,
+      "witness": "b1edf20147e90555c8ed9363789661cc23f33bcba054a6b949563c9bb7a8cb95",
+      "cpuPerOpNs": 0,
+      "cpuUtilPct": 0,
+      "jPerOp": 0,
+      "jTotal": 0,
+      "wattsEff": 15
+    },
+    {
+      "name": "uorId",
+      "iters": 60,
+      "nsTotal": 491900,
+      "nsPerOp": 8198.333333333334,
+      "opsPerSec": 121976.01138442772,
+      "p50": 4200,
+      "p95": 14000,
+      "p99": 56500,
+      "witness": "ec7eb57597babd2dbc852689f5a46848c68ca082a5f67932bfc9158cdfbb5252",
+      "cpuPerOpNs": 0,
+      "cpuUtilPct": 0,
+      "jPerOp": 0,
+      "jTotal": 0,
+      "wattsEff": 15
+    },
+    {
+      "name": "proofVerify",
+      "iters": 60,
+      "nsTotal": 79200,
+      "nsPerOp": 1320,
+      "opsPerSec": 757575.7575757576,
+      "p50": 300,
+      "p95": 2000,
+      "p99": 2800,
+      "witness": "78d82c0eb2f4335f7f2b8a8b348e4b1059145d0ddc818074a5ada5dc1bbeedad",
+      "cpuPerOpNs": 0,
+      "cpuUtilPct": 0,
+      "jPerOp": 0,
+      "jTotal": 0,
+      "wattsEff": 15
+    },
+    {
+      "name": "ctp96Verify",
+      "iters": 30,
+      "nsTotal": 60639000,
+      "nsPerOp": 2021300,
+      "opsPerSec": 494.7311136397368,
+      "p50": 2019800,
+      "p95": 2019800,
+      "p99": 2019800,
+      "witness": "ae6931bfe989eaf21078236996cdd3f5022aeb9aeba8014dc466006e5ff1e686",
+      "cpuPerOpNs": 0,
+      "cpuUtilPct": 0,
+      "jPerOp": 0,
+      "jTotal": 0,
+      "wattsEff": 15
+    }
+  ],
+  "runs": {
+    "ccmHash": [
+      "b1edf20147e90555c8ed9363789661cc23f33bcba054a6b949563c9bb7a8cb95"
+    ],
+    "uorId": [
+      "ec7eb57597babd2dbc852689f5a46848c68ca082a5f67932bfc9158cdfbb5252"
+    ],
+    "proofVerify": [
+      "78d82c0eb2f4335f7f2b8a8b348e4b1059145d0ddc818074a5ada5dc1bbeedad"
+    ],
+    "ctp96Verify": [
+      "be299046cd8739abae35881f3e19981ae7b36e782f43a2d530140e05bf29c3bb"
+    ]
+  },
+  "suiteWitness": "f3071e5c4d3f6d41ff66a50d6a5ff7bc435a5e54e169fd23f55146d6693f4ff3"
+}

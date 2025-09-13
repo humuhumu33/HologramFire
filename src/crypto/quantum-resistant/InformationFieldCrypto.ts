@@ -1,243 +1,363 @@
 /**
- * Information Field Crypto - Quantum-Resistant Cryptographic System
+ * Information Field Cryptography
+ * 
+ * This module implements quantum-resistant cryptography based on information field
+ * conservation and holographic correspondence principles.
  */
 
-export interface KleinWindow {
-  id: number;
-  shape: [number, number];
-  map: (x: number, y: number) => number;
+import { ccmHash } from "../ccm/CCMHash";
+import { generateKleinWindows, KleinWindow } from "../../core/klein/Klein";
+import { generateC768Schedule, verifyC768Schedule } from "../../core/conservation/C768";
+import { classifyR96, classifyR96Scalar } from "../../core/resonance/R96";
+import { phi } from "../../core/holography/Phi";
+import { N, P, C, R_CLASSES } from "../../core/constants";
+
+export interface InformationField {
+  field: number[][];
+  holographic_correspondence: any;
+  resonance_classification: string;
+  conservation_proof: string;
 }
 
 export interface FieldKey {
-  field: {
-    conservation: number;
-    coherence: number;
-    resonance: number[];
-    holographic_fingerprint?: string;
-  };
-  key: string;
-  klein_windows?: KleinWindow[];
-  c768_schedule?: number[];
-  resonance_key?: string;
-  holographic_correspondence?: string;
+  field: InformationField;
+  holographic_correspondence: any;
+  resonance_key: string;
+  conservation_schedule: any;
 }
 
 export interface CoherenceSignature {
   signature: string;
-  fieldKey: FieldKey;
+  holographic_correspondence: any;
+  resonance_proof: string;
+  conservation_evidence: any;
   timestamp: number;
-  field_coherence?: number;
-  conservation_proof?: string;
-  resonance_spectrum?: number[];
-  holographic_correspondence?: string;
-  field_topology?: string;
-}
-
-export interface InformationField {
-  conservation: number;
-  coherence: number;
-  resonance: number[];
-  holographic_fingerprint: string;
 }
 
 export interface QuantumResistantConfig {
-  field_dimensions?: number;
-  coherence_threshold?: number;
-  conservation_tolerance?: number;
-  resonance_bands?: number;
-  holographic_depth?: number;
-  fieldSize?: number;
-  conservationThreshold?: number;
-  coherenceThreshold?: number;
+  enableCaching: boolean;
+  cacheSize: number;
+  enablePerformanceOptimization: boolean;
+  enableHolographicValidation: boolean;
 }
 
 export class InformationFieldCrypto {
-  private config: QuantumResistantConfig;
   private cache: Map<string, any> = new Map();
+  private config: QuantumResistantConfig;
 
-  constructor(config: Partial<QuantumResistantConfig> = {}) {
+  constructor(config?: Partial<QuantumResistantConfig>) {
     this.config = {
-      field_dimensions: 12288,
-      coherence_threshold: 0.95,
-      conservation_tolerance: 1e-6,
-      resonance_bands: 96,
-      holographic_depth: 7,
-      fieldSize: 48,
-      conservationThreshold: 0.9,
-      coherenceThreshold: 0.9,
+      enableCaching: true,
+      cacheSize: 1000,
+      enablePerformanceOptimization: true,
+      enableHolographicValidation: true,
       ...config
     };
   }
 
-  async generateFieldKey(seed: string, context: any): Promise<FieldKey> {
-    const cacheKey = `fieldKey:${seed}:${JSON.stringify(context)}`;
+  /**
+   * Generate a quantum-resistant field key
+   */
+  async generateFieldKey(seed: string, context: unknown): Promise<FieldKey> {
+    const cacheKey = ccmHash({ seed, context }, "field_key");
     
-    if (this.cache.has(cacheKey)) {
+    if (this.config.enableCaching && this.cache.has(cacheKey)) {
       return this.cache.get(cacheKey);
     }
 
-    // Use deterministic generation based on seed for consistency
-    const seedHash = this.hash(seed + JSON.stringify(context));
-    const seedNum = parseInt(seedHash.substring(0, 8), 16);
+    // Generate Klein windows for field structure
+    const kleinWindows = generateKleinWindows(seed, N);
     
-    // Create deterministic random-like values
-    const deterministicRandom = (index: number) => {
-      const x = Math.sin(seedNum + index) * 10000;
-      return x - Math.floor(x);
-    };
-
+    // Generate conservation schedule
+    const conservationSchedule = generateC768Schedule(seed, context);
+    
+    // Create information field
     const field: InformationField = {
-      conservation: 0.95 + deterministicRandom(1) * 0.05,
-      coherence: 0.95 + deterministicRandom(2) * 0.05,
-      resonance: new Array(this.config.resonance_bands || 96).fill(0).map((_, i) => 
-        deterministicRandom(3 + i) * 0.2 + 0.1
-      ),
-      holographic_fingerprint: `holographic-${seed}-${seedHash.substring(0, 8)}`
+      field: this.generateFieldMatrix(kleinWindows),
+      holographic_correspondence: this.generateHolographicCorrespondence(kleinWindows),
+      resonance_classification: classifyR96(kleinWindows),
+      conservation_proof: ccmHash({ kleinWindows, conservationSchedule }, "conservation_proof")
     };
 
-    // Generate Klein windows with proper structure
-    const klein_windows: KleinWindow[] = new Array(192).fill(0).map((_, i) => ({
-      id: i,
-      shape: [48, 256] as [number, number],
-      map: (x: number, y: number) => deterministicRandom(1000 + i * 2 + x + y)
-    }));
-
-    // Generate C768 schedule as permutation of [0, 767]
-    const c768_schedule: number[] = [];
-    const available = Array.from({length: 768}, (_, i) => i);
-    for (let i = 0; i < 768; i++) {
-      const index = Math.floor(deterministicRandom(2000 + i) * available.length);
-      c768_schedule.push(available.splice(index, 1)[0]);
-    }
+    // Generate resonance key
+    const resonanceKey = ccmHash({ field, seed }, "resonance_key");
 
     const fieldKey: FieldKey = {
       field,
-      key: `field-${seed}-${seedHash.substring(0, 8)}`,
-      klein_windows,
-      c768_schedule,
-      resonance_key: `resonance-${seed}-${seedHash.substring(0, 8)}`,
-      holographic_correspondence: `correspondence-${seed}-${seedHash.substring(0, 8)}`
+      holographic_correspondence: field.holographic_correspondence,
+      resonance_key: resonanceKey,
+      conservation_schedule: conservationSchedule
     };
 
-    this.cache.set(cacheKey, fieldKey);
+    if (this.config.enableCaching) {
+      this.cache.set(cacheKey, fieldKey);
+      this.manageCacheSize();
+    }
+
     return fieldKey;
   }
 
-  async createCoherenceSignature(message: any, fieldKey: FieldKey): Promise<CoherenceSignature> {
-    const messageHash = this.hash(JSON.stringify(message));
-    const signature = `coherence-${messageHash}-${fieldKey.key}`;
+  /**
+   * Create a coherence signature
+   */
+  async createCoherenceSignature(message: unknown, fieldKey: FieldKey): Promise<CoherenceSignature> {
+    const messageHash = ccmHash(message, "message_hash");
+    const timestamp = Date.now();
     
-    // Use deterministic generation for consistent signatures
-    const seedHash = this.hash(messageHash + fieldKey.key);
-    const seedNum = parseInt(seedHash.substring(0, 8), 16);
+    // Generate holographic correspondence
+    const holographicCorrespondence = this.generateHolographicCorrespondence(fieldKey.field.field);
     
-    const deterministicRandom = (index: number) => {
-      const x = Math.sin(seedNum + index) * 10000;
-      return x - Math.floor(x);
-    };
+    // Create resonance proof
+    const resonanceProof = ccmHash({
+      messageHash,
+      fieldKey: fieldKey.resonance_key,
+      holographicCorrespondence
+    }, "resonance_proof");
     
+    // Generate conservation evidence
+    const conservationEvidence = verifyC768Schedule(
+      fieldKey.conservation_schedule,
+      { messageHash, timestamp }
+    );
+    
+    // Create signature
+    const signature = ccmHash({
+      messageHash,
+      resonanceProof,
+      conservationEvidence,
+      holographicCorrespondence,
+      timestamp
+    }, "coherence_signature");
+
     return {
       signature,
-      fieldKey,
-      timestamp: Date.now(),
-      field_coherence: fieldKey.field.coherence,
-      conservation_proof: `proof-${messageHash}`,
-      resonance_spectrum: new Array(96).fill(0).map((_, i) => deterministicRandom(i)),
-      holographic_correspondence: `correspondence-${messageHash}-${fieldKey.key}`,
-      field_topology: `topology-${messageHash}`
+      holographic_correspondence: holographicCorrespondence,
+      resonance_proof: resonanceProof,
+      conservation_evidence: conservationEvidence,
+      timestamp
     };
   }
 
+  /**
+   * Verify a coherence signature
+   */
   async verifyCoherenceSignature(
-    message: any, 
-    signature: CoherenceSignature, 
+    message: unknown,
+    signature: CoherenceSignature,
     fieldKey: FieldKey
   ): Promise<boolean> {
     try {
-      const messageHash = this.hash(JSON.stringify(message));
-      const expectedSignature = `coherence-${messageHash}-${fieldKey.key}`;
-      
-      // Verify signature string
-      if (signature.signature !== expectedSignature) {
-        return false;
-      }
-      
-      // Verify field key matches
-      if (signature.fieldKey.key !== fieldKey.key) {
-        return false;
-      }
-      
-      // Verify conservation proof
-      const expectedProof = `proof-${messageHash}`;
-      if (signature.conservation_proof !== expectedProof) {
-        return false;
-      }
+      const messageHash = ccmHash(message, "message_hash");
       
       // Verify holographic correspondence
-      const expectedCorrespondence = `correspondence-${messageHash}-${fieldKey.key}`;
-      if (signature.holographic_correspondence !== expectedCorrespondence) {
+      const expectedCorrespondence = this.generateHolographicCorrespondence(fieldKey.field.field);
+      if (!this.verifyHolographicCorrespondence(signature.holographic_correspondence, expectedCorrespondence)) {
         return false;
       }
       
-      // Verify field topology
-      const expectedTopology = `topology-${messageHash}`;
-      if (signature.field_topology !== expectedTopology) {
+      // Verify resonance proof
+      const expectedResonanceProof = ccmHash({
+        messageHash,
+        fieldKey: fieldKey.resonance_key,
+        holographicCorrespondence: signature.holographic_correspondence
+      }, "resonance_proof");
+      
+      if (signature.resonance_proof !== expectedResonanceProof) {
         return false;
       }
       
-      // Verify field coherence matches the field key
-      if (signature.field_coherence !== fieldKey.field.coherence) {
+      // Verify conservation evidence
+      const conservationValid = verifyC768Schedule(
+        fieldKey.conservation_schedule,
+        { messageHash, timestamp: signature.timestamp }
+      );
+      
+      if (!conservationValid) {
         return false;
       }
       
-      return true;
+      // Verify signature
+      const expectedSignature = ccmHash({
+        messageHash,
+        resonanceProof: signature.resonance_proof,
+        conservationEvidence: signature.conservation_evidence,
+        holographicCorrespondence: signature.holographic_correspondence,
+        timestamp: signature.timestamp
+      }, "coherence_signature");
+      
+      return signature.signature === expectedSignature;
     } catch (error) {
       return false;
     }
   }
 
+  /**
+   * Generate field matrix from Klein windows
+   */
+  private generateFieldMatrix(kleinWindows: KleinWindow[]): number[][] {
+    const field: number[][] = [];
+    
+    for (let p = 0; p < P; p++) {
+      const row: number[] = [];
+      for (let c = 0; c < C; c++) {
+        const windowIndex = (p * C + c) % kleinWindows.length;
+        const window = kleinWindows[windowIndex];
+        const value = phi(window.start, window.end, p, c);
+        row.push(value);
+      }
+      field.push(row);
+    }
+    
+    return field;
+  }
+
+  /**
+   * Generate holographic correspondence
+   */
+  private generateHolographicCorrespondence(field: number[][]): any {
+    const correspondence = {
+      field_hash: ccmHash(field, "field_hash"),
+      resonance_pattern: this.extractResonancePattern(field),
+      conservation_balance: this.calculateConservationBalance(field),
+      holographic_projection: this.generateHolographicProjection(field)
+    };
+    
+    return correspondence;
+  }
+
+  /**
+   * Verify holographic correspondence
+   */
+  private verifyHolographicCorrespondence(actual: any, expected: any): boolean {
+    return actual.field_hash === expected.field_hash &&
+           actual.resonance_pattern === expected.resonance_pattern &&
+           actual.conservation_balance === expected.conservation_balance;
+  }
+
+  /**
+   * Extract resonance pattern from field
+   */
+  private extractResonancePattern(field: number[][]): string {
+    const pattern = field.map(row => 
+      row.map(value => classifyR96Scalar(value)).join('')
+    ).join('');
+    
+    return ccmHash({ pattern }, "resonance_pattern");
+  }
+
+  /**
+   * Calculate conservation balance
+   */
+  private calculateConservationBalance(field: number[][]): number {
+    let balance = 0;
+    for (let p = 0; p < P; p++) {
+      for (let c = 0; c < C; c++) {
+        balance += field[p][c];
+      }
+    }
+    return balance;
+  }
+
+  /**
+   * Generate holographic projection
+   */
+  private generateHolographicProjection(field: number[][]): any {
+    const projection = {
+      total_energy: this.calculateConservationBalance(field),
+      resonance_classes: R_CLASSES.map(cls => ({
+        class: cls,
+        count: this.countResonanceClass(field, cls)
+      })),
+      holographic_density: this.calculateHolographicDensity(field)
+    };
+    
+    return projection;
+  }
+
+  /**
+   * Count resonance class occurrences
+   */
+  private countResonanceClass(field: number[][], resonanceClass: string): number {
+    let count = 0;
+    for (let p = 0; p < P; p++) {
+      for (let c = 0; c < C; c++) {
+        if (classifyR96Scalar(field[p][c]) === resonanceClass) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  /**
+   * Calculate holographic density
+   */
+  private calculateHolographicDensity(field: number[][]): number {
+    const totalElements = P * C;
+    const nonZeroElements = field.flat().filter(value => value !== 0).length;
+    return nonZeroElements / totalElements;
+  }
+
+  /**
+   * Manage cache size
+   */
+  private manageCacheSize(): void {
+    if (this.cache.size > this.config.cacheSize) {
+      const keys = Array.from(this.cache.keys());
+      const keysToDelete = keys.slice(0, keys.length - this.config.cacheSize);
+      keysToDelete.forEach(key => this.cache.delete(key));
+    }
+  }
+
+  /**
+   * Get cache statistics
+   */
   getCacheStats(): { size: number; hit_rate: number } {
     return {
       size: this.cache.size,
-      hit_rate: 0.95
+      hit_rate: 0.95 // Placeholder - would need actual hit tracking
     };
   }
 
+  /**
+   * Clear cache
+   */
   clearCache(): void {
     this.cache.clear();
   }
-
-  private hash(input: string): string {
-    let hash = 0;
-    for (let i = 0; i < input.length; i++) {
-      const char = input.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash).toString(16);
-  }
 }
 
-// Global instance
-export const globalInformationFieldCrypto = new InformationFieldCrypto();
-
-// Convenience functions
-export function getQuantumResistantCrypto(): InformationFieldCrypto {
-  return globalInformationFieldCrypto;
+/**
+ * Get quantum-resistant crypto instance
+ */
+export function getQuantumResistantCrypto(config?: Partial<QuantumResistantConfig>): InformationFieldCrypto {
+  return new InformationFieldCrypto(config);
 }
 
-export async function generateQuantumResistantKey(seed: string, context: any): Promise<FieldKey> {
-  return globalInformationFieldCrypto.generateFieldKey(seed, context);
+/**
+ * Generate quantum-resistant key
+ */
+export async function generateQuantumResistantKey(seed: string, context: unknown): Promise<FieldKey> {
+  const crypto = getQuantumResistantCrypto();
+  return crypto.generateFieldKey(seed, context);
 }
 
-export async function createQuantumResistantSignature(message: any, fieldKey: FieldKey): Promise<CoherenceSignature> {
-  return globalInformationFieldCrypto.createCoherenceSignature(message, fieldKey);
+/**
+ * Create quantum-resistant signature
+ */
+export async function createQuantumResistantSignature(message: unknown, fieldKey: FieldKey): Promise<CoherenceSignature> {
+  const crypto = getQuantumResistantCrypto();
+  return crypto.createCoherenceSignature(message, fieldKey);
 }
 
+/**
+ * Verify quantum-resistant signature
+ */
 export async function verifyQuantumResistantSignature(
-  message: any, 
-  signature: CoherenceSignature, 
+  message: unknown,
+  signature: CoherenceSignature,
   fieldKey: FieldKey
 ): Promise<boolean> {
-  return globalInformationFieldCrypto.verifyCoherenceSignature(message, signature, fieldKey);
+  const crypto = getQuantumResistantCrypto();
+  return crypto.verifyCoherenceSignature(message, signature, fieldKey);
 }

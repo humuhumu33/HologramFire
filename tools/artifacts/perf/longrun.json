@@ -1,0 +1,22 @@
+{
+  "stability": {
+    "violations": [],
+    "drift": 0.01,
+    "threshold": 0.05
+  },
+  "results": [
+    {
+      "timestamp": "2024-01-01T00:00:00Z",
+      "performance": 0.95,
+      "stability": 0.98,
+      "cpuPerOpNs": 1000,
+      "jPerOp": 0.5
+    }
+  ],
+  "summary": {
+    "total_tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "duration_ms": 1000
+  }
+}

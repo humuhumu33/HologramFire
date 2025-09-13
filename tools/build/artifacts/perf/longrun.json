@@ -1,0 +1,47 @@
+{
+  "v": 1,
+  "windows": 5,
+  "perWindowRuns": 3,
+  "warmupOps": 30,
+  "iters": 100,
+  "itersTransport": 50,
+  "maxDrift": 2,
+  "stability": {
+    "violations": []
+  },
+  "results": [
+    {
+      "name": "ccmHash",
+      "nsPerOp": 6570,
+      "p95": 18600,
+      "cpuPerOpNs": 0,
+      "jPerOp": 0,
+      "witness": "6776a77bce76cc4ae63909794ceb3538a9ac0a55e712638d604e10d950a95c53"
+    },
+    {
+      "name": "uorId",
+      "nsPerOp": 12355,
+      "p95": 16700,
+      "cpuPerOpNs": 0,
+      "jPerOp": 0,
+      "witness": "4ab740e2c1e0847f5c1ac92e435de402afd6c10ec11c2ebf983001be30a27b88"
+    },
+    {
+      "name": "proofVerify",
+      "nsPerOp": 692,
+      "p95": 500,
+      "cpuPerOpNs": 0,
+      "jPerOp": 0,
+      "witness": "44078270933470eb461f4c6a956f9ff34f36aae6af1d7271a1dcd4796dc75220"
+    },
+    {
+      "name": "ctp96Verify",
+      "nsPerOp": 337208,
+      "p95": 483000,
+      "cpuPerOpNs": 1860000,
+      "jPerOp": 0.0279,
+      "witness": "5560cb77f8d9c3ef264d7fabc9f6b80d6d90d2f6bc065bbbfecb279eee470238"
+    }
+  ],
+  "suiteWitness": "7df24e74d7a18a9dc762d461afece077bf3996fa1b8affab27a16e3d4feebff6"
+}

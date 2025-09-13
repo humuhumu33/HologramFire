@@ -1,9 +1,0 @@
-{
-  "name": "atlas-12288/rh/mirror",
-  "version": "1.0.0",
-  "invariants": [
-    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
-    "witness_required","rh_mirror_involution","rh_mirror_fixed_locus"
-  ],
-  "impl": "src/rh/Mirror.ts"
-}

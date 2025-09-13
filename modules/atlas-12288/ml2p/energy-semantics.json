@@ -1,9 +1,0 @@
-{
-  "name": "atlas-12288/ml2p/energy-semantics",
-  "version": "1.0.0",
-  "invariants": [
-    "page_conservation","cycle_conservation","resonance_classification","holographic_correspondence",
-    "witness_required","ml2p_energy_units_joules","ml2p_esml_locality","ml2p_power_first_class"
-  ],
-  "impl": "src/ml2p/energy/Semantics.ts"
-}
