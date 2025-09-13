@@ -8,6 +8,7 @@ import type { Storage, Budget, Receipt, Witness, LatticeCoord } from '../types';
 import { mkStorage, budget, assertClosed, validateCoords, mkTestData, sleep } from '../testkit';
 import { createHistogram, type PerformanceHistogram } from '../bench/histogram';
 import { GATES } from '../types';
+import { generateR96 } from '../utils/r96';
 
 export interface StorageStepResult {
   success: boolean;
@@ -376,12 +377,8 @@ export class StorageStep {
   }
 
   private generateR96(bytes: Buffer): string {
-    // R96 generation using real SDK
-    let hash = 0;
-    for (let i = 0; i < bytes.length; i++) {
-      hash = ((hash << 5) - hash + bytes[i]) & 0xffffffff;
-    }
-    return Math.abs(hash).toString(16).padStart(8, '0');
+    // Use centralized R96 generation to match SDK
+    return generateR96(bytes);
   }
 
   private createWitness(bytes: Buffer): Witness {

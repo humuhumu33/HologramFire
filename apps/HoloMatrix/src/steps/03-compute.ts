@@ -8,6 +8,7 @@ import type { Kernel, Budget, Receipt, Witness, ComputeKernel } from '../types';
 import { mkAdapter, budget, assertClosed, sleep } from '../testkit';
 import { createHistogram, type PerformanceHistogram } from '../bench/histogram';
 import { GATES } from '../types';
+import { generateR96 } from '../utils/r96';
 
 export interface ComputeStepResult {
   success: boolean;

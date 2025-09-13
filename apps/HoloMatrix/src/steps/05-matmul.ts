@@ -11,6 +11,7 @@ import { StorageStep } from './02-storage';
 import { ComputeStep } from './03-compute';
 import { createReporter } from '../bench/report';
 import { budget, sleep } from '../testkit';
+import { generateR96 } from '../utils/r96';
 
 export interface MatMulStepResult {
   success: boolean;
@@ -45,7 +46,7 @@ export class MatMulStep {
 
   constructor(config: MatMulConfig) {
     this.config = config;
-    this.matMulUseCase = createMatMulUseCase(config);
+    this.matMulUseCase = null; // Will be initialized in initializeComponents()
     this.transport = new TransportStep({
       lanes: config.lanes,
       windowMs: config.window,
@@ -77,9 +78,18 @@ export class MatMulStep {
     console.log(`  Target: ${this.config.targetGbps} Gbit/s`);
     console.log('='.repeat(60));
 
-    // HARD GATE: Matrix size validation
-    if (this.config.size !== 2048 || this.config.block !== 128) {
-      throw new Error(`Demo must run with 2048x2048 matrix and 128x128 block. Got ${this.config.size}x${this.config.size} with ${this.config.block}x${this.config.block} blocks`);
+    // HARD GATE: Matrix size validation - support both 2048x2048 and 8192x8192
+    const validConfigs = [
+      { size: 2048, block: 128 },
+      { size: 8192, block: 256 }
+    ];
+    
+    const isValidConfig = validConfigs.some(config => 
+      this.config.size === config.size && this.config.block === config.block
+    );
+    
+    if (!isValidConfig) {
+      throw new Error(`Demo must run with either 2048x2048/128x128 or 8192x8192/256x256 configuration. Got ${this.config.size}x${this.config.size} with ${this.config.block}x${this.config.block} blocks`);
     }
 
     this.startTime = Date.now();
@@ -131,6 +141,11 @@ export class MatMulStep {
 
   private async initializeComponents(): Promise<void> {
     console.log('\n🔧 Initializing components...');
+    
+    // Initialize the matrix use case first (this is where the large matrix initialization happens)
+    console.log('📊 Creating matrix multiplication use case...');
+    this.matMulUseCase = await createMatMulUseCase(this.config);
+    console.log('✅ Matrix use case initialized');
     
     await this.transport.initialize();
     await this.storage.initialize();
@@ -433,37 +448,45 @@ export class MatMulStep {
     console.log('\n🔍 Validating Performance Requirements...');
     
     // Matrix size (already validated at start)
-    console.log('✅ Matrix size: 2048×2048 with 128×128 blocks');
+    console.log(`✅ Matrix size: ${this.config.size}×${this.config.size} with ${this.config.block}×${this.config.block} blocks`);
+
+    // Get thresholds based on matrix size
+    const isLargeMatrix = this.config.size === 8192;
+    const throughputThreshold = isLargeMatrix ? 50.0 : 25.0;
+    const transportP99Threshold = isLargeMatrix ? 3.0 : 1.8;
+    const storageP99Threshold = isLargeMatrix ? 5.0 : 3.0;
+    const computeP99Threshold = isLargeMatrix ? 20.0 : 10.0;
+    const e2eP99Threshold = isLargeMatrix ? 40.0 : 20.0;
 
     // Throughput gate
-    if (metrics.throughputGbps < 25.0) {
-      throw new Error(`Throughput below target: ${metrics.throughputGbps.toFixed(2)} Gbit/s < 25.0 Gbit/s required`);
+    if (metrics.throughputGbps < throughputThreshold) {
+      throw new Error(`Throughput below target: ${metrics.throughputGbps.toFixed(2)} Gbit/s < ${throughputThreshold} Gbit/s required`);
     }
-    console.log(`✅ Throughput: ${metrics.throughputGbps.toFixed(2)} Gbit/s ≥ 25.0 Gbit/s`);
+    console.log(`✅ Throughput: ${metrics.throughputGbps.toFixed(2)} Gbit/s ≥ ${throughputThreshold} Gbit/s`);
 
     // Transport latency gate
-    if (metrics.transport.p99Ms > 1.8) {
-      throw new Error(`Transport p99 too high: ${metrics.transport.p99Ms.toFixed(2)} ms > 1.8 ms required`);
+    if (metrics.transport.p99Ms > transportP99Threshold) {
+      throw new Error(`Transport p99 too high: ${metrics.transport.p99Ms.toFixed(2)} ms > ${transportP99Threshold} ms required`);
     }
-    console.log(`✅ Transport p99: ${metrics.transport.p99Ms.toFixed(2)} ms ≤ 1.8 ms`);
+    console.log(`✅ Transport p99: ${metrics.transport.p99Ms.toFixed(2)} ms ≤ ${transportP99Threshold} ms`);
 
     // Storage latency gate
-    if (metrics.storage.p99Ms > 3.0) {
-      throw new Error(`Storage p99 too high: ${metrics.storage.p99Ms.toFixed(2)} ms > 3.0 ms required`);
+    if (metrics.storage.p99Ms > storageP99Threshold) {
+      throw new Error(`Storage p99 too high: ${metrics.storage.p99Ms.toFixed(2)} ms > ${storageP99Threshold} ms required`);
     }
-    console.log(`✅ Storage p99: ${metrics.storage.p99Ms.toFixed(2)} ms ≤ 3.0 ms`);
+    console.log(`✅ Storage p99: ${metrics.storage.p99Ms.toFixed(2)} ms ≤ ${storageP99Threshold} ms`);
 
     // Compute latency gate
-    if (metrics.compute.p99Ms > 10.0) {
-      throw new Error(`Compute p99 too high: ${metrics.compute.p99Ms.toFixed(2)} ms > 10.0 ms required`);
+    if (metrics.compute.p99Ms > computeP99Threshold) {
+      throw new Error(`Compute p99 too high: ${metrics.compute.p99Ms.toFixed(2)} ms > ${computeP99Threshold} ms required`);
     }
-    console.log(`✅ Compute p99: ${metrics.compute.p99Ms.toFixed(2)} ms ≤ 10.0 ms`);
+    console.log(`✅ Compute p99: ${metrics.compute.p99Ms.toFixed(2)} ms ≤ ${computeP99Threshold} ms`);
 
     // E2E latency gate
-    if (metrics.e2e.p99Ms > 20.0) {
-      throw new Error(`E2E p99 too high: ${metrics.e2e.p99Ms.toFixed(2)} ms > 20.0 ms required`);
+    if (metrics.e2e.p99Ms > e2eP99Threshold) {
+      throw new Error(`E2E p99 too high: ${metrics.e2e.p99Ms.toFixed(2)} ms > ${e2eP99Threshold} ms required`);
     }
-    console.log(`✅ E2E p99: ${metrics.e2e.p99Ms.toFixed(2)} ms ≤ 20.0 ms`);
+    console.log(`✅ E2E p99: ${metrics.e2e.p99Ms.toFixed(2)} ms ≤ ${e2eP99Threshold} ms`);
 
     // Window closure gate
     const windowClosureRate = metrics.transport.windowsClosed / metrics.transport.windowsTotal;
@@ -489,41 +512,49 @@ export class MatMulStep {
     operator: string;
     threshold: number;
   }> {
+    // Get thresholds based on matrix size
+    const isLargeMatrix = this.config.size === 8192;
+    const throughputThreshold = isLargeMatrix ? 50.0 : 25.0;
+    const transportP99Threshold = isLargeMatrix ? 3.0 : 1.8;
+    const storageP99Threshold = isLargeMatrix ? 5.0 : 3.0;
+    const computeP99Threshold = isLargeMatrix ? 20.0 : 10.0;
+    const e2eP99Threshold = isLargeMatrix ? 40.0 : 20.0;
+
     return [
       {
-        name: 'Throughput ≥ 25.0 Gbit/s',
-        passed: metrics.throughputGbps >= 25.0,
+        name: `Throughput ≥ ${throughputThreshold} Gbit/s`,
+        passed: metrics.throughputGbps >= throughputThreshold,
         actual: metrics.throughputGbps,
         operator: '>=',
-        threshold: 25.0
+        threshold: throughputThreshold
       },
       {
-        name: 'Transport p99 ≤ 1.8 ms',
-        passed: metrics.transport.p99Ms <= 1.8,
+        name: `Transport p99 ≤ ${transportP99Threshold} ms`,
+        passed: metrics.transport.p99Ms <= transportP99Threshold,
         actual: metrics.transport.p99Ms,
         operator: '<=',
-        threshold: 1.8
+        threshold: transportP99Threshold
       },
       {
-        name: 'Storage p99 ≤ 3.0 ms',
-        passed: metrics.storage.p99Ms <= 3.0,
+        name: `Storage p99 ≤ ${storageP99Threshold} ms`,
+        passed: metrics.storage.p99Ms <= storageP99Threshold,
         actual: metrics.storage.p99Ms,
         operator: '<=',
-        threshold: 3.0
+        threshold: storageP99Threshold
       },
       {
-        name: 'Compute p99 ≤ 10.0 ms',
-        passed: metrics.compute.p99Ms <= 10.0,
+        name: `Compute p99 ≤ ${computeP99Threshold} ms`,
+        passed: metrics.compute.p99Ms <= computeP99Threshold,
         actual: metrics.compute.p99Ms,
         operator: '<=',
-        threshold: 10.0
+        threshold: computeP99Threshold
       },
       {
-        name: 'E2E p99 ≤ 20.0 ms',
-        passed: metrics.e2e.p99Ms <= 20.0,
+        name: `E2E p99 ≤ ${e2eP99Threshold} ms`,
+        passed: metrics.e2e.p99Ms <= e2eP99Threshold,
         actual: metrics.e2e.p99Ms,
         operator: '<=',
-        threshold: 20.0
+        threshold: e2eP99Threshold
       },
       {
         name: 'Window closure ≥ 99.5%',
@@ -610,12 +641,8 @@ export class MatMulStep {
    * Generate R96 hash for buffer
    */
   private generateR96(buffer: Buffer): string {
-    // Simple hash for testing - in production would use proper R96
-    let hash = 0;
-    for (let i = 0; i < buffer.length; i++) {
-      hash = ((hash << 5) - hash + buffer[i]) & 0xffffffff;
-    }
-    return Math.abs(hash).toString(16).padStart(8, '0');
+    // Use centralized R96 generation to match SDK
+    return generateR96(buffer);
   }
 }
 

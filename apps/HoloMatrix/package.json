@@ -11,6 +11,7 @@
     "demo:bench": "ts-node src/steps/04-bench.ts --duration 10 --lanes 64 --payload 4096 --batch 16 --workers 4 --window 100 --target 25",
     "demo:matmul": "ts-node src/steps/05-matmul.ts --size 2048 --block 128 --lanes 64 --payload 4096 --batch 16 --workers 4 --window 100 --targetGbps 25",
     "demo:1000": "ts-node run-1000-matrices.ts",
+    "demo:8192": "ts-node run-8192-matrices.ts",
     "demo:100-streaming": "ts-node run-100-matrices-streaming.ts",
     "demo:100-ultra": "ts-node run-100-matrices-ultra-streaming.ts",
     "demo:100-fixed": "ts-node run-100-matrices-fixed.ts",

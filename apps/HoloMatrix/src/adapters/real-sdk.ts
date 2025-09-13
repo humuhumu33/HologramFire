@@ -13,7 +13,8 @@ import {
   norm, 
   HologramSDK,
   ccmHash 
-} from '../../../../libs/sdk/node/sdk/dist/index';
+} from '../../../../libs/sdk/node/sdk/dist/index.js';
+import { generateR96 } from '../utils/r96';
 import type { 
   Budget, 
   Witness, 
@@ -45,9 +46,10 @@ function getSDK(): HologramSDK {
 
 /**
  * Generate a deterministic 24-hex checksum from bytes (R96) using SDK
+ * Now uses centralized implementation for consistency
  */
 function r96hex(buf: Buffer): string {
-  return ccmHash(buf, 'r96').slice(0, 24);
+  return generateR96(buf);
 }
 
 /**
@@ -103,8 +105,8 @@ export async function createCTP(opts: { nodeId: string; lanes: number; windowMs:
     send: async ({ lane, payload, budget }: any) => {
       if (payload.length > budget.io) throw new Error("over-budget: io");
       
-      // Generate witness using real SDK
-      const witness = await sdk.generateWitness(payload);
+      // Generate witness using centralized R96 generation
+      const witness = generateR96(payload);
       inbox.push(payload);
       
       return { 
@@ -114,7 +116,7 @@ export async function createCTP(opts: { nodeId: string; lanes: number; windowMs:
     },
     recv: async () => {
       const payload = inbox.shift() ?? Buffer.from("");
-      const witness = await sdk.generateWitness(payload);
+      const witness = generateR96(payload);
       
       return { 
         payload, 
@@ -147,8 +149,8 @@ export async function createStorage(_: any = {}) {
     put: async ({ id, bytes, budget, witness }: any) => {
       if (bytes.length > budget.io) throw new Error("over-budget: storage io");
       
-      // Generate real witness using SDK
-      const realWitness = await sdk.generateWitness(bytes);
+      // Generate real witness using centralized R96 generation
+      const realWitness = generateR96(bytes);
       const witnessObj: Witness = {
         r96: realWitness
       };
@@ -216,7 +218,7 @@ export async function spawnKernel({ name, inputs, budget, pin, iopolicy }: any) 
   // If input doesn't exist in store, create test data for it
   if (!src) {
     const testData = Buffer.from(`test-data-for-${inputId}`, 'utf8');
-    const witness = await sdk.generateWitness(testData);
+    const witness = generateR96(testData);
     const witnessObj: Witness = {
       r96: witness
     };
@@ -225,7 +227,7 @@ export async function spawnKernel({ name, inputs, budget, pin, iopolicy }: any) 
   }
 
   const outBytes = asciiUpperStamp(src.bytes);
-  const witnessR96 = await sdk.generateWitness(outBytes);
+  const witnessR96 = generateR96(outBytes); // Use centralized R96 generation
   const outId = uorIdFromBytes(outBytes);
   
   const witnessObj: Witness = {

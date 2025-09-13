@@ -5,6 +5,7 @@
 
 import type { Budget, Witness } from '../types';
 import { uorIdFromBytes, mkWitness } from '../testkit';
+import { generateR96 } from '../utils/r96';
 
 export interface PostcardPayload {
   id: string;
@@ -70,12 +71,8 @@ export class PostcardUseCase {
    * Generate R96 hash for buffer
    */
   private generateR96(buffer: Buffer): string {
-    // Simple hash for testing
-    let hash = 0;
-    for (let i = 0; i < buffer.length; i++) {
-      hash = ((hash << 5) - hash + buffer[i]) & 0xffffffff;
-    }
-    return Math.abs(hash).toString(16).padStart(8, '0');
+    // Use centralized R96 generation to match SDK
+    return generateR96(buffer);
   }
 
   /**
