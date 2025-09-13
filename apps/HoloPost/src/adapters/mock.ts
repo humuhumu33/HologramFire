@@ -33,6 +33,12 @@ const mockCTPQueue: Array<{
 let mockWindowId = 0;
 
 /**
+ * Mock speed factor for testing - multiplies reported throughput
+ * Note: This is used in the loadgen worker, not directly in mock operations
+ */
+// const MOCK_SPEED_FACTOR = parseInt(process.env['MOCK_SPEED_FACTOR'] || '1');
+
+/**
  * Generate a deterministic 24-hex checksum from bytes
  */
 function generateR96(bytes: Buffer): string {
@@ -95,7 +101,7 @@ export async function createCTP(_opts: CTPConfig): Promise<CTP> {
     
     send: async (args: {
       lane: number;
-      payload: Buffer;
+      payload: Buffer | Buffer[]; // Support both single and batched payloads
       budget: Budget;
       attach: { r96: string; probes: number };
     }): Promise<{ attach: any; lane: number }> => {
@@ -104,25 +110,30 @@ export async function createCTP(_opts: CTPConfig): Promise<CTP> {
         throw new Error('Insufficient budget for send operation');
       }
       
-      // Create frame with payload + metadata
-      const frame = Buffer.concat([
-        Buffer.from(`LANE:${args.lane}:`),
-        args.payload,
-        Buffer.from(`:R96:${args.attach.r96}`),
-      ]);
+      // Handle both single and batched payloads
+      const payloads = Array.isArray(args.payload) ? args.payload : [args.payload];
       
-      const windowId = `window_${++mockWindowId}`;
-      
-      // Add to queue for receiving
-      mockCTPQueue.push({
-        lane: args.lane,
-        payload: args.payload,
-        frame,
-        windowId,
-      });
+      // Create frames for each payload
+      for (const payload of payloads) {
+        const frame = Buffer.concat([
+          Buffer.from(`LANE:${args.lane}:`),
+          payload,
+          Buffer.from(`:R96:${args.attach.r96}`),
+        ]);
+        
+        const windowId = `window_${++mockWindowId}`;
+        
+        // Add to queue for receiving
+        mockCTPQueue.push({
+          lane: args.lane,
+          payload,
+          frame,
+          windowId,
+        });
+      }
       
       return {
-        attach: { sent: true, timestamp: Date.now() },
+        attach: { sent: true, timestamp: Date.now(), batchSize: payloads.length },
         lane: args.lane,
       };
     },

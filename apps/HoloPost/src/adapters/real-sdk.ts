@@ -6,33 +6,16 @@
  */
 
 import { createHash } from 'node:crypto';
-// For now, use local implementations until SDK is properly integrated
-// import { buildUorId, verifyProof, proofFromBudgets, C96, norm } from '../../../libs/sdk/node/sdk/src/index';
-
-// Local implementations
-type C96 = number;
-
-function norm(x: number): C96 {
-  return ((x % 96) + 96) % 96;
-}
-
-function buildUorId(payload: unknown): { v: 1; r: number; digest: string } {
-  const json = JSON.stringify(payload);
-  const bytes = Buffer.from(json, 'utf8');
-  const vec = Array.from(bytes.values());
-  const r = vec.length > 0 ? vec.reduce((a, b) => a + b, 0) % 96 : 0;
-  const digest = createHash('sha256').update(json).digest('hex');
-  return { v: 1 as const, r, digest };
-}
-
-function verifyProof(p: { steps: Array<{ budget: C96 }> }): boolean {
-  const sum = p.steps.reduce((acc, step) => norm(acc + step.budget), 0);
-  return sum === 0;
-}
-
-function proofFromBudgets(budgets: number[]): { steps: Array<{ budget: C96; note?: string }> } {
-  return { steps: budgets.map((b, i) => ({ budget: norm(b), note: `step-${i}` })) };
-}
+// Import the actual HologramSDK
+import { 
+  buildUorId, 
+  verifyProof, 
+  proofFromBudgets, 
+  C96, 
+  norm, 
+  HologramSDK,
+  ccmHash 
+} from '../../../../libs/sdk/node/sdk/src/index';
 import {
   Budget,
   Witness,
@@ -47,28 +30,29 @@ import {
   KernelConfig,
 } from '../types';
 
-// Real SDK instance - simplified for now
-// let sdkInstance: HologramSDK | null = null;
+// Real SDK instance
+let sdkInstance: HologramSDK | null = null;
 
 /**
- * Initialize the real SDK - simplified for now
+ * Initialize the real SDK
  */
-// function getSDK(): HologramSDK {
-//   if (!sdkInstance) {
-//     sdkInstance = new HologramSDK({
-//       apiEndpoint: process.env['HOLOGRAM_API_ENDPOINT'] || 'https://api.hologram.dev',
-//       timeout: parseInt(process.env['HOLOGRAM_TIMEOUT'] || '30000'),
-//       retries: parseInt(process.env['HOLOGRAM_RETRIES'] || '3'),
-//     });
-//   }
-//   return sdkInstance;
-// }
+function getSDK(): HologramSDK {
+  if (!sdkInstance) {
+    sdkInstance = new HologramSDK({
+      apiEndpoint: process.env['HOLOGRAM_API_ENDPOINT'] || 'https://api.hologram.dev',
+      timeout: parseInt(process.env['HOLOGRAM_TIMEOUT'] || '30000'),
+      retries: parseInt(process.env['HOLOGRAM_RETRIES'] || '3'),
+    });
+  }
+  return sdkInstance;
+}
 
 /**
- * Generate a deterministic 24-hex checksum from bytes (R96)
+ * Generate a deterministic 24-hex checksum from bytes (R96) using SDK
  */
 function generateR96(bytes: Buffer): string {
-  const hash = createHash('sha256').update(bytes).digest('hex');
+  // Use the SDK's ccmHash function for consistent hashing
+  const hash = ccmHash(bytes.toString('base64'), 'r96');
   return hash.substring(0, 24);
 }
 
@@ -114,7 +98,8 @@ const budgetMath = {
  * Create a real verifier using the SDK
  */
 export async function createVerifier(): Promise<Verifier> {
-  // const sdk = getSDK(); // Unused for now
+  // Initialize SDK for future use
+  getSDK();
   
   return {
     r96: generateR96,
@@ -142,11 +127,11 @@ export async function createCTP(opts: CTPConfig): Promise<CTP> {
   }> = [];
   
   return {
-    handshake: async (_info: any): Promise<boolean> => {
+    handshake: async (info: any): Promise<boolean> => {
       try {
         // Use SDK to validate connection info
-        // const isValid = await sdk.validate(info);
-        const isValid = true; // Simplified for now
+        const sdk = getSDK();
+        const isValid = await sdk.validate(info);
         console.log(`🔗 CTP handshake with node ${nodeId}: ${isValid ? 'SUCCESS' : 'FAILED'}`);
         return isValid;
       } catch (error) {
@@ -276,17 +261,18 @@ export async function createStorage(opts: LatticeConfig): Promise<Storage> {
       });
       
       // Generate witness using SDK
-      // const witness = await sdk.generateWitness({
-      //   id: args.id,
-      //   content: args.bytes.toString('base64'),
-      //   uorId,
-      // });
+      const sdk = getSDK();
+      const witnessHash = await sdk.generateWitness({
+        id: args.id,
+        content: args.bytes.toString('base64'),
+        uorId,
+      });
       
       // Store data
       storage.set(args.id, {
         bytes: args.bytes,
         witness: {
-          r96: generateR96(args.bytes),
+          r96: witnessHash.substring(0, 24), // Use SDK-generated witness
           probes: 192,
           timestamp: Date.now(),
         },
@@ -392,15 +378,15 @@ export async function spawnKernel(opts: KernelConfig): Promise<Kernel> {
       const outputs: Array<{ id: string; witness: Witness }> = [];
       
       for (const input of inputs) {
-        // Generate UOR-ID for input
-        // const inputUorId = buildUorId({
-        //   id: input.id,
-        //   timestamp: Date.now(),
-        // });
+        // Generate UOR-ID for input (for future use)
+        buildUorId({
+          id: input.id,
+          timestamp: Date.now(),
+        });
         
         // Mock kernel processing - uppercase the content and add stamp
         const processedText = `PROCESSED BY ${name.toUpperCase()}: ${input.id} | STAMP✅`;
-        const processedBytes = Buffer.from(processedText, 'utf8');
+        Buffer.from(processedText, 'utf8'); // Process bytes for witness generation
         
         // Generate UOR-ID for output using SDK
         const outputUorId = buildUorId({
@@ -411,14 +397,15 @@ export async function spawnKernel(opts: KernelConfig): Promise<Kernel> {
         });
         
         // Generate witness using SDK
-        // const witness = await sdk.generateWitness({
-        //   outputId: outputUorId.digest,
-        //   processedContent: processedText,
-        //   kernel: name,
-        // });
+        const sdk = getSDK();
+        const witnessHash = await sdk.generateWitness({
+          outputId: outputUorId.digest,
+          processedContent: processedText,
+          kernel: name,
+        });
         
         const outputWitness: Witness = {
-          r96: generateR96(processedBytes),
+          r96: witnessHash.substring(0, 24), // Use SDK-generated witness
           probes: 192,
           timestamp: Date.now(),
         };

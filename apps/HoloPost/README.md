@@ -320,6 +320,211 @@ Expected performance (mock implementation):
 - Transport: ~2-3ms per cycle
 - Compute: ~5-10ms per kernel
 
+## 🚀 25G Throughput Benchmark
+
+The HoloPost demo includes a comprehensive throughput benchmark suite designed to validate **≥ 25 Gbit/s** sustained transport throughput using the **CTP-96 fast path** over the **48×256 = 12,288** lattice.
+
+### Key Features
+
+- **Lane Parallelism**: Multiple columns for concurrent transport
+- **Batching**: Aggregates small payloads to amortize verification overhead
+- **Zero-Copy Validation**: Optimized paths for high-throughput scenarios
+- **Worker Threading**: Parallel processing across multiple CPU cores
+- **Comprehensive Metrics**: Gb/s, frames/s, p50/p99 latency, CPU%, window efficiency
+
+### Quick Start
+
+```bash
+# Default 25G benchmark (10s, 32 lanes, 4KB payload)
+npm run demo:bench
+
+# High-performance 25G test with real SDK
+npm run bench:25g
+
+# Fast mock test (4x speed factor)
+npm run bench:mock-fast
+
+# Matrix sweep to find optimal configuration
+npm run bench:matrix
+```
+
+### Configuration Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `--duration` | 10s | Test duration in seconds |
+| `--lanes` | 32 | Number of transport lanes/columns |
+| `--payload` | 4096 | Payload size in bytes |
+| `--batch` | 16 | Batch size for send operations |
+| `--window` | 100ms | Settlement window size |
+| `--workers` | 4 | Number of worker threads |
+| `--target` | 25 | Target throughput in Gb/s |
+| `--aggregate-to` | auto | Aggregate small payloads to this size |
+
+### Performance Tuning
+
+#### What Knobs Matter
+
+1. **Lanes**: More lanes = more parallelism (8-64 recommended)
+2. **Payload Size**: Larger payloads = higher efficiency (4KB+ optimal)
+3. **Batch Size**: Larger batches = lower overhead (8-32 recommended)
+4. **Workers**: Scale with CPU cores (4-8 for most systems)
+5. **Window Size**: Balance latency vs efficiency (50-200ms)
+
+#### Aggregation for Small Payloads
+
+For payloads ≤ 2KB, the benchmark automatically aggregates multiple payloads into 4KB frames to:
+- Amortize verification overhead
+- Reduce per-frame processing costs
+- Maintain high throughput even with small messages
+
+Example:
+```bash
+# Test 1KB payloads aggregated to 4KB frames
+npm run demo:bench --payload 1024 --aggregate-to 4096
+```
+
+### Real SDK Usage
+
+To test against the real Hologram SDK:
+
+```bash
+# Use real SDK instead of mock
+HOLOGRAM_USE_MOCK=false npm run demo:bench
+
+# High-performance real SDK test
+npm run bench:25g
+```
+
+#### Hardware Recommendations
+
+For 25G+ performance with real SDK:
+- **NIC**: 25G+ capable network interface
+- **CPU**: Multi-core processor with SIMD support
+- **Memory**: Sufficient for zero-copy operations
+- **OS**: Enable multiple RX/TX queues
+- **Tuning**: Set `lanes` to match NIC queue count
+
+### Pass/Fail Criteria
+
+The benchmark **exits with code 0** only if ALL criteria are met:
+
+✅ **Throughput ≥ Target Gb/s** (default: 25)  
+✅ **P99 Latency ≤ 2.0ms**  
+✅ **Window Efficiency ≥ 99%**  
+✅ **Loss Rate ≤ 2%**  
+
+Otherwise **exits with code 1** and shows detailed failure analysis.
+
+### Example Output
+
+```
+════════════════════════════════════════════════════════════
+CTP-96 Bench — 25G Throughput Validation
+════════════════════════════════════════════════════════════
+
+Duration: 10s
+Lanes: 32
+Payload: 4.0KB
+Batch: 16
+Window: 100ms
+Workers: 4
+Target: 25 Gb/s
+
+📊 Results:
+Gb/s: 27.3 fps: 829k p50: 0.42ms p99: 1.8ms CPU: 68%
+
+📈 Frame Stats:
+Sent: 8.4M Delivered: 8.3M Rejected: 110k
+Loss Rate: 1.31%
+
+🪟 Window Settlement:
+Windows: 829 closed / 836 total (99.2%)
+
+🛤️  Lane Utilization (top 10):
+  L 0: 260k frames
+  L 1: 259k frames
+  L 2: 258k frames
+  ...
+
+🎯 Pass/Fail Criteria:
+  ✅ PASS Throughput ≥ Target: 27.3 ≥ 25
+  ✅ PASS P99 Latency ≤ 2ms: 1.8 ≤ 2.0
+  ✅ PASS Window Efficiency ≥ 99%: 99.2% ≥ 99%
+  ✅ PASS Loss Rate ≤ 2%: 1.31% ≤ 2%
+
+🎉 BENCHMARK PASSED - All criteria met!
+```
+
+### Advanced Usage
+
+#### Matrix Sweep
+
+Find the optimal configuration automatically:
+
+```bash
+npm run bench:matrix
+```
+
+Tests combinations of:
+- Payload sizes: 1KB, 2KB, 4KB, 8KB
+- Lane counts: 8, 16, 32, 64
+- Batch sizes: 1, 8, 16, 32
+- Aggregation: none, 4KB
+
+#### Custom Configurations
+
+```bash
+# High-latency, high-throughput test
+npm run demo:bench --duration 30 --lanes 64 --payload 8192 --batch 32
+
+# Low-latency test
+npm run demo:bench --window 50 --lanes 16 --payload 2048 --batch 8
+
+# Stress test
+npm run demo:bench --duration 60 --lanes 128 --workers 8 --target 50
+```
+
+#### Results Export
+
+```bash
+# Save results to JSON file
+npm run demo:bench --output results.json
+
+# Results are auto-saved to ./bench-results/ directory
+```
+
+### Testing
+
+Run the benchmark test suite:
+
+```bash
+# Run all benchmark tests
+npm run test:bench
+
+# Run specific test categories
+npm test -- --testNamePattern="25G"
+npm test -- --testNamePattern="Aggregation"
+npm test -- --testNamePattern="Budget"
+```
+
+### Troubleshooting
+
+#### Common Issues
+
+1. **Low Throughput**: Increase lanes, payload size, or batch size
+2. **High Latency**: Reduce window size or increase workers
+3. **High Loss Rate**: Increase budget or reduce target throughput
+4. **Memory Issues**: Reduce workers or batch size
+
+#### Performance Tips
+
+- Use `--matrix` to find optimal settings for your hardware
+- Start with default settings and tune incrementally
+- Monitor CPU usage - should be 60-80% for optimal performance
+- Ensure sufficient memory for zero-copy operations
+- Use real SDK for production performance validation
+
 ## 🔍 Key Features
 
 ### Budget Enforcement

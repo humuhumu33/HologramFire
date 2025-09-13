@@ -11,6 +11,7 @@
 
 import * as mockSDK from './mock';
 import * as realSDK from './real-sdk';
+// import * as enhancedRealSDK from './enhanced-real-sdk'; // Unused for now
 
 // Check if we should use the mock implementation
 const useMock = process.env['HOLOGRAM_USE_MOCK'] !== 'false';
@@ -28,6 +29,33 @@ export const createStorage = useMock ? mockSDK.createStorage : realSDK.createSto
 export const spawnKernel = useMock ? mockSDK.spawnKernel : realSDK.spawnKernel;
 export const uorIdFromBytes = useMock ? mockSDK.uorIdFromBytes : realSDK.uorIdFromBytes;
 export const place = useMock ? mockSDK.place : realSDK.place;
+
+/**
+ * Probe SDK capabilities for benchmarking
+ */
+export function capabilities(): {
+  simd: boolean;
+  zeroCopy: boolean;
+  fastPath: boolean;
+  maxLanes: number;
+} {
+  if (useMock) {
+    return {
+      simd: true,
+      zeroCopy: true,
+      fastPath: true,
+      maxLanes: 256, // Mock supports full lattice
+    };
+  } else {
+    // Real SDK capabilities - would be implemented by actual SDK
+    return {
+      simd: true,
+      zeroCopy: true,
+      fastPath: true,
+      maxLanes: 256,
+    };
+  }
+}
 
 /**
  * Real SDK implementation would look like this:
