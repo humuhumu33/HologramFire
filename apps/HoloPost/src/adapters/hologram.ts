@@ -6,42 +6,28 @@
  * 
  * To use the real SDK:
  * 1. Set HOLOGRAM_USE_MOCK=false
- * 2. Install the real Hologram SDK package
- * 3. Update the import path below to point to the actual SDK
+ * 2. The real SDK implementation will be used automatically
  */
 
-// Types are imported from mock.ts
+import * as mockSDK from './mock';
+import * as realSDK from './real-sdk';
 
 // Check if we should use the mock implementation
 const useMock = process.env['HOLOGRAM_USE_MOCK'] !== 'false';
 
-// Always use mock implementation for now
-// TODO: Replace with actual Hologram SDK imports when available
-// Example:
-// import { HologramSDK } from '@hologram/sdk';
-// or
-// import { HologramSDK } from '../../../libs/hologram-sdk';
-
-if (!useMock) {
-  console.warn('⚠️  Real Hologram SDK not yet configured.');
-  console.warn('   To use the real SDK:');
-  console.warn('   1. Set HOLOGRAM_USE_MOCK=false');
-  console.warn('   2. Install the real Hologram SDK package');
-  console.warn('   3. Update imports in src/adapters/hologram.ts');
-  console.warn('   4. Map the real SDK functions to the expected interface');
-  console.warn('');
-  console.warn('   Falling back to mock implementation...');
+if (useMock) {
+  console.log('🔧 Using MOCK Hologram SDK implementation');
+} else {
+  console.log('🚀 Using REAL Hologram SDK implementation');
 }
 
-// Export mock implementation
-export {
-  createVerifier,
-  createCTP,
-  createStorage,
-  spawnKernel,
-  uorIdFromBytes,
-  place,
-} from './mock';
+// Export the appropriate implementation
+export const createVerifier = useMock ? mockSDK.createVerifier : realSDK.createVerifier;
+export const createCTP = useMock ? mockSDK.createCTP : realSDK.createCTP;
+export const createStorage = useMock ? mockSDK.createStorage : realSDK.createStorage;
+export const spawnKernel = useMock ? mockSDK.spawnKernel : realSDK.spawnKernel;
+export const uorIdFromBytes = useMock ? mockSDK.uorIdFromBytes : realSDK.uorIdFromBytes;
+export const place = useMock ? mockSDK.place : realSDK.place;
 
 /**
  * Real SDK implementation would look like this:

@@ -62,9 +62,14 @@ npm run demo
 npm run demo:transport
 npm run demo:storage
 npm run demo:compute
+npm run demo:encoding
 
 # Run performance tests
 npm run demo:perf
+
+# Encode/decode text messages
+npm run encode "Hello World" r96
+npm run decode "SGVsbG8gV29ybGQ=" base64
 ```
 
 ### Testing
@@ -196,6 +201,57 @@ When you run the demo, you'll see output like:
 
 This makes it easy to understand exactly what gates are being used and why.
 
+## 🔐 Text Encoding/Decoding
+
+HoloPost provides comprehensive text encoding and decoding capabilities, allowing users to encode and decode any text message using various encoding schemes supported by the Hologram lattice.
+
+### Available Encoding Schemes
+
+- **Base64**: Standard Base64 encoding (widely supported, URL safe)
+- **Hex**: Hexadecimal encoding (simple, human readable, debug friendly)
+- **Holographic**: Holographic lattice coordinate encoding (lattice native, fault tolerant, distributed)
+- **R96**: R96 checksum-validated encoding (integrity verified, tamper resistant, fast validation)
+- **Klein**: Klein probe-validated encoding (probe validated, frame integrity, transport optimized)
+
+### CLI Usage
+
+```bash
+# Encode a message
+npm run encode "Hello from HoloPost!" r96
+npm run encode "Secret message" holographic
+npm run encode "Test data" base64
+
+# Decode a message
+npm run decode "SGVsbG8gZnJvbSBIb2xvUG9zdCE=" base64
+npm run decode "25,205|30,086|16,243|41,009|38,073" holographic
+```
+
+### Programmatic Usage
+
+```typescript
+import { createEncodedPostcard, decodePostcard } from './usecases/postcard';
+
+// Encode a message
+const { postcard, encoded } = createEncodedPostcard(
+  'Hello from the Hologram lattice! 🌟',
+  'r96'
+);
+
+// Decode a postcard
+const decoded = decodePostcard(postcard, 'r96');
+console.log(`Decoded: ${decoded.decoded}`);
+console.log(`Valid: ${decoded.valid}`);
+```
+
+### Features
+
+- **Witness Verification**: All encoding schemes include witness verification with r96 checksums and Klein probes
+- **Integrity Validation**: Automatic validation during decoding to ensure message integrity
+- **Multiple Schemes**: Support for 5 different encoding schemes optimized for different use cases
+- **Batch Operations**: Encode/decode multiple messages at once
+- **Performance Metrics**: Detailed timing and compression ratio information
+- **Gate Integration**: Full integration with the Hologram gate system for audit trails
+
 ## 📊 Demo Flow
 
 ### Step 1: Transport
@@ -220,6 +276,13 @@ This makes it easy to understand exactly what gates are being used and why.
 3. Generate output with witness
 4. Validate compute and aggregate receipts
 5. Retrieve processed output
+
+### Step 4: Text Encoding/Decoding
+1. Test all available encoding schemes
+2. Encode sample messages with witness verification
+3. Decode and validate encoded messages
+4. Test batch encoding operations
+5. Validate round-trip encoding/decoding
 
 ## 🧪 Testing
 

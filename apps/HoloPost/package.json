@@ -8,7 +8,18 @@
     "demo:transport": "ts-node src/steps/01-transport.ts",
     "demo:storage": "ts-node src/steps/02-storage.ts",
     "demo:compute": "ts-node src/steps/03-compute.ts",
+    "demo:encoding": "ts-node src/steps/04-encoding.ts",
     "demo:perf": "ts-node src/demo.ts --perf",
+    "demo:throughput": "ts-node src/throughput-test.ts",
+    "demo:throughput:real": "ts-node src/throughput-test.ts --real",
+    "demo:real-sdk-throughput": "ts-node src/real-sdk-throughput-test.ts",
+    "demo:quick-throughput": "ts-node src/quick-throughput-test.ts",
+    "demo:high-performance": "ts-node src/high-performance-hologram.ts",
+    "demo:parallel": "ts-node src/parallel-demo.ts",
+    "demo:parallel:real": "ts-node src/parallel-demo.ts --real",
+    "demo:parallel:main": "ts-node src/demo.ts --parallel",
+    "encode": "ts-node src/demo.ts --encode",
+    "decode": "ts-node src/demo.ts --decode",
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc",
@@ -41,7 +52,11 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "@hologram/sdk": "file:../../libs/sdk/node/sdk",
+    "ws": "^8.13.0",
+    "axios": "^1.4.0",
+    "zod": "^3.21.0"
   },
   "engines": {
     "node": ">=20.0.0"

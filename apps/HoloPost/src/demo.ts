@@ -9,9 +9,11 @@
 import { runTransportStep } from './steps/01-transport';
 import { runStorageStep } from './steps/02-storage';
 import { runComputeStep } from './steps/03-compute';
+import { runEncodingStep } from './steps/04-encoding';
 import { PerfTimer, runPerfTest } from './testkit';
 import { gateVerifier, GateOps } from './gates/verification';
 import { generateQuickReference } from './gates/documentation';
+import { runParallelDemo } from './parallel-demo';
 
 /**
  * Main demo configuration
@@ -58,6 +60,7 @@ function printCompletionSummary(results: {
   transport: any;
   storage: any;
   compute: any;
+  encoding: any;
   totalTime: number;
 }): void {
   console.log('\n' + '🎉'.repeat(20));
@@ -69,17 +72,20 @@ function printCompletionSummary(results: {
   console.log(`   Transport window: ${results.transport.windowId}`);
   console.log(`   Storage ID: ${results.storage.storageId.substring(0, 16)}...`);
   console.log(`   Output ID: ${results.compute.outputId.substring(0, 16)}...`);
+  console.log(`   Encoding tests: ${results.encoding.totalTests} (${results.encoding.successRate.toFixed(1)}% success)`);
   
   console.log('\n✅ ALL RECEIPTS CLOSED:');
   console.log('   ✅ Transport settlement receipt');
   console.log('   ✅ Storage put receipt');
   console.log('   ✅ Compute receipt');
   console.log('   ✅ Aggregate receipt');
+  console.log('   ✅ Encoding validation receipt');
   
   console.log('\n🏗️  VIRTUAL INFRASTRUCTURE DEMONSTRATED:');
   console.log('   ✅ Transport: CTP-96 style O(1) verification + windowed settlement');
   console.log('   ✅ Storage: Deterministic placement, replicas/erasure coding, witnesses, repair');
   console.log('   ✅ Compute: Budgeted, pinned near data, receipts');
+  console.log('   ✅ Encoding: Multiple encoding schemes with witness verification');
   
   console.log('\n🎯 RESULT: Hologram lattice successfully replaces traditional cloud DB!');
   console.log(`   Final output UOR-ID: ${results.compute.outputId}`);
@@ -132,6 +138,10 @@ export async function runDemo(): Promise<void> {
     printStepSeparator(3, 'Compute');
     const computeResult = await runComputeStep(storageResult.postcard);
     
+    // Step 4: Encoding/Decoding
+    printStepSeparator(4, 'Text Encoding/Decoding');
+    const encodingResult = await runEncodingStep();
+    
     const totalTime = demoTimer.end();
     
     // Print completion summary
@@ -139,6 +149,7 @@ export async function runDemo(): Promise<void> {
       transport: transportResult,
       storage: storageResult,
       compute: computeResult,
+      encoding: encodingResult,
       totalTime,
     });
     
@@ -224,6 +235,10 @@ export async function runStep(stepName: string): Promise<void> {
         const storageResult = await runStorageStepForCompute();
         await runComputeStep(storageResult.postcard);
         break;
+      case 'encoding':
+        const { runEncodingStep } = await import('./steps/04-encoding');
+        await runEncodingStep();
+        break;
       default:
         throw new Error(`Unknown step: ${stepName}`);
     }
@@ -232,6 +247,75 @@ export async function runStep(stepName: string): Promise<void> {
     
   } catch (error) {
     console.error(`\n❌ Step ${stepName} failed:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Encode a message using the specified scheme
+ */
+async function encodeMessage(message: string, scheme: 'base64' | 'hex' | 'holographic' | 'r96' | 'klein'): Promise<void> {
+  console.log(`\n🔐 Encoding Message with ${scheme.toUpperCase()}`);
+  console.log('='.repeat(50));
+  
+  try {
+    const { createEncodedPostcard } = await import('./usecases/postcard');
+    
+    const { encoded } = createEncodedPostcard(message, scheme);
+    
+    console.log(`📝 Original Message: "${message}"`);
+    console.log(`🔧 Scheme: ${scheme.toUpperCase()}`);
+    console.log(`📦 Encoded: "${encoded.encoded}"`);
+    console.log(`📊 Length: ${encoded.metadata.originalLength} → ${encoded.metadata.encodedLength} chars`);
+    console.log(`⏱️  Time: ${encoded.metadata.encodingTime}ms`);
+    
+    if (encoded.witness) {
+      console.log(`🔍 Witness r96: ${encoded.witness.r96}`);
+      console.log(`🔍 Witness Probes: ${encoded.witness.probes}`);
+    }
+    
+    console.log('\n✅ Message encoded successfully!');
+    
+  } catch (error) {
+    console.error('\n❌ Encoding failed:', error);
+    throw error;
+  }
+}
+
+/**
+ * Decode an encoded message using the specified scheme
+ */
+async function decodeMessage(encoded: string, scheme: 'base64' | 'hex' | 'holographic' | 'r96' | 'klein'): Promise<void> {
+  console.log(`\n🔓 Decoding Message with ${scheme.toUpperCase()}`);
+  console.log('='.repeat(50));
+  
+  try {
+    const { decodeText } = await import('./utils/encoding');
+    
+    const decoded = decodeText(encoded, {
+      scheme,
+      validateWitness: true
+    });
+    
+    console.log(`📦 Encoded: "${encoded}"`);
+    console.log(`🔧 Scheme: ${scheme.toUpperCase()}`);
+    console.log(`📝 Decoded: "${decoded.decoded}"`);
+    console.log(`✅ Valid: ${decoded.valid ? 'YES' : 'NO'}`);
+    console.log(`⏱️  Time: ${decoded.metadata.validationTime}ms`);
+    
+    if (decoded.witness) {
+      console.log(`🔍 Witness r96: ${decoded.witness.r96}`);
+      console.log(`🔍 Witness Probes: ${decoded.witness.probes}`);
+    }
+    
+    if (decoded.valid) {
+      console.log('\n✅ Message decoded successfully!');
+    } else {
+      console.log('\n❌ Message decoding failed - invalid or corrupted!');
+    }
+    
+  } catch (error) {
+    console.error('\n❌ Decoding failed:', error);
     throw error;
   }
 }
@@ -256,6 +340,28 @@ async function main(): Promise<void> {
         break;
       case '--compute':
         await runStep('compute');
+        break;
+      case '--encoding':
+        await runStep('encoding');
+        break;
+      case '--parallel':
+        await runParallelDemo();
+        break;
+      case '--encode':
+        if (args.length < 3) {
+          console.error('Usage: npm run demo -- --encode <message> <scheme>');
+          console.error('Available schemes: base64, hex, holographic, r96, klein');
+          process.exit(1);
+        }
+        await encodeMessage(args[1] || '', args[2] as any);
+        break;
+      case '--decode':
+        if (args.length < 3) {
+          console.error('Usage: npm run demo -- --decode <encoded> <scheme>');
+          console.error('Available schemes: base64, hex, holographic, r96, klein');
+          process.exit(1);
+        }
+        await decodeMessage(args[1] || '', args[2] as any);
         break;
       default:
         await runDemo();
