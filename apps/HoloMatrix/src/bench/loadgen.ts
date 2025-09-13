@@ -178,10 +178,10 @@ class LoadGenerator {
       laneUtilization[i] /= this.results.length;
     }
 
-    // Calculate throughput
+    // Calculate throughput based on actual data processed
     const duration = (this.endTime - this.startTime) / 1000; // seconds
     const totalBytes = totalFramesSent * this.config.payload;
-    const throughputGbps = (totalBytes * 8) / (duration * 1e9);
+    const throughputGbps = duration > 0 ? (totalBytes * 8) / (duration * 1e9) : 0;
 
     return {
       throughputGbps,

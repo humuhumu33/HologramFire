@@ -12,6 +12,7 @@ import { ComputeStep } from './03-compute';
 import { createReporter } from '../bench/report';
 import { budget, sleep } from '../testkit';
 import { generateR96 } from '../utils/r96';
+import { calculateMatrixDataInfo, calculateThroughput, ThroughputTimer } from '../utils/throughput';
 
 export interface MatMulStepResult {
   success: boolean;
@@ -42,11 +43,15 @@ export class MatMulStep {
   private reporter: any;
   private liveDisplayInterval: NodeJS.Timeout | null = null;
   private startTime: number = 0;
+  private computationStartTime: number = 0;
+  private computationEndTime: number = 0;
   private metricsSnapshot: any = null;
+  private throughputTimer: ThroughputTimer;
 
   constructor(config: MatMulConfig) {
     this.config = config;
     this.matMulUseCase = null; // Will be initialized in initializeComponents()
+    this.throughputTimer = new ThroughputTimer();
     this.transport = new TransportStep({
       lanes: config.lanes,
       windowMs: config.window,
@@ -101,8 +106,14 @@ export class MatMulStep {
       // Start live display
       this.startLiveDisplay();
 
+      // Start throughput timer (after initialization)
+      this.throughputTimer.start();
+
       // Run the pipeline
       const metrics = await this.executePipeline();
+
+      // Stop throughput timer (before validation and cleanup)
+      this.throughputTimer.stop();
 
       // HARD GATES: Validate all performance requirements with assertions
       await this.validateResults(metrics);
@@ -399,10 +410,21 @@ export class MatMulStep {
     const avgComputeLatency = compute.computeLatencies.length > 0 ?
       compute.computeLatencies.reduce((a: number, b: number) => a + b, 0) / compute.computeLatencies.length : 0;
 
-    // Calculate throughput based on actual elapsed time
-    const totalBytes = (ingress.framesSent + egress.framesSent) * this.config.payload;
-    const elapsedTime = (Date.now() - this.startTime) / 1000;
-    const throughputGbps = elapsedTime > 0 ? (totalBytes * 8) / (elapsedTime * 1e9) : 0;
+    // Calculate accurate throughput using the new utilities
+    const matrixDataInfo = calculateMatrixDataInfo(this.config.size, this.config.block);
+    const computationTime = this.throughputTimer.getElapsedSeconds();
+    const throughputMeasurement = calculateThroughput(matrixDataInfo.totalDataBytes, computationTime);
+    const throughputGbps = throughputMeasurement.throughputGbps;
+
+    // Debug throughput calculation
+    console.log(`\n🔍 Throughput Debug Info:`);
+    console.log(`  Matrix: ${this.config.size}×${this.config.size}, Blocks: ${this.config.block}×${this.config.block}`);
+    console.log(`  Total blocks: ${matrixDataInfo.totalBlocks}`);
+    console.log(`  Bytes per block: ${matrixDataInfo.bytesPerBlock.toLocaleString()}`);
+    console.log(`  Total data bytes: ${matrixDataInfo.totalDataBytes.toLocaleString()}`);
+    console.log(`  Total data GB: ${(matrixDataInfo.totalDataBytes / 1e9).toFixed(2)}`);
+    console.log(`  Computation time: ${computationTime.toFixed(3)}s`);
+    console.log(`  Calculated throughput: ${throughputGbps.toFixed(2)} Gbit/s`);
 
     const metrics = {
       throughputGbps,
@@ -636,6 +658,7 @@ export class MatMulStep {
   private updateMetricsSnapshot(metrics: any): void {
     this.metricsSnapshot = metrics;
   }
+
 
   /**
    * Generate R96 hash for buffer

@@ -1,0 +1,205 @@
+{
+  "testConfig": {
+    "size": 2048,
+    "block": 128,
+    "lanes": 32,
+    "payload": 4096,
+    "batch": 16,
+    "workers": 4,
+    "window": 100,
+    "targetGbps": 1
+  },
+  "summary": {
+    "matrixSize": "2048×2048",
+    "totalOperations": 10,
+    "successfulOperations": 10,
+    "totalTimeSeconds": 109.965,
+    "averageTimePerOperation": 10.996500000000001,
+    "totalDataProcessedGB": 2.76824064,
+    "verificationStats": {
+      "matrixSizeValid": {
+        "passed": 10,
+        "total": 10
+      },
+      "blockStructureValid": {
+        "passed": 10,
+        "total": 10
+      },
+      "computationValid": {
+        "passed": 10,
+        "total": 10
+      },
+      "resultIntegrityValid": {
+        "passed": 10,
+        "total": 10
+      }
+    }
+  },
+  "performance": {
+    "averageThroughput": 0.21033247009496697,
+    "averageDuration": 10538.6,
+    "averageBlocksProcessed": 20
+  },
+  "detailedResults": [
+    {
+      "operation": 1,
+      "success": true,
+      "duration": 10443,
+      "throughput": 0.2120647813846596,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 2,
+      "success": true,
+      "duration": 10849,
+      "throughput": 0.2041287226472486,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 3,
+      "success": true,
+      "duration": 11063,
+      "throughput": 0.20018010593871463,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 4,
+      "success": true,
+      "duration": 10609,
+      "throughput": 0.20874658422094447,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 5,
+      "success": true,
+      "duration": 10883,
+      "throughput": 0.20349099623265643,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 6,
+      "success": true,
+      "duration": 10629,
+      "throughput": 0.20835379734688117,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 7,
+      "success": true,
+      "duration": 10343,
+      "throughput": 0.21411510316155855,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 8,
+      "success": true,
+      "duration": 10419,
+      "throughput": 0.21255326921969478,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 9,
+      "success": true,
+      "duration": 10152,
+      "throughput": 0.21814347044917257,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    },
+    {
+      "operation": 10,
+      "success": true,
+      "duration": 9996,
+      "throughput": 0.22154787034813925,
+      "totalBlocks": 512,
+      "blocksProcessed": 20,
+      "matrixSize": "2048×2048",
+      "dataProcessed": 276824064,
+      "verificationChecks": {
+        "matrixSizeValid": true,
+        "blockStructureValid": true,
+        "computationValid": true,
+        "resultIntegrityValid": true
+      }
+    }
+  ]
+}
