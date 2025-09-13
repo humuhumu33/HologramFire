@@ -12,11 +12,12 @@ import { EventEmitter } from 'events';
 import { RealtimeSyncManager } from '../firebase-interface/realtime-sync';
 import { AuthSystem } from '../firebase-interface/auth-system';
 import { FirestoreDatabase } from '../firebase-interface/firestore-database';
-import { ADLCore } from '../adl/adl-core';
+import { ADLIntegrationManager, ADLIntegrationConfig } from '../adl/adl-integration';
+import { EnhancedADLCore } from '../adl/adl-enhanced-core';
 import { UltraHighPerformanceEngine } from '../performance/ultra-high-performance-engine';
 import { CompressionEngine } from '../performance/compression-engine';
 import { PerformanceDashboard } from '../monitoring/performance-dashboard';
-import { AvailableSchemas } from '../adl/adl-schemas';
+import { AvailableSchemas, EnhancedSchemas } from '../adl';
 
 export interface HologramFirebaseADLConfig {
   // Firebase-like Interface
@@ -43,6 +44,9 @@ export interface HologramFirebaseADLConfig {
     schemas: string[];
     validationLevel: 'basic' | 'enhanced' | 'maximum';
     integrityChecking: boolean;
+    contentAddressable: boolean;
+    blockStorage: boolean;
+    holographicVerification: boolean;
   };
 
   // Performance Optimization
@@ -105,7 +109,8 @@ export class HologramFirebaseADL extends EventEmitter {
   private realtimeSync: RealtimeSyncManager | null = null;
   private authSystem: AuthSystem | null = null;
   private firestoreDB: FirestoreDatabase | null = null;
-  private adlCore: ADLCore | null = null;
+  private adlManager: ADLIntegrationManager | null = null;
+  private adlCore: EnhancedADLCore | null = null;
   private performanceEngine: UltraHighPerformanceEngine | null = null;
   private compressionEngine: CompressionEngine | null = null;
   private dashboard: PerformanceDashboard | null = null;
@@ -247,8 +252,9 @@ export class HologramFirebaseADL extends EventEmitter {
         this.status.components.auth = false;
       }
 
-      if (this.adlCore) {
-        await this.adlCore.close();
+      if (this.adlManager) {
+        await this.adlManager.close();
+        this.adlManager = null;
         this.adlCore = null;
         this.status.components.adl = false;
       }
@@ -351,18 +357,87 @@ export class HologramFirebaseADL extends EventEmitter {
 
     console.log('📋 Starting Advanced Data Layouts (ADL) Core...');
     
-    this.adlCore = new ADLCore(this.holographicVerifier, this.performanceEngine);
-    
-    // Register available schemas
-    for (const schema of AvailableSchemas) {
-      if (this.config.adl.schemas.includes(schema.id)) {
-        await this.adlCore.registerSchema(schema);
-        console.log(`  📄 Registered schema: ${schema.name} (${schema.id})`);
+    // Create ADL integration configuration
+    const adlConfig: ADLIntegrationConfig = {
+      enhancedADL: {
+        contentAddressable: {
+          enabled: this.config.adl.contentAddressable,
+          compressionEnabled: true,
+          deduplicationEnabled: true,
+          replicationFactor: 3
+        },
+        blockStorage: {
+          blockSize: 64 * 1024,
+          replicationFactor: 3,
+          erasureCoding: { k: 6, m: 3 },
+          placementStrategy: 'holographic',
+          integrityCheckInterval: 30000,
+          holographicVerification: this.config.adl.holographicVerification,
+          compressionEnabled: true,
+          encryptionEnabled: true
+        },
+        integrity: {
+          enabled: this.config.adl.integrityChecking,
+          checkInterval: 10000,
+          holographicVerification: this.config.adl.holographicVerification,
+          merkleTreeVerification: true,
+          cryptographicSignatures: true,
+          realTimeMonitoring: true,
+          autoRemediation: true,
+          alertThresholds: {
+            integrityScore: 0.95,
+            violationCount: 5,
+            checkFailureRate: 0.05
+          }
+        },
+        performance: {
+          cacheSize: 10000,
+          batchSize: 100,
+          parallelProcessing: true,
+          optimizationLevel: this.config.adl.validationLevel === 'maximum' ? 'maximum' : 'enhanced'
+        },
+        holographic: {
+          enabled: this.config.adl.holographicVerification,
+          verificationLevel: this.config.adl.validationLevel,
+          fingerprintAlgorithm: 'holographic-sha256'
+        }
+      },
+      firebaseCompatibility: {
+        enabled: true,
+        realTimeSync: this.config.realtime.enabled,
+        authentication: this.config.auth.enabled
+      },
+      performance: {
+        optimizationEnabled: true,
+        targetThroughput: this.config.performance.targetThroughput,
+        cacheSize: 10000,
+        batchSize: 100
+      },
+      holographic: {
+        enabled: this.config.adl.holographicVerification,
+        verificationLevel: this.config.adl.validationLevel,
+        fingerprintAlgorithm: 'holographic-sha256'
       }
-    }
+    };
+    
+    // Initialize ADL integration manager
+    this.adlManager = new ADLIntegrationManager(
+      adlConfig,
+      this.holographicVerifier,
+      this.compressionEngine
+    );
+    
+    await this.adlManager.initialize();
+    
+    // Get the enhanced ADL core for direct access
+    this.adlCore = (this.adlManager as any).enhancedADL;
 
     this.status.components.adl = true;
-    console.log(`✅ ADL Core started: ${this.config.adl.schemas.length} schemas registered`);
+    console.log(`✅ Enhanced ADL Core started: ${this.config.adl.schemas.length} schemas registered`);
+    console.log(`   📦 Content-addressable storage: ${this.config.adl.contentAddressable ? 'Enabled' : 'Disabled'}`);
+    console.log(`   🧱 Block storage: ${this.config.adl.blockStorage ? 'Enabled' : 'Disabled'}`);
+    console.log(`   🔒 Integrity verification: ${this.config.adl.integrityChecking ? 'Enabled' : 'Disabled'}`);
+    console.log(`   🔮 Holographic verification: ${this.config.adl.holographicVerification ? 'Enabled' : 'Disabled'}`);
   }
 
   /**
@@ -557,8 +632,8 @@ export class HologramFirebaseADL extends EventEmitter {
       metrics.firestore = this.firestoreDB.getPerformanceMetrics();
     }
 
-    if (this.adlCore) {
-      metrics.adl = this.adlCore.getPerformanceMetrics();
+    if (this.adlManager) {
+      metrics.adl = this.adlManager.getStats();
     }
 
     if (this.dashboard) {
@@ -566,6 +641,84 @@ export class HologramFirebaseADL extends EventEmitter {
     }
 
     return metrics;
+  }
+
+  /**
+   * Get ADL integration manager
+   */
+  getADLManager(): ADLIntegrationManager | null {
+    return this.adlManager;
+  }
+
+  /**
+   * Create user profile using enhanced ADL
+   */
+  async createUserProfile(userData: {
+    id: string;
+    email: string;
+    displayName?: string;
+    photoURL?: string;
+    preferences?: any;
+  }): Promise<any> {
+    if (!this.adlManager) {
+      throw new Error('ADL Manager not initialized');
+    }
+    return await this.adlManager.createUserProfile(userData);
+  }
+
+  /**
+   * Create document using enhanced ADL
+   */
+  async createDocument(documentData: {
+    id: string;
+    title: string;
+    content: string;
+    authorId: string;
+    tags?: string[];
+    isPublished?: boolean;
+  }): Promise<any> {
+    if (!this.adlManager) {
+      throw new Error('ADL Manager not initialized');
+    }
+    return await this.adlManager.createDocument(documentData);
+  }
+
+  /**
+   * Create message using enhanced ADL
+   */
+  async createMessage(messageData: {
+    id: string;
+    senderId: string;
+    recipientId: string;
+    content: string;
+    messageType: 'text' | 'image' | 'file' | 'system';
+    isEncrypted?: boolean;
+    attachments?: any[];
+  }): Promise<any> {
+    if (!this.adlManager) {
+      throw new Error('ADL Manager not initialized');
+    }
+    return await this.adlManager.createMessage(messageData);
+  }
+
+  /**
+   * Query instances using enhanced ADL
+   */
+  async queryInstances(query: any): Promise<any[]> {
+    if (!this.adlManager) {
+      throw new Error('ADL Manager not initialized');
+    }
+    return await this.adlManager.queryInstances(query);
+  }
+
+  /**
+   * Verify instance integrity using enhanced ADL
+   */
+  async verifyInstanceIntegrity(instanceId: string): Promise<boolean> {
+    if (!this.adlManager) {
+      throw new Error('ADL Manager not initialized');
+    }
+    return await this.adlManager.verifyInstanceIntegrity(instanceId);
   }
 
   /**
