@@ -6,7 +6,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -59,28 +58,8 @@ func (wv *WitnessVerifier) VerifyWitness(ctx context.Context, bundle *WitnessBun
 		"uor_id":     bundle.UORID,
 	}).Debug("Starting witness verification")
 
-	// Test knobs for deterministic testing:
-	// "uor:test/ok:*"   -> always OK
-	// "uor:test/bad:*"  -> always BAD
-	if strings.HasPrefix(bundle.UORID, "uor:test/ok:") {
-		return &WitnessResult{
-			Valid:      true,
-			Type:       bundle.Type,
-			VerifiedAt: time.Now(),
-			Details: map[string]interface{}{
-				"test_mode": "ok",
-				"uor_id":    bundle.UORID,
-			},
-		}, nil
-	}
-	if strings.HasPrefix(bundle.UORID, "uor:test/bad:") {
-		return &WitnessResult{
-			Valid:      false,
-			Type:       bundle.Type,
-			VerifiedAt: time.Now(),
-			Error:      "test mode: forced failure",
-		}, nil
-	}
+	// Production mode: All witnesses must be properly verified
+	// No test mode shortcuts in production
 
 	// Check if witness has expired
 	if bundle.Expires.Before(time.Now()) {
