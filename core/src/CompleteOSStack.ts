@@ -12,6 +12,10 @@ import { UnifiedContextManager } from './unified/UnifiedContext';
 import { ContentResolver } from './graphql/ContentResolver';
 import { ConservationEnforcer } from './conservation/ConservationEnforcer';
 import { UniversalCompiler } from './compilation/UniversalCompiler';
+import { InternetOSCore } from './internet-os/InternetOSCore';
+import { SiliconToSocietyAbstraction } from './internet-os/SiliconToSocietyAbstraction';
+import { UniversalCompilationSystem } from './internet-os/UniversalCompilationSystem';
+import { UnifiedInternetOS } from './internet-os/UnifiedInternetOS';
 
 export interface OSStackConfig {
   enableHardware: boolean;
@@ -24,7 +28,11 @@ export interface OSStackConfig {
   enableGraphQL: boolean;
   enableConservation: boolean;
   enableCompilation: boolean;
-  conformanceProfile: 'P-Core' | 'P-Logic' | 'P-Network' | 'P-Full';
+  enableInternetOS: boolean;
+  enableSiliconToSociety: boolean;
+  enableUniversalCompilation: boolean;
+  enableUnifiedInternetOS: boolean;
+  conformanceProfile: 'P-Core' | 'P-Logic' | 'P-Network' | 'P-Full' | 'P-Internet' | 'P-Unified';
 }
 
 export interface OSStackContext {
@@ -32,6 +40,10 @@ export interface OSStackContext {
   contentResolver: ContentResolver;
   conservationEnforcer: ConservationEnforcer;
   universalCompiler: UniversalCompiler;
+  internetOSCore: InternetOSCore;
+  siliconToSocietyAbstraction: SiliconToSocietyAbstraction;
+  universalCompilationSystem: UniversalCompilationSystem;
+  unifiedInternetOS: UnifiedInternetOS;
   atlasEncoder: Atlas12288Encoder;
   witnessGenerator: WitnessGenerator;
   config: OSStackConfig;
@@ -67,11 +79,44 @@ export class CompleteOSStack {
     // Initialize universal compiler
     const universalCompiler = new UniversalCompiler();
 
+    // Initialize Internet OS components
+    const internetOSCore = config.enableInternetOS ? new InternetOSCore({
+      enableSiliconLayer: true,
+      enableHardwareLayer: true,
+      enableSystemLayer: true,
+      enableServiceLayer: true,
+      enableApplicationLayer: true,
+      enableCognitiveLayer: true,
+      enableSocialLayer: true,
+      enableUniversalCompilation: true,
+      enableCrossLayerCommunication: true,
+      enableHolographicState: true,
+      conformanceProfile: 'P-Internet'
+    }) : null as any;
+
+    const siliconToSocietyAbstraction = config.enableSiliconToSociety ? new SiliconToSocietyAbstraction() : null as any;
+
+    const universalCompilationSystem = config.enableUniversalCompilation ? new UniversalCompilationSystem() : null as any;
+
+    const unifiedInternetOS = config.enableUnifiedInternetOS ? new UnifiedInternetOS({
+      enableCore: true,
+      enableAbstraction: true,
+      enableCompilation: true,
+      enableUnifiedOperations: true,
+      enableHolographicState: true,
+      enableCrossLayerCommunication: true,
+      conformanceProfile: 'P-Unified'
+    }) : null as any;
+
     this.context = {
       unifiedContext,
       contentResolver,
       conservationEnforcer,
       universalCompiler,
+      internetOSCore,
+      siliconToSocietyAbstraction,
+      universalCompilationSystem,
+      unifiedInternetOS,
       atlasEncoder: this.atlasEncoder,
       witnessGenerator: this.witnessGenerator,
       config,
@@ -93,6 +138,10 @@ export class CompleteOSStack {
       contentResolver: this.context.contentResolver.getHolographicState(),
       conservationEnforcer: this.context.conservationEnforcer.getHolographicState(),
       universalCompiler: this.context.universalCompiler.getHolographicState(),
+      internetOSCore: this.context.internetOSCore?.getInternetOSStatus(),
+      siliconToSocietyAbstraction: this.context.siliconToSocietyAbstraction?.getStatus(),
+      universalCompilationSystem: this.context.universalCompilationSystem?.getStatus(),
+      unifiedInternetOS: this.context.unifiedInternetOS?.getStatus(),
       config: this.context.config
     };
 
@@ -382,7 +431,79 @@ export class CompleteOSStack {
       holographicState: this.context.holographicState.size,
       unifiedState: this.context.unifiedState.size,
       unifiedOperations: this.context.unifiedContext.listUnifiedOperations().length,
-      crossLayerCommunications: this.context.unifiedContext.listCrossLayerCommunications().length
+      crossLayerCommunications: this.context.unifiedContext.listCrossLayerCommunications().length,
+      internetOSCore: this.context.internetOSCore?.getInternetOSStatus(),
+      siliconToSocietyAbstraction: this.context.siliconToSocietyAbstraction?.getStatus(),
+      universalCompilationSystem: this.context.universalCompilationSystem?.getStatus(),
+      unifiedInternetOS: this.context.unifiedInternetOS?.getStatus()
+    };
+  }
+
+  /**
+   * Execute Internet OS operation
+   */
+  async executeInternetOSOperation(operation: string, data: any): Promise<any> {
+    if (!this.context.config.enableInternetOS || !this.context.internetOSCore) {
+      throw new Error('Internet OS is not enabled');
+    }
+
+    return await this.context.internetOSCore.executeCrossLayerOperation(operation, data);
+  }
+
+  /**
+   * Transform across abstraction levels
+   */
+  async transformAcrossLevels(sourceLevel: string, targetLevel: string, data: any): Promise<any> {
+    if (!this.context.config.enableSiliconToSociety || !this.context.siliconToSocietyAbstraction) {
+      throw new Error('Silicon to Society abstraction is not enabled');
+    }
+
+    return await this.context.siliconToSocietyAbstraction.transformAcrossLevels(sourceLevel, targetLevel, data);
+  }
+
+  /**
+   * Compile to universal target
+   */
+  async compileToUniversalTarget(sourceId: string, targetId: string, sourceCode: any, options: any = {}): Promise<any> {
+    if (!this.context.config.enableUniversalCompilation || !this.context.universalCompilationSystem) {
+      throw new Error('Universal compilation system is not enabled');
+    }
+
+    return await this.context.universalCompilationSystem.compile(sourceId, targetId, sourceCode, options);
+  }
+
+  /**
+   * Execute unified Internet OS operation
+   */
+  async executeUnifiedInternetOSOperation(operationId: string, data: any): Promise<any> {
+    if (!this.context.config.enableUnifiedInternetOS || !this.context.unifiedInternetOS) {
+      throw new Error('Unified Internet OS is not enabled');
+    }
+
+    return await this.context.unifiedInternetOS.executeUnifiedOperation(operationId, data);
+  }
+
+  /**
+   * Get Internet OS capabilities
+   */
+  getInternetOSCapabilities(): any {
+    return {
+      internetOSCore: this.context.internetOSCore ? {
+        enabled: true,
+        status: this.context.internetOSCore.getInternetOSStatus()
+      } : { enabled: false },
+      siliconToSocietyAbstraction: this.context.siliconToSocietyAbstraction ? {
+        enabled: true,
+        status: this.context.siliconToSocietyAbstraction.getStatus()
+      } : { enabled: false },
+      universalCompilationSystem: this.context.universalCompilationSystem ? {
+        enabled: true,
+        status: this.context.universalCompilationSystem.getStatus()
+      } : { enabled: false },
+      unifiedInternetOS: this.context.unifiedInternetOS ? {
+        enabled: true,
+        status: this.context.unifiedInternetOS.getStatus()
+      } : { enabled: false }
     };
   }
 
@@ -432,7 +553,11 @@ export class CompleteOSStack {
       enableGraphQL: true,
       enableConservation: true,
       enableCompilation: true,
-      conformanceProfile: 'P-Full'
+      enableInternetOS: true,
+      enableSiliconToSociety: true,
+      enableUniversalCompilation: true,
+      enableUnifiedInternetOS: true,
+      conformanceProfile: 'P-Unified'
     };
 
     return await CompleteOSStack.create(defaultConfig);
