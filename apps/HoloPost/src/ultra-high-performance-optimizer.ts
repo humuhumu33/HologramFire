@@ -8,7 +8,7 @@
 
 import { Worker } from 'worker_threads';
 import { EventEmitter } from 'events';
-import { createHash, createHmac } from 'node:crypto';
+// Removed unused imports
 import { Buffer } from 'node:buffer';
 
 /**
@@ -256,14 +256,14 @@ class UltraHighPerformanceWorkerPool {
       const taskIndex = this.taskQueue.findIndex(t => t.task.workerId === message.workerId);
       if (taskIndex !== -1) {
         const task = this.taskQueue.splice(taskIndex, 1)[0];
-        task.resolve(message.result);
+        task?.resolve(message.result);
       }
     } else {
       // Handle error
       const taskIndex = this.taskQueue.findIndex(t => t.task.workerId === message.workerId);
       if (taskIndex !== -1) {
         const task = this.taskQueue.splice(taskIndex, 1)[0];
-        task.reject(new Error(message.error));
+        task?.reject(new Error(message.error));
       }
     }
     
@@ -529,7 +529,7 @@ export class UltraHighPerformanceHologram {
       }, 10);
       
       // Send through ultra-high-performance network
-      const networkResult = await this.networkManager.sendData(result.data);
+      // const networkResult = await this.networkManager.sendData(result.data); // Removed unused variable
       
       const end = performance.now();
       const latency = end - start;

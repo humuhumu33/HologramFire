@@ -11,7 +11,7 @@
 
 import { Worker } from 'worker_threads';
 import { EventEmitter } from 'events';
-import { createHash } from 'node:crypto';
+// import { createHash } from 'node:crypto'; // Removed unused import
 import { Buffer } from 'node:buffer';
 
 /**
@@ -108,7 +108,7 @@ class Optimized25GWorkerPool {
           // Advanced compression for bandwidth efficiency
           const compressed = compressOptimized25G(results, task.compressionLevel);
           
-          const processingTime = performance.now() - start;
+          // const processingTime = performance.now() - start; // Removed unused variable
           const throughput = (task.data.length * 8) / (processingTime / 1000); // bits per second
           
           return {
@@ -245,14 +245,14 @@ class Optimized25GWorkerPool {
       const taskIndex = this.taskQueue.findIndex(t => t.task.workerId === message.workerId);
       if (taskIndex !== -1) {
         const task = this.taskQueue.splice(taskIndex, 1)[0];
-        task.resolve(message.result);
+        task?.resolve(message.result);
       }
     } else {
       // Handle error
       const taskIndex = this.taskQueue.findIndex(t => t.task.workerId === message.workerId);
       if (taskIndex !== -1) {
         const task = this.taskQueue.splice(taskIndex, 1)[0];
-        task.reject(new Error(message.error));
+        task?.reject(new Error(message.error));
       }
     }
     
@@ -344,7 +344,7 @@ class Optimized25GNetworkManager {
       processedData = this.compressData(data);
     }
     
-    const processingTime = performance.now() - start;
+    // const processingTime = performance.now() - start; // Removed unused variable
     
     // Update lane metrics
     laneInfo.frames++;
@@ -616,4 +616,4 @@ export async function runOptimized25GBenchmark(): Promise<void> {
 }
 
 // Export for use in other modules
-export { Optimized25GBenchmark, Optimized25GConfig };
+// export { Optimized25GBenchmark, Optimized25GConfig }; // Removed duplicate export

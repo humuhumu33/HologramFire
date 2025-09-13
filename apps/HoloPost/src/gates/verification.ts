@@ -109,21 +109,21 @@ export const GATE_DEFINITIONS = {
     spec: 'receipt.spec',
     description: 'Receipt schema + signature envelope',
     purpose: 'Generate and verify operation receipts',
-    phases: ['bootstrap', 'transport', 'storage', 'compute']
+    phases: ['bootstrap', 'transport', 'storage', 'compute', 'encoding']
   },
   'G4.holosig.spec': {
     family: 'G4',
     spec: 'holosig.spec',
     description: 'Holographic signature primitives',
     purpose: 'Enable holographic signature verification',
-    phases: ['bootstrap', 'storage']
+    phases: ['bootstrap', 'storage', 'encoding']
   },
   'G4.alpha.attestation.spec': {
     family: 'G4',
     spec: 'alpha.attestation.spec',
     description: 'Alpha attestation primitives',
     purpose: 'Enable alpha attestation verification',
-    phases: ['bootstrap', 'storage']
+    phases: ['bootstrap', 'storage', 'encoding']
   },
   'G4.ccm.kat.spec': {
     family: 'G4',

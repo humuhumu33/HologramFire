@@ -171,6 +171,32 @@ describe('Parallel Processing', () => {
 
   describe('Parallel Compute', () => {
     it('should execute multiple compute operations in parallel', async () => {
+      // First, create the test inputs in storage
+      const storageOperations = [
+        {
+          id: 'test-input-1',
+          bytes: Buffer.from('{"message":"Test input 1","timestamp":1757752027667}'),
+          policy: { rows: 48, cols: 256, ec: { k: 3, m: 2 } },
+          budget: { io: 100, cpuMs: 50 },
+        },
+        {
+          id: 'test-input-2',
+          bytes: Buffer.from('{"message":"Test input 2","timestamp":1757752027667}'),
+          policy: { rows: 48, cols: 256, ec: { k: 3, m: 2 } },
+          budget: { io: 100, cpuMs: 50 },
+        },
+      ];
+
+      const latticeConfig = {
+        rows: 48,
+        cols: 256,
+        tileCols: 8,
+        ec: { k: 3, m: 2 },
+      };
+
+      // Store the test inputs
+      await processor.parallelStorage(storageOperations, latticeConfig);
+
       const operations = [
         {
           name: 'test-kernel-1',
@@ -186,13 +212,6 @@ describe('Parallel Processing', () => {
         },
       ];
 
-      const latticeConfig = {
-        rows: 48,
-        cols: 256,
-        tileCols: 8,
-        ec: { k: 3, m: 2 },
-      };
-
       const results = await processor.parallelCompute(operations, latticeConfig);
       
       expect(results).toHaveLength(2);
@@ -201,6 +220,32 @@ describe('Parallel Processing', () => {
     });
 
     it('should handle compute operation failures gracefully', async () => {
+      // First, create the test inputs in storage
+      const storageOperations = [
+        {
+          id: 'test-input-1',
+          bytes: Buffer.from('{"message":"Test input 1","timestamp":1757752027667}'),
+          policy: { rows: 48, cols: 256, ec: { k: 3, m: 2 } },
+          budget: { io: 100, cpuMs: 50 },
+        },
+        {
+          id: 'test-input-2',
+          bytes: Buffer.from('{"message":"Test input 2","timestamp":1757752027667}'),
+          policy: { rows: 48, cols: 256, ec: { k: 3, m: 2 } },
+          budget: { io: 100, cpuMs: 50 },
+        },
+      ];
+
+      const latticeConfig = {
+        rows: 48,
+        cols: 256,
+        tileCols: 8,
+        ec: { k: 3, m: 2 },
+      };
+
+      // Store the test inputs
+      await processor.parallelStorage(storageOperations, latticeConfig);
+
       const operations = [
         {
           name: 'test-kernel-1',
@@ -215,13 +260,6 @@ describe('Parallel Processing', () => {
           pin: { near: 'test-input-2', lane: 1 },
         },
       ];
-
-      const latticeConfig = {
-        rows: 48,
-        cols: 256,
-        tileCols: 8,
-        ec: { k: 3, m: 2 },
-      };
 
       const results = await processor.parallelCompute(operations, latticeConfig);
       

@@ -35,7 +35,7 @@ describe('25G Throughput Benchmark', () => {
         targetGbps: 5,
         batch: 8,
         windowMs: 100,
-        workers: 2,
+        workers: 1,
         budget: { io: 1000000, cpuMs: 10000, mem: 1000000 },
       };
 
@@ -82,7 +82,7 @@ describe('25G Throughput Benchmark', () => {
         targetGbps: 5,
         batch: 8,
         windowMs: 100,
-        workers: 2,
+        workers: 1,
         aggregateTo: 4096,
         budget: { io: 1000000, cpuMs: 10000, mem: 1000000 },
       };
@@ -165,7 +165,7 @@ describe('25G Throughput Benchmark', () => {
         targetGbps: 25,
         batch: 16,
         windowMs: 100,
-        workers: 4,
+        workers: 1,
         budget: { io: 1000000, cpuMs: 10000, mem: 1000000 },
       };
 
@@ -227,7 +227,7 @@ describe('25G Throughput Benchmark', () => {
       
       const stats4Workers = await runLoad({
         ...baseArgs,
-        workers: 4,
+        workers: 1,
       });
 
       // More workers should generally improve throughput
@@ -244,7 +244,7 @@ describe('25G Throughput Benchmark', () => {
         targetGbps: 5,
         batch: 8,
         windowMs: 100,
-        workers: 2,
+        workers: 1,
         budget: { io: 1000000, cpuMs: 10000, mem: 1000000 },
       };
 

@@ -7,10 +7,7 @@
 
 import { Worker } from 'worker_threads';
 import { EventEmitter } from 'events';
-import { createHash, createHmac } from 'node:crypto';
-import { createVerifier, createCTP, createStorage, spawnKernel } from './adapters/hologram';
-import { createPostcardWitness } from './usecases/postcard';
-import { mkBudget } from './testkit';
+// Removed unused imports
 import { Buffer } from 'node:buffer';
 
 /**
@@ -51,7 +48,7 @@ interface PerformanceMetrics {
  */
 export class IncrementalOptimizationManager {
   private phases: OptimizationPhase[] = [];
-  private currentPhase: number = 0;
+  // private currentPhase: number = 0; // Removed unused variable
   private metrics: PerformanceMetrics[] = [];
   private baselineThroughput: number = 839.33 * 1024 * 1024; // 839.33 MB/s baseline
   
@@ -154,17 +151,17 @@ export class IncrementalOptimizationManager {
     console.log('='.repeat(80));
     
     for (let i = 0; i < this.phases.length; i++) {
-      this.currentPhase = i;
+      // this.currentPhase = i; // Removed unused assignment
       const phase = this.phases[i];
       
-      console.log(`\n🔧 ${phase.name}`);
-      console.log(`📝 ${phase.description}`);
-      console.log(`🎯 Target: ${this.formatBytes(phase.targetThroughput)}/s`);
-      console.log(`📈 Expected: ${phase.expectedImprovement}`);
+      console.log(`\n🔧 ${phase?.name || 'Unknown Phase'}`);
+      console.log(`📝 ${phase?.description || 'No description'}`);
+      console.log(`🎯 Target: ${this.formatBytes(phase?.targetThroughput || 0)}/s`);
+      console.log(`📈 Expected: ${phase?.expectedImprovement || 'Unknown'}`);
       console.log('─'.repeat(60));
       
       try {
-        const metrics = await this.runPhase(phase);
+        const metrics = await this.runPhase(phase!);
         this.metrics.push(metrics);
         
         console.log(`✅ Phase ${i + 1} completed:`);
@@ -175,15 +172,15 @@ export class IncrementalOptimizationManager {
         
         if (i > 0) {
           const prevMetrics = this.metrics[i - 1];
-          const improvement = ((metrics.throughput - prevMetrics.throughput) / prevMetrics.throughput) * 100;
+          const improvement = ((metrics.throughput - (prevMetrics?.throughput || 0)) / (prevMetrics?.throughput || 1)) * 100;
           console.log(`   📈 Improvement: ${improvement.toFixed(1)}%`);
         }
         
         // Check if target achieved
-        if (metrics.throughput >= phase.targetThroughput) {
+        if (metrics.throughput >= (phase?.targetThroughput || 0)) {
           console.log(`   🎉 Target achieved!`);
         } else {
-          const gap = phase.targetThroughput - metrics.throughput;
+          const gap = (phase?.targetThroughput || 0) - metrics.throughput;
           console.log(`   📊 Gap: ${this.formatBytes(gap)}/s remaining`);
         }
         
@@ -207,9 +204,9 @@ export class IncrementalOptimizationManager {
    */
   private async runPhase(phase: OptimizationPhase): Promise<PerformanceMetrics> {
     // Set environment variables for this phase
-    process.env.HOLOGRAM_USE_MOCK = 'false';
-    process.env.HOLOGRAM_USE_ENHANCED = 'true';
-    process.env.UV_THREADPOOL_SIZE = phase.workerThreads.toString();
+    process.env['HOLOGRAM_USE_MOCK'] = 'false';
+    process.env['HOLOGRAM_USE_ENHANCED'] = 'true';
+    process.env['UV_THREADPOOL_SIZE'] = phase.workerThreads.toString();
     
     const startTime = Date.now();
     
@@ -223,13 +220,13 @@ export class IncrementalOptimizationManager {
       maxConcurrency: phase.maxConcurrency
     });
     
-    // Create network manager for this phase
-    const networkManager = new OptimizedNetworkManager({
-      lanes: phase.networkLanes,
-      compression: phase.compressionEnabled,
-      zeroCopy: phase.zeroCopyEnabled,
-      rdma: phase.rdmaEnabled
-    });
+    // Create network manager for this phase (commented out)
+    // const networkManager = new OptimizedNetworkManager({
+    //   lanes: phase.networkLanes,
+    //   compression: phase.compressionEnabled,
+    //   zeroCopy: phase.zeroCopyEnabled,
+    //   rdma: phase.rdmaEnabled
+    // });
     
     try {
       // Create tasks for this phase
@@ -250,7 +247,7 @@ export class IncrementalOptimizationManager {
       let improvement = 0;
       if (this.metrics.length > 0) {
         const prevMetrics = this.metrics[this.metrics.length - 1];
-        improvement = ((throughput - prevMetrics.throughput) / prevMetrics.throughput) * 100;
+        improvement = ((throughput - (prevMetrics?.throughput || 0)) / (prevMetrics?.throughput || 1)) * 100;
       } else {
         improvement = ((throughput - this.baselineThroughput) / this.baselineThroughput) * 100;
       }
@@ -281,7 +278,7 @@ export class IncrementalOptimizationManager {
     const pattern = Buffer.from('HOLOGRAM_INCREMENTAL_OPTIMIZATION_PATTERN_');
     
     for (let i = 0; i < size; i++) {
-      data[i] = pattern[i % pattern.length];
+      data[i] = pattern[i % pattern.length] || 0;
     }
     
     return data;
@@ -331,18 +328,18 @@ export class IncrementalOptimizationManager {
     console.log('='.repeat(80));
     
     const finalMetrics = this.metrics[this.metrics.length - 1];
-    const totalImprovement = ((finalMetrics.throughput - this.baselineThroughput) / this.baselineThroughput) * 100;
+    const totalImprovement = ((finalMetrics?.throughput || 0) - this.baselineThroughput) / this.baselineThroughput * 100;
     
     console.log(`🎯 Target: ${this.formatBytes(25 * 1024 * 1024 * 1024)}/s`);
     console.log(`📊 Baseline: ${this.formatBytes(this.baselineThroughput)}/s`);
-    console.log(`🚀 Final: ${this.formatBytes(finalMetrics.throughput)}/s`);
+    console.log(`🚀 Final: ${this.formatBytes(finalMetrics?.throughput || 0)}/s`);
     console.log(`📈 Total Improvement: ${totalImprovement.toFixed(1)}%`);
-    console.log(`🎯 Target Achievement: ${((finalMetrics.throughput / (25 * 1024 * 1024 * 1024)) * 100).toFixed(1)}%`);
+    console.log(`🎯 Target Achievement: ${(((finalMetrics?.throughput || 0) / (25 * 1024 * 1024 * 1024)) * 100).toFixed(1)}%`);
     
-    if (finalMetrics.throughput >= 25 * 1024 * 1024 * 1024) {
+    if ((finalMetrics?.throughput || 0) >= 25 * 1024 * 1024 * 1024) {
       console.log('\n🎉 SUCCESS: 25 GB/s target achieved!');
     } else {
-      const gap = 25 * 1024 * 1024 * 1024 - finalMetrics.throughput;
+      const gap = 25 * 1024 * 1024 * 1024 - (finalMetrics?.throughput || 0);
       console.log(`\n📊 Gap: ${this.formatBytes(gap)}/s remaining to reach target`);
     }
     
@@ -352,7 +349,7 @@ export class IncrementalOptimizationManager {
     });
     
     console.log('\n💡 Recommendations:');
-    if (finalMetrics.throughput < 25 * 1024 * 1024 * 1024) {
+    if ((finalMetrics?.throughput || 0) < 25 * 1024 * 1024 * 1024) {
       console.log('   • Increase hardware resources (CPU cores, memory, network)');
       console.log('   • Enable additional GPU acceleration');
       console.log('   • Optimize network topology and protocols');
@@ -513,7 +510,7 @@ class OptimizedWorkerPool {
  * Optimized Network Manager (simplified version)
  */
 class OptimizedNetworkManager extends EventEmitter {
-  constructor(config: { 
+  constructor(_config: { 
     lanes: number; 
     compression: boolean; 
     zeroCopy: boolean;
@@ -522,7 +519,7 @@ class OptimizedNetworkManager extends EventEmitter {
     super();
   }
   
-  async createSession(config: any): Promise<any> {
+  async createSession(_config: any): Promise<any> {
     return {
       send: async (data: Buffer) => ({ success: true, throughput: data.length / 0.001 }),
       receive: async () => ({ data: Buffer.alloc(1024), frame: Buffer.alloc(1024), windowId: 'test' }),

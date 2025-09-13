@@ -110,6 +110,9 @@ export async function createCTP(_opts: CTPConfig): Promise<CTP> {
         throw new Error('Insufficient budget for send operation');
       }
       
+      // Add small delay to simulate realistic operation timing
+      await new Promise(resolve => setTimeout(resolve, 2));
+      
       // Handle both single and batched payloads
       const payloads = Array.isArray(args.payload) ? args.payload : [args.payload];
       
@@ -285,6 +288,10 @@ export async function spawnKernel(opts: KernelConfig): Promise<Kernel> {
     await: async () => {
       // Simulate kernel execution
       console.log(`🔍 Mock kernel starting execution with ${inputs.length} inputs`);
+      
+      // Add small delay to simulate realistic operation timing
+      await new Promise(resolve => setTimeout(resolve, 2));
+      
       const outputs: Array<{ id: string; witness: Witness }> = [];
       
       for (const input of inputs) {

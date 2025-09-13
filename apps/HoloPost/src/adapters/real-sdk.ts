@@ -15,7 +15,7 @@ import {
   norm, 
   HologramSDK,
   ccmHash 
-} from '../../../../libs/sdk/node/sdk/src/index';
+} from '../../../../libs/sdk/node/sdk/dist/index';
 import {
   Budget,
   Witness,
