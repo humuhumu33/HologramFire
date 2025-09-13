@@ -13,8 +13,8 @@ import * as mockSDK from './mock';
 import * as realSDK from './real-sdk';
 // import * as enhancedRealSDK from './enhanced-real-sdk'; // Unused for now
 
-// Check if we should use the mock implementation
-const useMock = process.env['HOLOGRAM_USE_MOCK'] !== 'false';
+// Check if we should use the mock implementation (default to real SDK)
+const useMock = process.env['HOLOGRAM_USE_MOCK'] === 'true';
 
 if (useMock) {
   console.log('🔧 Using MOCK Hologram SDK implementation');

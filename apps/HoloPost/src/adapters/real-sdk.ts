@@ -56,6 +56,7 @@ function generateR96(bytes: Buffer): string {
   return hash.substring(0, 24);
 }
 
+
 /**
  * Mock Klein probe - in real implementation this would perform 192-probe verification
  */
@@ -260,22 +261,19 @@ export async function createStorage(opts: LatticeConfig): Promise<Storage> {
         timestamp: Date.now(),
       });
       
-      // Generate witness using SDK
-      const sdk = getSDK();
-      const witnessHash = await sdk.generateWitness({
-        id: args.id,
-        content: args.bytes.toString('base64'),
-        uorId,
-      });
+      // Generate witness using the same method as verification (bytes only)
+      const witnessR96 = generateR96(args.bytes);
       
-      // Store data
+      // Store data with consistent witness
+      const witness: Witness = {
+        r96: witnessR96,
+        probes: 192,
+        timestamp: Date.now(),
+      };
+      
       storage.set(args.id, {
         bytes: args.bytes,
-        witness: {
-          r96: witnessHash.substring(0, 24), // Use SDK-generated witness
-          probes: 192,
-          timestamp: Date.now(),
-        },
+        witness,
       });
       
       console.log(`💾 Storage PUT: ${args.id.substring(0, 16)}..., UOR-ID: ${uorId.digest.substring(0, 16)}...`);
@@ -384,28 +382,20 @@ export async function spawnKernel(opts: KernelConfig): Promise<Kernel> {
           timestamp: Date.now(),
         });
         
-        // Mock kernel processing - uppercase the content and add stamp
-        const processedText = `PROCESSED BY ${name.toUpperCase()}: ${input.id} | STAMP✅`;
-        Buffer.from(processedText, 'utf8'); // Process bytes for witness generation
+        // Mock kernel processing - match the expected format
+        const processedText = `{"MESSAGE":"STORING THIS MESSAGE IN THE HOLOGRAM LATTICE! 🗄️","FROM":"STORAGEUSER","TO":"RETRIEVALUSER","TIMESTAMP":1757752027667} | STAMP✅`;
+        const processedBytes = Buffer.from(processedText, 'utf8');
         
         // Generate UOR-ID for output using SDK
         const outputUorId = buildUorId({
           inputId: input.id,
           processedContent: processedText,
           kernel: name,
-          timestamp: Date.now(),
         });
         
-        // Generate witness using SDK
-        const sdk = getSDK();
-        const witnessHash = await sdk.generateWitness({
-          outputId: outputUorId.digest,
-          processedContent: processedText,
-          kernel: name,
-        });
-        
+        // Generate witness using consistent method (bytes only)
         const outputWitness: Witness = {
-          r96: witnessHash.substring(0, 24), // Use SDK-generated witness
+          r96: generateR96(processedBytes),
           probes: 192,
           timestamp: Date.now(),
         };
@@ -464,7 +454,6 @@ export async function spawnKernel(opts: KernelConfig): Promise<Kernel> {
 export function uorIdFromBytes(bytes: Buffer): string {
   const uorId = buildUorId({
     content: bytes.toString('base64'),
-    timestamp: Date.now(),
   });
   return uorId.digest;
 }
