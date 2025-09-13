@@ -26,7 +26,6 @@ describe('Real SDK 25G Throughput Benchmark', () => {
   beforeEach(() => {
     // Force real SDK usage
     process.env['HOLOGRAM_USE_MOCK'] = 'false';
-    delete process.env['MOCK_SPEED_FACTOR'];
   });
 
   afterEach(() => {
@@ -322,43 +321,6 @@ describe('Real SDK 25G Throughput Benchmark', () => {
     }, 60000);
   });
 
-  describe('Performance Comparison', () => {
-    it('should compare mock vs real SDK performance', async () => {
-      const baseArgs: RunArgs = {
-        durationSec: 5,
-        lanes: 32,
-        payloadBytes: 4096,
-        targetGbps: 10,
-        batch: 16,
-        windowMs: 100,
-        workers: 4,
-        budget: { io: 5000000, cpuMs: 50000, mem: 5000000 },
-      };
-
-      // Test with real SDK
-      process.env['HOLOGRAM_USE_MOCK'] = 'false';
-      const realStats = await runLoad(baseArgs);
-
-      // Test with mock SDK
-      process.env['HOLOGRAM_USE_MOCK'] = 'true';
-      process.env['MOCK_SPEED_FACTOR'] = '1';
-      const mockStats = await runLoad(baseArgs);
-
-      console.log(`\n📊 Mock vs Real SDK Comparison:`);
-      console.log(`   Real SDK: ${realStats.gbps.toFixed(2)} Gb/s, ${realStats.p50latencyMs.toFixed(2)}ms p50`);
-      console.log(`   Mock SDK: ${mockStats.gbps.toFixed(2)} Gb/s, ${mockStats.p50latencyMs.toFixed(2)}ms p50`);
-      console.log(`   Throughput Ratio: ${(realStats.gbps / mockStats.gbps).toFixed(2)}x`);
-      console.log(`   Latency Ratio: ${(realStats.p50latencyMs / mockStats.p50latencyMs).toFixed(2)}x`);
-
-      // Both should achieve some throughput
-      expect(realStats.gbps).toBeGreaterThan(0);
-      expect(mockStats.gbps).toBeGreaterThan(0);
-      
-      // Both should have reasonable latency
-      expect(realStats.p50latencyMs).toBeGreaterThan(0);
-      expect(mockStats.p50latencyMs).toBeGreaterThan(0);
-    }, 60000);
-  });
 
   describe('Error Handling and Recovery', () => {
     it('should handle budget exhaustion gracefully', async () => {

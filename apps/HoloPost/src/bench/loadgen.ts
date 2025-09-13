@@ -304,8 +304,7 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
   const endTime = startTime + (durationSec * 1000);
   let frameCount = 0;
   
-  // Boost mock performance for testing
-  const mockSpeedFactor = 1000; // 1000x faster for tests
+  // Real SDK performance tracking
   
   while (Date.now() < endTime && frameCount < framesPerWorker) {
     try {
@@ -375,13 +374,7 @@ async function runWorkerMain(workerData: any): Promise<WorkerStats> {
     p99: histogramStats.p99,
   };
   
-  // Apply mock speed boost for testing
-  if (process.env.NODE_ENV === 'test') {
-    stats.sent *= mockSpeedFactor;
-    stats.delivered *= mockSpeedFactor;
-    stats.settleClosed *= mockSpeedFactor;
-    stats.settleTotal *= mockSpeedFactor;
-  }
+  // Real SDK performance metrics (no artificial speed boost)
   
   // Clean up
   await ctp.close();

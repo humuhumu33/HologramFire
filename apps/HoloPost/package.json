@@ -31,7 +31,6 @@
     "encode": "ts-node src/demo.ts --encode",
     "decode": "ts-node src/demo.ts --decode",
     "test": "jest",
-    "test:bench": "jest tests/bench.spec.ts",
     "test:sdk": "jest tests/real-sdk-benchmark.spec.ts",
     "test:sdk:watch": "jest tests/real-sdk-benchmark.spec.ts --watch",
     "test:watch": "jest --watch",
@@ -42,7 +41,14 @@
     "bench:25g:optimized": "ts-node --transpile-only src/optimized-25g-benchmark.ts",
     "bench:25g:ultra": "ts-node --transpile-only src/ultra-high-performance-optimizer.ts",
     "bench:25g:run": "node run-optimized-25g-benchmark.js",
-    "optimize:25g": "npm run build && npm run bench:25g:run"
+    "optimize:25g": "npm run build && npm run bench:25g:run",
+    "demo:firebase-adl": "ts-node src/demo-firebase-adl.ts",
+    "demo:firebase-adl:full": "ts-node src/demo-firebase-adl.ts --comprehensive",
+    "demo:firebase-adl:performance": "ts-node src/demo-firebase-adl.ts --performance-only",
+    "phase1:validate": "ts-node src/phase1-validation.ts",
+    "phase1:test": "npm run phase1:validate",
+    "phase1:demo": "ts-node src/core/phase1-integration.ts",
+    "phase1:quick": "ts-node src/phase1-quick-test.ts"
   },
   "keywords": [
     "hologram",
@@ -74,7 +80,9 @@
     "axios": "^1.4.0",
     "crypto": "^1.0.1",
     "ws": "^8.13.0",
-    "zod": "^3.21.0"
+    "zod": "^3.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "@types/jsonwebtoken": "^9.0.5"
   },
   "engines": {
     "node": ">=20.0.0"

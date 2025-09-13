@@ -1,0 +1,35 @@
+{
+  "name": "holomatrix",
+  "version": "1.0.0",
+  "description": "Hologram Virtual Infra MatMul Demo - 12,288 lattice with 25 Gbit/s target",
+  "main": "dist/demo.js",
+  "scripts": {
+    "demo": "ts-node src/demo.ts",
+    "demo:transport": "ts-node src/steps/01-transport.ts",
+    "demo:storage": "ts-node src/steps/02-storage.ts",
+    "demo:compute": "ts-node src/steps/03-compute.ts",
+    "demo:bench": "ts-node src/steps/04-bench.ts --duration 10 --lanes 64 --payload 4096 --batch 16 --workers 4 --window 100 --target 25",
+    "demo:matmul": "ts-node src/steps/05-matmul.ts --size 2048 --block 128 --lanes 64 --payload 4096 --batch 16 --workers 4 --window 100 --targetGbps 25",
+    "bench:mock-fast": "cross-env MOCK_SPEED_FACTOR=4 ts-node src/steps/04-bench.ts --duration 5 --lanes 32 --payload 4096 --batch 16 --workers 4 --window 100 --target 25",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "tsc -p .",
+    "clean": "rimraf dist"
+  },
+  "keywords": ["hologram", "matrix", "multiplication", "verification", "blockchain"],
+  "author": "Hologram Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "cross-env": "^7.0.3",
+    "jest": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "commander": "^11.0.0"
+  }
+}

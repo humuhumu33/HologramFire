@@ -5,7 +5,7 @@
  */
 
 // Set environment variables for testing
-process.env['HOLOGRAM_USE_MOCK'] = 'true';
+process.env['HOLOGRAM_USE_MOCK'] = 'false';
 process.env['NODE_ENV'] = 'test';
 
 // Increase timeout for integration tests

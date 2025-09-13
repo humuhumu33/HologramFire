@@ -193,7 +193,6 @@ async function runBenchmarks() {
   console.log('='.repeat(80));
 
   const realSDKEnv = { HOLOGRAM_USE_MOCK: 'false' };
-  const mockSDKEnv = { HOLOGRAM_USE_MOCK: 'true', MOCK_SPEED_FACTOR: '1' };
 
   try {
     // 1. Run real SDK benchmark tests
@@ -278,18 +277,6 @@ async function runBenchmarks() {
       ], realSDKEnv);
     }
 
-    // 6. Comparison with mock SDK if requested
-    if (config.compare) {
-      console.log('\n⚖️  PHASE 6: Mock vs Real SDK Comparison');
-      
-      // Run same test with mock SDK
-      console.log('\n🎭 Mock SDK Benchmark');
-      await runBenchmarkCLI(benchmarkArgs, mockSDKEnv);
-      
-      // Run same test with real SDK again for comparison
-      console.log('\n🔧 Real SDK Benchmark (for comparison)');
-      await runBenchmarkCLI(benchmarkArgs, realSDKEnv);
-    }
 
     console.log('\n🎉 ALL BENCHMARKS COMPLETED SUCCESSFULLY!');
     console.log('='.repeat(80));
