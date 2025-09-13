@@ -40,7 +40,11 @@
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "format": "prettier --write src/**/*.ts"
+    "format": "prettier --write src/**/*.ts",
+    "bench:25g:optimized": "ts-node --transpile-only src/optimized-25g-benchmark.ts",
+    "bench:25g:ultra": "ts-node --transpile-only src/ultra-high-performance-optimizer.ts",
+    "bench:25g:run": "node run-optimized-25g-benchmark.js",
+    "optimize:25g": "npm run build && npm run bench:25g:run"
   },
   "keywords": [
     "hologram",

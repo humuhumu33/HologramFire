@@ -10,7 +10,7 @@
  */
 
 import { Worker, isMainThread, parentPort, workerData } from 'worker_threads';
-import { createVerifier, createCTP } from '../adapters/hologram';
+import { createVerifier, createCTP } from '../adapters/hologram.js';
 import { LatencyHistogram } from './histogram';
 import { CTPConfig } from '../types';
 
