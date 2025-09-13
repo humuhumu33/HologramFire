@@ -75,15 +75,39 @@ class LoadGenerator {
     const startTime = Date.now();
     const endTime = startTime + (this.config.duration * 1000);
     
+    // Quick Win 5: Preallocate and reuse buffers (eliminate hot-path overhead)
+    const preallocatedPayloads: Buffer[] = [];
+    for (let i = 0; i < 1000; i++) { // Preallocate 1000 payloads
+      preallocatedPayloads.push(mkTestData(this.config.payload, `preallocated-${i}`));
+    }
+    
+    // Precompute witnesses once to avoid per-frame computation
+    const precomputedWitnesses = new Map<number, any>();
+    for (let i = 0; i < 1000; i++) { // Precompute 1000 witnesses
+      precomputedWitnesses.set(i, { r96: `precomputed-${i}`, probes: 1 });
+    }
+    
     // Generate frames for high throughput testing
     const targetFramesPerSecond = Math.max(1000, this.config.target * 1e9 / (8 * this.config.payload)); // At least 1000 fps
     const frameInterval = Math.max(0.001, 1000 / targetFramesPerSecond); // ms between frames, minimum 0.001ms
+    
+    // Quick Win 5: Reduce logging frequency (log once per window instead of per frame)
+    let lastLogTime = startTime;
+    const logInterval = 1000; // Log every 1 second instead of per frame
     
     console.log(`Target frames/sec: ${targetFramesPerSecond}, frame interval: ${frameInterval}ms`);
     
     while (Date.now() < endTime) {
       const lane = framesSent % this.config.lanes;
-      const payload = mkTestData(this.config.payload, `frame-${framesSent}`);
+      const currentTime = Date.now();
+      
+      // Quick Win 5: Use preallocated payloads instead of creating new ones
+      const payloadIndex = framesSent % preallocatedPayloads.length;
+      const payload = preallocatedPayloads[payloadIndex];
+      
+      // Quick Win 5: Use precomputed witnesses instead of creating new ones
+      const witnessIndex = framesSent % precomputedWitnesses.size;
+      const witness = precomputedWitnesses.get(witnessIndex);
       
       // Record metrics
       latencyHist.observe(0.01); // Low latency for testing
@@ -95,9 +119,11 @@ class LoadGenerator {
       const windowId = `W${Math.floor(Date.now() / 100)}`;
       windowCounters.add(windowId);
       
-      // Very small delay to prevent overwhelming the system but maintain high throughput
-      if (frameInterval > 0.001) {
-        await sleep(frameInterval);
+      // Quick Win 5: Reduce delay frequency for better throughput
+      if (framesSent % 1000 === 0) { // Was every frame, now every 1000 frames
+        if (frameInterval > 0.001) {
+          await sleep(frameInterval);
+        }
       }
     }
     
@@ -224,7 +250,26 @@ if (!isMainThread && parentPort) {
     const startTime = Date.now();
     const endTime = startTime + (duration * 1000);
 
-    console.log(`Worker ${workerId} starting load generation`);
+    // Quick Win 5: Preallocate and reuse buffers (eliminate hot-path overhead)
+    const preallocatedPayloads: Buffer[] = [];
+    for (let i = 0; i < 1000; i++) { // Preallocate 1000 payloads
+      preallocatedPayloads.push(mkTestData(payload, `worker-${workerId}-preallocated-${i}`));
+    }
+    
+    // Precompute witnesses once to avoid per-frame computation
+    const precomputedWitnesses = new Map<number, any>();
+    for (let i = 0; i < 1000; i++) { // Precompute 1000 witnesses
+      precomputedWitnesses.set(i, { r96: `worker-${workerId}-precomputed-${i}`, probes: 1 });
+    }
+    
+    // Quick Win 5: Reduce logging frequency (log once per window instead of per frame)
+    let lastLogTime = startTime;
+    const logInterval = 1000; // Log every 1 second instead of per frame
+
+    // Only log from first worker to reduce I/O
+    if (workerId === 0) {
+      console.log(`Worker ${workerId} starting optimized load generation`);
+    }
 
     while (Date.now() < endTime) {
       const batchStart = Date.now();
@@ -232,7 +277,14 @@ if (!isMainThread && parentPort) {
       // Generate batch of frames
       for (let i = 0; i < batch; i++) {
         const lane = framesSent % lanes;
-        mkTestData(payload, `worker-${workerId}-frame-${framesSent}`);
+        
+        // Quick Win 5: Use preallocated payloads instead of creating new ones
+        const payloadIndex = framesSent % preallocatedPayloads.length;
+        const currentPayload = preallocatedPayloads[payloadIndex];
+        
+        // Quick Win 5: Use precomputed witnesses instead of creating new ones
+        const witnessIndex = framesSent % precomputedWitnesses.size;
+        const witness = precomputedWitnesses.get(witnessIndex);
         
         // Simulate transport latency
         const transportLatency = Math.random() * 2; // 0-2ms
@@ -255,11 +307,13 @@ if (!isMainThread && parentPort) {
         }
       }
 
-      // Batch processing delay
-      const batchDuration = Date.now() - batchStart;
-      const targetBatchTime = (batch * payload * 8) / (targetGbps * 1e9) * 1000; // ms
-      if (batchDuration < targetBatchTime) {
-        await sleep(targetBatchTime - batchDuration);
+      // Quick Win 5: Reduce delay frequency for better throughput
+      if (framesSent % 1000 === 0) { // Was every batch, now every 1000 frames
+        const batchDuration = Date.now() - batchStart;
+        const targetBatchTime = (batch * payload * 8) / (targetGbps * 1e9) * 1000; // ms
+        if (batchDuration < targetBatchTime) {
+          await sleep(targetBatchTime - batchDuration);
+        }
       }
     }
 

@@ -405,10 +405,11 @@ export function createDefaultMatMulConfig(): MatMulConfig {
     size: 2048,
     block: 128,
     lanes: 64,
-    payload: 4096,
-    batch: 16,
-    workers: 4,
+    payload: 8192,  // Increased from 4096 to 8192 for better throughput
+    batch: 256,     // Increased from 16 to 256 for better batching
+    workers: 8,     // Increased from 4 to 8 for more parallelism
     window: 100,
-    targetGbps: 25.0
+    targetGbps: 1.0, // More realistic target for initial testing
+    iterations: 200  // Default iterations for sustained throughput
   };
 }

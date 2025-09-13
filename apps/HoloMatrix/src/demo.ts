@@ -210,6 +210,7 @@ program
   .option('-w, --workers <count>', 'Number of workers', '4')
   .option('-W, --window <ms>', 'Window size in milliseconds', '100')
   .option('-t, --targetGbps <float>', 'Target throughput in Gbit/s', '25')
+  .option('-i, --iterations <count>', 'Number of iterations to run', '200')
   .option('-v, --verbose', 'Verbose output', false)
   .action(async (options) => {
     const demo = new HologramDemo({
@@ -222,7 +223,8 @@ program
         batch: parseInt(options.batch),
         workers: parseInt(options.workers),
         window: parseInt(options.window),
-        targetGbps: parseFloat(options.targetGbps)
+        targetGbps: parseFloat(options.targetGbps),
+        iterations: parseInt(options.iterations)
       },
       verbose: options.verbose
     });

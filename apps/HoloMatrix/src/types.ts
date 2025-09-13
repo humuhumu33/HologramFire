@@ -114,6 +114,7 @@ export interface MatMulConfig {
   workers: number;     // worker threads (default 4-8)
   window: number;      // settlement window in ms (default 100)
   targetGbps: number;  // target throughput (default 25.0)
+  iterations?: number; // number of iterations to run (default 200)
 }
 
 export interface BenchConfig {
