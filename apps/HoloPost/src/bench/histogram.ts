@@ -47,7 +47,7 @@ export class LatencyHistogram {
       this.bucketCount - 1
     );
     
-    this.buckets[bucketIndex]++;
+    this.buckets[bucketIndex] = (this.buckets[bucketIndex] || 0) + 1;
   }
   
   /**
@@ -95,18 +95,19 @@ export class LatencyHistogram {
     let cumulativeCount = 0;
     
     for (let i = 0; i < this.bucketCount; i++) {
-      cumulativeCount += this.buckets[i];
+      cumulativeCount += this.buckets[i] || 0;
       
       if (cumulativeCount >= targetCount) {
         // Linear interpolation within the bucket
         const bucketStart = i * this.bucketSizeMs;
         const bucketEnd = (i + 1) * this.bucketSizeMs;
         
-        if (this.buckets[i] === 0) {
+        const bucketCount = this.buckets[i] || 0;
+        if (bucketCount === 0) {
           return bucketStart;
         }
         
-        const withinBucket = (targetCount - (cumulativeCount - this.buckets[i])) / this.buckets[i];
+        const withinBucket = (targetCount - (cumulativeCount - bucketCount)) / bucketCount;
         return bucketStart + withinBucket * (bucketEnd - bucketStart);
       }
     }
@@ -130,7 +131,7 @@ export class LatencyHistogram {
    */
   merge(other: LatencyHistogram): void {
     for (let i = 0; i < this.bucketCount; i++) {
-      this.buckets[i] += other.buckets[i];
+      this.buckets[i] = (this.buckets[i] || 0) + (other.buckets[i] || 0);
     }
     
     this.count += other.count;

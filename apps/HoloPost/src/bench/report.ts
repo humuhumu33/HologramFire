@@ -65,23 +65,6 @@ function formatBytes(bytes: number): string {
   return `${size.toFixed(1)}${units[unitIndex]}`;
 }
 
-/**
- * Create ASCII bar for lane utilization
- */
-function createLaneBar(laneUtil: Array<{ lane: number; frames: number }>, maxWidth: number = 50): string {
-  if (laneUtil.length === 0) return '';
-  
-  const maxFrames = Math.max(...laneUtil.map(l => l.frames));
-  if (maxFrames === 0) return '█'.repeat(maxWidth);
-  
-  const bars = laneUtil.slice(0, 10).map(lane => {
-    const ratio = lane.frames / maxFrames;
-    const barLength = Math.round(ratio * maxWidth);
-    return `L${lane.lane}:${'█'.repeat(barLength)}${'░'.repeat(maxWidth - barLength)}`;
-  });
-  
-  return bars.join('\n');
-}
 
 /**
  * Print benchmark report header

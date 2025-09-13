@@ -1,0 +1,166 @@
+{
+  "timestamp": "2025-09-13T09:53:05.903Z",
+  "args": {
+    "durationSec": 5,
+    "lanes": 32,
+    "payloadBytes": 4096,
+    "targetGbps": 25,
+    "batch": 16,
+    "windowMs": 100,
+    "workers": 4,
+    "budget": {
+      "io": 1000000,
+      "cpuMs": 10000,
+      "mem": 1000000
+    }
+  },
+  "stats": {
+    "gbps": 3.4719012772646884,
+    "fps": 105954.01847121242,
+    "sent": 539200,
+    "delivered": 539200,
+    "rejected": 0,
+    "settleClosed": 33700,
+    "settleTotal": 33700,
+    "p50latencyMs": 0.005,
+    "p99latencyMs": 0.0099,
+    "cpuPercent": 17.822754961682058,
+    "laneUtil": [
+      {
+        "lane": 0,
+        "frames": 269616
+      },
+      {
+        "lane": 16,
+        "frames": 269584
+      },
+      {
+        "lane": 1,
+        "frames": 0
+      },
+      {
+        "lane": 2,
+        "frames": 0
+      },
+      {
+        "lane": 3,
+        "frames": 0
+      },
+      {
+        "lane": 4,
+        "frames": 0
+      },
+      {
+        "lane": 5,
+        "frames": 0
+      },
+      {
+        "lane": 6,
+        "frames": 0
+      },
+      {
+        "lane": 7,
+        "frames": 0
+      },
+      {
+        "lane": 8,
+        "frames": 0
+      },
+      {
+        "lane": 9,
+        "frames": 0
+      },
+      {
+        "lane": 10,
+        "frames": 0
+      },
+      {
+        "lane": 11,
+        "frames": 0
+      },
+      {
+        "lane": 12,
+        "frames": 0
+      },
+      {
+        "lane": 13,
+        "frames": 0
+      },
+      {
+        "lane": 14,
+        "frames": 0
+      },
+      {
+        "lane": 15,
+        "frames": 0
+      },
+      {
+        "lane": 17,
+        "frames": 0
+      },
+      {
+        "lane": 18,
+        "frames": 0
+      },
+      {
+        "lane": 19,
+        "frames": 0
+      },
+      {
+        "lane": 20,
+        "frames": 0
+      },
+      {
+        "lane": 21,
+        "frames": 0
+      },
+      {
+        "lane": 22,
+        "frames": 0
+      },
+      {
+        "lane": 23,
+        "frames": 0
+      },
+      {
+        "lane": 24,
+        "frames": 0
+      },
+      {
+        "lane": 25,
+        "frames": 0
+      },
+      {
+        "lane": 26,
+        "frames": 0
+      },
+      {
+        "lane": 27,
+        "frames": 0
+      },
+      {
+        "lane": 28,
+        "frames": 0
+      },
+      {
+        "lane": 29,
+        "frames": 0
+      },
+      {
+        "lane": 30,
+        "frames": 0
+      },
+      {
+        "lane": 31,
+        "frames": 0
+      }
+    ]
+  },
+  "criteria": {
+    "throughputPassed": false,
+    "latencyPassed": true,
+    "windowEfficiencyPassed": true,
+    "lossRatePassed": true,
+    "overallPassed": false
+  }
+}

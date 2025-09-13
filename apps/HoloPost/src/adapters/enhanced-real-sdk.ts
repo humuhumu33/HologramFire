@@ -6,13 +6,10 @@
  * and advanced networking.
  */
 
-import { createHash, createHmac, randomBytes } from 'node:crypto';
+import { createHash } from 'node:crypto';
 import { Worker } from 'worker_threads';
 import { EventEmitter } from 'events';
 import {
-  Budget,
-  Witness,
-  Receipt,
   Placement,
   Verifier,
   CTP,
@@ -54,20 +51,6 @@ interface EnhancedSDKConfig {
   totalCells: number;
 }
 
-/**
- * Enhanced Performance Metrics
- */
-interface EnhancedMetrics {
-  throughput: number;
-  latency: number;
-  concurrency: number;
-  compressionRatio: number;
-  energyEfficiency: number;
-  memoryUsage: number;
-  cpuUsage: number;
-  networkUtilization: number;
-  gpuUtilization: number;
-}
 
 /**
  * Enhanced Worker Pool for High-Performance Processing
@@ -602,6 +585,12 @@ export class EnhancedRealSDK {
         // Enhanced R96 generation
         const hash = createHash('sha256').update(payload).digest('hex');
         return hash.substring(0, 24);
+      },
+      budget: {
+        add: (a: any, b: any) => ({ io: a.io + b.io, cpuMs: a.cpuMs + b.cpuMs }),
+        sub: (a: any, b: any) => ({ io: a.io - b.io, cpuMs: a.cpuMs - b.cpuMs }),
+        zero: () => ({ io: 0, cpuMs: 0 }),
+        isZero: (b: any) => b.io === 0 && b.cpuMs === 0
       }
     };
   }
@@ -617,23 +606,23 @@ export class EnhancedRealSDK {
     });
     
     return {
-      handshake: async (config: any) => {
+      handshake: async (_config: any) => {
         // Enhanced handshake with optimization
-        return { success: true, sessionId: session.sessionId };
+        return true;
       },
       send: async (args: any) => {
         // Enhanced send with high performance
-        const result = await session.send(args.payload);
+        await session.send(args.payload);
         return {
-          success: true,
-          throughput: result.throughput,
-          latency: result.latency
+          attach: args.attach,
+          lane: args.lane
         };
       },
       recv: async () => {
         // Enhanced receive with high performance
         const result = await session.receive();
         return {
+          lane: 0,
           frame: result.frame,
           payload: result.data,
           windowId: result.windowId
@@ -641,12 +630,16 @@ export class EnhancedRealSDK {
       },
       settle: async (windowId: string) => {
         // Enhanced settlement
-        return { success: true, windowId };
+        return { 
+          ok: true, 
+          windowClosed: true, 
+          budgetAfter: { io: 1000, cpuMs: 1000 }, 
+          details: { operation: 'settle', timestamp: Date.now(), windowId } 
+        };
       },
       close: async () => {
         // Enhanced close
         await session.close();
-        return { success: true };
       }
     };
   }
@@ -654,14 +647,14 @@ export class EnhancedRealSDK {
   /**
    * Enhanced storage creation
    */
-  async createStorage(opts: LatticeConfig): Promise<Storage> {
+  async createStorage(_opts: LatticeConfig): Promise<Storage> {
     return {
       put: async (args: any) => {
         // Enhanced storage with high performance
         const start = Date.now();
         
         // Process with worker pool
-        const result = await this.workerPool.executeTask({
+        await this.workerPool.executeTask({
           data: args.bytes,
           operation: 'storage',
           chunkSize: this.config.bufferSize
@@ -676,32 +669,34 @@ export class EnhancedRealSDK {
         
         return {
           ok: true,
-          id: args.id,
-          throughput,
-          latency: processingTime,
-          compressionRatio: result.compressionRatio
+          windowClosed: true,
+          budgetAfter: { io: 1000, cpuMs: 1000 },
+          details: { operation: 'put', timestamp: Date.now(), id: args.id, throughput, latency: processingTime }
         };
       },
-      get: async (args: any) => {
+      get: async (_args: any) => {
         // Enhanced retrieval with high performance
-        const start = Date.now();
+        // const start = Date.now();
         
         // Simulate retrieval
         const data = Buffer.alloc(1024 * 1024, 0x42); // 1MB test data
         
-        const processingTime = Date.now() - start;
-        const throughput = data.length / (processingTime / 1000);
+        // const processingTime = Date.now() - start;
+        // const throughput = data.length / (processingTime / 1000);
         
         return {
-          ok: true,
           bytes: data,
-          throughput,
-          latency: processingTime
+          witness: { r96: 'test-witness', probes: 1, timestamp: Date.now() }
         };
       },
       repair: async (args: any) => {
         // Enhanced repair with high performance
-        return { success: true, repaired: args.parts };
+        return { 
+          ok: true, 
+          windowClosed: true, 
+          budgetAfter: { io: 1000, cpuMs: 1000 }, 
+          details: { operation: 'repair', timestamp: Date.now(), repaired: args.parts } 
+        };
       }
     };
   }
@@ -717,7 +712,7 @@ export class EnhancedRealSDK {
         
         // Process with worker pool
         const results = await this.workerPool.executeParallel(
-          opts.inputs.map(input => ({
+          opts.inputs.map(_input => ({
             data: Buffer.alloc(1024 * 1024, 0x42), // 1MB test data
             operation: 'compute',
             chunkSize: this.config.bufferSize
@@ -741,8 +736,10 @@ export class EnhancedRealSDK {
               timestamp: Date.now()
             }
           })),
-          throughput: totalThroughput,
-          latency: processingTime
+          receipts: {
+            compute: { ok: true, windowClosed: true, budgetAfter: { io: 1000, cpuMs: 1000 }, details: { operation: 'compute', timestamp: Date.now() } },
+            aggregate: { ok: true, windowClosed: true, budgetAfter: { io: 1000, cpuMs: 1000 }, details: { operation: 'aggregate', timestamp: Date.now() } }
+          }
         };
       }
     };
@@ -769,10 +766,8 @@ export class EnhancedRealSDK {
       const col = parseInt(hash.substring(i * 2 + 1, i * 2 + 3), 16) % opts.cols;
       
       placements.push({
-        row,
-        col,
-        shard: i,
-        priority: i === 0 ? 'high' : 'normal'
+        r: row,
+        c: col
       });
     }
     
