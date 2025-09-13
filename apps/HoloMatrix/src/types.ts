@@ -3,25 +3,43 @@
  * 12,288 lattice (48×256) with verifiable streaming matrix multiplication
  */
 
-export interface Budget {
-  cpuMs: number;
-  io: number;
-  mem: number;
-}
+export type Budget = { io: number; cpuMs: number; mem?: number };
 
-export interface Witness {
-  r96: string;
-  timestamp: number;
-  nodeId: string;
-}
+export type Witness = { 
+  r96: string; 
+  timestamp?: number; 
+  nodeId?: string; 
+};
 
-export interface Receipt {
-  id: string;
-  closed: boolean;
-  timestamp: number;
-  gate: string;
-  metadata?: Record<string, unknown>;
-}
+export type Receipt = {
+  id?: string;
+  ok: boolean;
+  closed?: boolean;
+  windowClosed: boolean;
+  budgetAfter: Budget;
+  gate?: string;
+  details?: Record<string, unknown>;
+};
+
+export type MatrixBlock = {
+  id: string;            // UOR-ID for the block
+  i: number;             // block row index
+  j: number;             // block col index
+  bytes: Buffer;         // serialized block data
+};
+
+export type StageLatency = {
+  p50: number; p90: number; p99: number;
+};
+
+export type RunStats = {
+  gbps: number; fps: number;
+  sent: number; delivered: number; rejected: number;
+  settleClosed: number; settleTotal: number;
+  transport: StageLatency; storage: StageLatency; compute: StageLatency; e2e: StageLatency;
+  cpuPercent: number;
+  laneUtil: Array<{ lane: number; frames: number }>;
+};
 
 export interface Metrics {
   throughputGbps: number;
@@ -106,6 +124,21 @@ export interface BenchConfig {
   workers: number;
   window: number;
   target: number;      // target Gbps
+}
+
+export interface LoadGenResult {
+  throughputGbps: number;
+  latency: {
+    p50: number;
+    p99: number;
+  };
+  framesSent: number;
+  framesReceived: number;
+  windowsTotal: number;
+  windowsClosed: number;
+  rejects: number;
+  laneUtilization: number[];
+  duration: number;
 }
 
 export interface HistogramBucket {

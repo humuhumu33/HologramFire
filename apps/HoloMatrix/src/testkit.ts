@@ -10,15 +10,16 @@ import type {
   Budget,
   Receipt,
   HologramAdapter,
-  LatticeCoord
+  LatticeCoord,
+  Witness
 } from './types';
-import adapter from './adapters/hologram';
+import * as adapter from './adapters/hologram';
 
 /**
  * Create a verifier instance
  */
 export async function mkVerifier(): Promise<Verifier> {
-  return await adapter.createVerifier();
+  return await (adapter as any).createVerifier();
 }
 
 /**
@@ -29,7 +30,7 @@ export async function mkCTP(opts: {
   lanes: number;
   windowMs: number;
 }): Promise<CTP> {
-  return await adapter.createCTP(opts);
+  return await (adapter as any).createCTP(opts);
 }
 
 /**
@@ -41,14 +42,14 @@ export async function mkStorage(opts: {
   tileCols: number;
   ec: { k: number; m: number };
 }): Promise<Storage> {
-  return await adapter.createStorage(opts);
+  return await (adapter as any).createStorage(opts);
 }
 
 /**
  * Create a budget with specified resources
  */
 export function budget(cpuMs: number = 1000, io: number = 1000, mem: number = 1000): Budget {
-  return { cpuMs, io, mem };
+  return { io, cpuMs, mem };
 }
 
 /**
@@ -62,26 +63,22 @@ export function zeroBudget(): Budget {
  * Assert that a receipt is closed
  */
 export function assertClosed(receipt: Receipt, gate?: string): void {
-  if (!receipt.closed) {
-    throw new Error(`Receipt ${receipt.id} is not closed`);
+  if (!receipt.windowClosed) {
+    throw new Error(`Receipt is not closed`);
   }
-  if (gate && receipt.gate !== gate) {
-    throw new Error(`Receipt ${receipt.id} gate mismatch: expected ${gate}, got ${receipt.gate}`);
+  if (gate && receipt.details?.gate !== gate) {
+    throw new Error(`Receipt gate mismatch: expected ${gate}, got ${receipt.details?.gate}`);
   }
 }
 
 /**
- * Create a mock witness for testing
+ * Create a witness for testing
  */
-export function mkWitness(r96: string, nodeId: string = 'test-node'): {
-  r96: string;
-  timestamp: number;
-  nodeId: string;
-} {
-  return {
-    r96,
+export function mkWitness(r96: string, nodeId: string = 'test-node'): Witness {
+  return { 
+    r96, 
     timestamp: Date.now(),
-    nodeId
+    nodeId 
   };
 }
 
@@ -89,14 +86,14 @@ export function mkWitness(r96: string, nodeId: string = 'test-node'): {
  * Generate a deterministic UOR ID from bytes
  */
 export function uorIdFromBytes(bytes: Buffer): string {
-  return adapter.uorIdFromBytes(bytes);
+  return (adapter as any).uorIdFromBytes(bytes);
 }
 
 /**
  * Place data on the lattice
  */
 export function place(id: string, opts: { rows: 48; cols: 256; parity?: number }): LatticeCoord[] {
-  return adapter.place(id, opts);
+  return (adapter as any).place(id, opts);
 }
 
 /**
@@ -145,7 +142,7 @@ export async function measureTime<T>(fn: () => Promise<T>): Promise<{ result: T;
 }
 
 /**
- * Create a mock transport frame
+ * Create a transport frame
  */
 export function mkTransportFrame(lane: number, payload: Buffer, windowId: string): {
   lane: number;
@@ -154,12 +151,13 @@ export function mkTransportFrame(lane: number, payload: Buffer, windowId: string
   r96: string;
   timestamp: number;
 } {
-  const verifier = adapter.createVerifier();
+  // Generate real r96 hash using the adapter
+  const r96 = (adapter as any).uorIdFromBytes(payload).replace('uor:', '');
   return {
     lane,
     payload,
     windowId,
-    r96: 'mock-r96-hash',
+    r96,
     timestamp: Date.now()
   };
 }
@@ -168,7 +166,7 @@ export function mkTransportFrame(lane: number, payload: Buffer, windowId: string
  * Validate budget operations
  */
 export function validateBudget(b: Budget): void {
-  if (b.cpuMs < 0 || b.io < 0 || b.mem < 0) {
+  if (b.cpuMs < 0 || b.io < 0 || (b.mem && b.mem < 0)) {
     throw new Error(`Invalid budget: negative values not allowed`);
   }
 }
@@ -177,7 +175,7 @@ export function validateBudget(b: Budget): void {
  * Check if budget has sufficient resources
  */
 export function hasBudget(b: Budget, required: Budget): boolean {
-  return b.cpuMs >= required.cpuMs && b.io >= required.io && b.mem >= required.mem;
+  return b.cpuMs >= required.cpuMs && b.io >= required.io && (b.mem || 0) >= (required.mem || 0);
 }
 
 /**
@@ -204,7 +202,7 @@ export function mkTestData(size: number, pattern: string = 'test'): Buffer {
 }
 
 /**
- * Create a mock compute kernel configuration
+ * Create a compute kernel configuration
  */
 export function mkComputeKernel(
   name: string,
@@ -244,17 +242,14 @@ export function mkNodeId(prefix: string = 'test'): string {
  * Validate receipt structure
  */
 export function validateReceipt(receipt: Receipt): void {
-  if (!receipt.id || typeof receipt.id !== 'string') {
-    throw new Error('Receipt must have a valid string ID');
+  if (typeof receipt.ok !== 'boolean') {
+    throw new Error('Receipt ok field must be boolean');
   }
-  if (typeof receipt.closed !== 'boolean') {
-    throw new Error('Receipt closed field must be boolean');
+  if (typeof receipt.windowClosed !== 'boolean') {
+    throw new Error('Receipt windowClosed field must be boolean');
   }
-  if (typeof receipt.timestamp !== 'number' || receipt.timestamp <= 0) {
-    throw new Error('Receipt must have a valid positive timestamp');
-  }
-  if (!receipt.gate || typeof receipt.gate !== 'string') {
-    throw new Error('Receipt must have a valid gate name');
+  if (!receipt.budgetAfter) {
+    throw new Error('Receipt must have budgetAfter');
   }
 }
 
@@ -262,5 +257,5 @@ export function validateReceipt(receipt: Receipt): void {
  * Create a test adapter instance
  */
 export function mkAdapter(): HologramAdapter {
-  return adapter;
+  return adapter as any;
 }

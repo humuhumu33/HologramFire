@@ -11,6 +11,8 @@
  * - Phase C (Compute): G7, G3, G1, G6, G8, G4, G0
  */
 
+import { vpiRegistry } from '../runtime/vpi-registry';
+
 export interface GateStamp {
   gate: string;
   family: string;
@@ -447,8 +449,10 @@ export const GateOps = {
       gateVerifier.stampGate('G5.uorid.kat.spec', operation),
     fixtures: (operation: string) => 
       gateVerifier.stampGate('G5.fixtures.spec', operation),
-    vpiRegistry: (operation: string) => 
-      gateVerifier.stampGate('G7.vpi.registry.spec', operation),
+    vpiRegistry: (operation: string) => {
+      vpiRegistry.initialize();
+      return gateVerifier.stampGate('G7.vpi.registry.spec', operation);
+    },
     localVerifier: (operation: string) => 
       gateVerifier.stampGate('G7.local.verifier.spec', operation),
     localTransport: (operation: string) => 

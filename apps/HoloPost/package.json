@@ -10,6 +10,7 @@
     "demo:compute": "ts-node src/steps/03-compute.ts",
     "demo:encoding": "ts-node src/steps/04-encoding.ts",
     "demo:bench": "ts-node src/steps/04-bench.ts",
+    "demo:matmul": "ts-node src/demos/05-matmul.ts",
     "bench:25g": "ts-node src/steps/04-bench.ts --duration 15 --lanes 64 --payload 4096 --batch 32 --window 100 --workers 8 --target 25",
     "bench:25g:comprehensive": "node run-real-sdk-benchmark.js --comprehensive --duration 20",
     "bench:25g:stress": "node run-real-sdk-benchmark.js --stress --duration 30",

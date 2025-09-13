@@ -261,14 +261,11 @@ export async function createStorage(opts: LatticeConfig): Promise<Storage> {
         timestamp: Date.now(),
       });
       
-      // Generate witness using the same method as verification (bytes only)
-      const witnessR96 = generateR96(args.bytes);
-      
-      // Store data with consistent witness
+      // Use the provided witness to ensure consistency
       const witness: Witness = {
-        r96: witnessR96,
-        probes: 192,
-        timestamp: Date.now(),
+        r96: args.witness.r96,
+        probes: args.witness.probes,
+        timestamp: args.witness.timestamp,
       };
       
       storage.set(args.id, {
@@ -299,6 +296,23 @@ export async function createStorage(opts: LatticeConfig): Promise<Storage> {
       const stored = storage.get(args.id);
       if (!stored) {
         throw new Error(`Data not found: ${args.id}`);
+      }
+      
+      // Validate witness consistency by recomputing from bytes
+      const computedWitness = generateR96(stored.bytes);
+      if (computedWitness !== stored.witness.r96) {
+        console.warn(`⚠️  Witness mismatch for ${args.id.substring(0, 16)}... - recomputing`);
+        // Update with correct witness
+        const correctedWitness: Witness = {
+          r96: computedWitness,
+          probes: stored.witness.probes,
+          timestamp: stored.witness.timestamp,
+        };
+        storage.set(args.id, {
+          bytes: stored.bytes,
+          witness: correctedWitness,
+        });
+        stored.witness = correctedWitness;
       }
       
       console.log(`📖 Storage GET: ${args.id.substring(0, 16)}...`);

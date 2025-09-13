@@ -12,6 +12,8 @@ import { spawnKernel, createVerifier } from '../adapters/hologram';
 import { createPostcard } from '../usecases/postcard';
 import { mkBudget, assertReceiptClosed, assertWitnessValid, logBudget, logReceipt, PerfTimer } from '../testkit';
 import { gateVerifier, GateOps } from '../gates/verification';
+import { vpiRegistry } from '../runtime/vpi-registry';
+import { registerMatmulKernel, getMatmulKernelBudget } from '../kernels/matmul-kernel';
 
 /**
  * Compute step configuration
@@ -47,37 +49,34 @@ export async function runComputeStep(inputPostcard: any): Promise<{
     // G7 - Runtime: VPI registry for kernel spawning
     GateOps.bootstrap.vpiRegistry('Spawn kernel; scheduler pin "near: UOR-ID"');
     
-    // Create budget for compute operations
-    const budget = mkBudget(400, 60, 32);
+    // Register matmul kernel if not already registered
+    if (!vpiRegistry.isKernelRegistered('matmul-block', 'v1')) {
+      registerMatmulKernel();
+    }
+    
+    // Create budget for compute operations using matmul kernel requirements
+    const matmulBudget = getMatmulKernelBudget();
+    const budget = mkBudget(matmulBudget.io, matmulBudget.cpuMs, matmulBudget.mem || 32);
     logBudget(budget, 'Compute');
     
     // Preflight: G3 + G1 - Logic + Core
     GateOps.bootstrap.r96Semiring('Check CPU/IO budget vectors can close before execution');
     GateOps.bootstrap.conservation('Validate budget conservation for compute');
     
-    // Spawn kernel with input pinned near the data
-    console.log('\n🚀 Spawning kernel...');
+    // Execute kernel using VPI registry
+    console.log('\n🚀 Executing kernel via VPI registry...');
     console.log(`   Kernel: ${COMPUTE_CONFIG.kernelName}`);
     console.log(`   Pinning near: ${inputPostcard.id.substring(0, 16)}...`);
     console.log(`   Lane: ${COMPUTE_CONFIG.lane}`);
     
-    const kernel = await spawnKernel({
-      name: COMPUTE_CONFIG.kernelName,
-      inputs: [{ id: inputPostcard.id }],
-      budget,
-      pin: {
-        near: inputPostcard.id,
-        lane: COMPUTE_CONFIG.lane,
-      },
-      iopolicy: {
-        lane: COMPUTE_CONFIG.lane,
-        windowMs: COMPUTE_CONFIG.windowMs,
-      },
-    });
-    
-    // Execute kernel and wait for completion
+    // Execute kernel using VPI registry
     console.log('\n⏳ Executing kernel...');
-    const result = await kernel.await();
+    const result = await vpiRegistry.executeKernel(
+      'matmul-block',
+      'v1',
+      [{ id: inputPostcard.id }],
+      budget
+    );
     
     if (!result.ok) {
       throw new Error('Kernel execution failed');

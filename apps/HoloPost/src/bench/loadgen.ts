@@ -120,19 +120,19 @@ export async function runLoad(args: RunArgs): Promise<RunStats> {
     const histogramStats = mergedHistogram.getStats();
     const elapsedSec = (Date.now() - startTime) / 1000;
     
-    return {
-      gbps: (totalDelivered * args.payloadBytes * 8) / (args.durationSec * 1e9),
-      fps: totalDelivered / elapsedSec,
-      sent: totalSent,
-      delivered: totalDelivered,
-      rejected: totalRejected,
-      settleClosed: totalSettleClosed,
-      settleTotal: totalSettleTotal,
-      p50latencyMs: histogramStats.p50,
-      p99latencyMs: histogramStats.p99,
-      cpuPercent: (totalCpuTime / (elapsedSec * 1000)) * 100,
-      laneUtil: workerStats[0]?.laneUtil || [],
-    };
+  return {
+    gbps: (totalDelivered * args.payloadBytes * 8) / (elapsedSec * 1e9),
+    fps: totalDelivered / elapsedSec,
+    sent: totalSent,
+    delivered: totalDelivered,
+    rejected: totalRejected,
+    settleClosed: totalSettleClosed,
+    settleTotal: totalSettleTotal,
+    p50latencyMs: histogramStats.p50,
+    p99latencyMs: histogramStats.p99,
+    cpuPercent: (totalCpuTime / (elapsedSec * 1000)) * 100,
+    laneUtil: workerStats[0]?.laneUtil || [],
+  };
   }
   
   // Create workers for non-test environments
@@ -202,7 +202,7 @@ export async function runLoad(args: RunArgs): Promise<RunStats> {
   const histogramStats = mergedHistogram.getStats();
   
   // Calculate effective throughput
-  const effectiveGbps = (args.payloadBytes * totalDelivered * 8) / (elapsedSec * 1e9);
+  const effectiveGbps = (totalDelivered * args.payloadBytes * 8) / (elapsedSec * 1e9);
   const effectiveFps = totalDelivered / elapsedSec;
   
   // Calculate CPU usage

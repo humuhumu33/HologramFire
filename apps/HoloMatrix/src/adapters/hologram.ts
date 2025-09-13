@@ -1,31 +1,19 @@
 /**
- * Hologram Adapter Switcher
- * Switches between mock and real SDK based on HOLOGRAM_USE_MOCK environment variable
+ * Hologram SDK Adapter for HoloMatrix
+ * 
+ * This adapter provides the real Hologram SDK implementation.
+ * All operations use the actual Hologram SDK for production-ready functionality.
  */
 
-import type { HologramAdapter } from '../types';
+import * as realSDK from './real-sdk';
 
-// Environment-based adapter selection
-const useMock = process.env.HOLOGRAM_USE_MOCK !== 'false';
+console.log('🚀 Using REAL Hologram SDK implementation');
 
-let adapter: HologramAdapter;
-
-if (useMock) {
-  // Use mock implementation for development and testing
-  const { MockHologramAdapter } = require('./mock');
-  adapter = new MockHologramAdapter();
-} else {
-  // TODO: Replace with real Hologram SDK imports
-  // const { RealHologramAdapter } = require('./real');
-  // adapter = new RealHologramAdapter();
-  
-  // For now, fall back to mock if real SDK not available
-  console.warn('Real Hologram SDK not yet implemented, falling back to mock');
-  const { MockHologramAdapter } = require('./mock');
-  adapter = new MockHologramAdapter();
-}
-
-export default adapter;
-
-// Re-export types for convenience
-export type { HologramAdapter } from '../types';
+// Export the real SDK implementation
+export const createVerifier = realSDK.createVerifier;
+export const createCTP = realSDK.createCTP;
+export const createStorage = realSDK.createStorage;
+export const spawnKernel = realSDK.spawnKernel;
+export const uorIdFromBytes = realSDK.uorIdFromBytes;
+export const place = realSDK.place;
+export const capabilities = realSDK.capabilities;
