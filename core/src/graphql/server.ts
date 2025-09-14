@@ -21,7 +21,7 @@ export class HologramGraphQLServer {
     this.app = express();
     this.server = http.createServer(this.app);
     this.apolloServer = new ApolloServer({
-      schema: hologramSchema,
+      typeDefs: hologramSchema,
       resolvers,
       plugins: [ApolloServerPluginDrainHttpServer({ httpServer: this.server })],
       context: ({ req }) => {
@@ -31,8 +31,7 @@ export class HologramGraphQLServer {
           requestId: this.generateRequestId()
         };
       },
-      introspection: true,
-      playground: true
+      introspection: true
     });
   }
 
@@ -44,7 +43,7 @@ export class HologramGraphQLServer {
       await this.apolloServer.start();
       
       this.apolloServer.applyMiddleware({ 
-        app: this.app,
+        app: this.app as any,
         path: '/graphql'
       });
 

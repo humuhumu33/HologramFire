@@ -8,6 +8,7 @@
     "build": "tsc",
     "test": "jest",
     "test:graphql": "ts-node src/graphql/test.ts",
+    "test:graphql:simple": "ts-node src/graphql/simple-test.ts",
     "test:ipfs": "ts-node src/ipfs/test.ts",
     "start:graphql": "ts-node src/graphql/server.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"

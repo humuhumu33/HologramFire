@@ -138,7 +138,9 @@ def ipfs_client():
             return res["Hash"]
         
         def cat(self, cid: str) -> bytes:
-            r = self._get("/api/v0/cat", params={"arg":cid}, stream=True)
+            url = f"{self.base}/api/v0/cat"
+            r = requests.post(url, params={"arg":cid})
+            r.raise_for_status()
             return r.content
         
         def pin_ls(self, cid: str):

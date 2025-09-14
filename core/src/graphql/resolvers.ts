@@ -22,8 +22,7 @@ import { ContentResolver } from './ContentResolver';
 import { Atlas12288Encoder } from '../atlas12288/Atlas12288Encoder';
 import { ConservationVerifier } from '../conservation/ConservationVerifier';
 import { WitnessGenerator } from '../witness/WitnessGenerator';
-import { R96Classifier } from '../core/resonance/R96';
-import { generateKleinWindows } from '../core/klein/Klein';
+// Removed problematic imports - using direct implementations
 
 export class HologramResolvers {
   private contentResolver: ContentResolver;
@@ -86,7 +85,11 @@ export class HologramResolvers {
       }
 
       // Verify the UOR-ID matches the content encoding
-      const expectedUORID = await this.atlasEncoder.generateUORID(content);
+      const expectedUORID = await this.atlasEncoder.generateUORID({
+        name: content.name,
+        data: content.data,
+        mimeType: content.metadata.mimeType || 'application/octet-stream'
+      });
       if (expectedUORID !== args.uorId) {
         throw new Error(`UOR-ID mismatch: expected ${expectedUORID}, got ${args.uorId}`);
       }
@@ -132,7 +135,11 @@ export class HologramResolvers {
       }
 
       // Verify the coordinates match the content's atlas-12288 encoding
-      const atlasMetadata = await this.atlasEncoder.encodeContent(content);
+      const atlasMetadata = await this.atlasEncoder.encodeContent({
+        name: content.name,
+        data: content.data,
+        mimeType: content.metadata.mimeType || 'application/octet-stream'
+      });
       if (atlasMetadata.page !== args.page || atlasMetadata.cycle !== args.cycle) {
         throw new Error(`Coordinate mismatch: expected page=${atlasMetadata.page}, cycle=${atlasMetadata.cycle}`);
       }
@@ -279,7 +286,7 @@ export class HologramResolvers {
       const atlasMetadata = await this.atlasEncoder.encodeContent({
         name: existingContent.name,
         data: args.data,
-        mimeType: existingContent.metadata.mimeType
+        mimeType: existingContent.metadata.mimeType || 'application/octet-stream'
       });
 
       // Verify conservation laws for updated content

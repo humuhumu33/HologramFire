@@ -197,15 +197,10 @@ export class WitnessGenerator {
    */
   private async generateConservationProof(content: Content): Promise<ConservationProof> {
     try {
-      // Verify page conservation
-      const pageConservation = await this.conservationVerifier.verifyPageConservation(
-        content.metadata.atlas12288.page
-      );
-      
-      // Verify cycle conservation
-      const cycleConservation = await this.conservationVerifier.verifyCycleConservation(
-        content.metadata.atlas12288.cycle
-      );
+      // Verify conservation laws for the content
+      const conservationValid = await this.conservationVerifier.verifyContent(content);
+      const pageConservation = conservationValid;
+      const cycleConservation = conservationValid;
       
       // Generate Klein probes
       const kleinProbes = await this.generateKleinProbes(content);
@@ -358,7 +353,7 @@ export class WitnessGenerator {
   /**
    * Verify witness
    */
-  async verifyWitness(witness: Witness, content: Content): Promise<boolean> {
+  async verifyWitnessIntegrity(witness: Witness, content: Content): Promise<boolean> {
     try {
       // Verify witness structure
       if (!witness.id || !witness.proof || !witness.conservationProof) {

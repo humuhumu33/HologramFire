@@ -5,9 +5,7 @@
  * the bijective properties of atlas-12288 for deterministic content addressing.
  */
 
-import { buildSchema } from 'graphql';
-
-export const hologramSchema = buildSchema(`
+export const hologramSchema = `
   # Core types for content resolution
   type Content {
     id: String!
@@ -136,6 +134,4 @@ export const hologramSchema = buildSchema(`
     details: String!
     timestamp: String!
   }
-`);
-
-export default hologramSchema;
+`;

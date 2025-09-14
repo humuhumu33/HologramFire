@@ -107,7 +107,7 @@ async function testGraphQLContentResolution() {
       totalResolutions: resolutionStats.totalResolutions,
       averageResolutionTime: resolutionStats.averageResolutionTime.toFixed(2) + 'ms',
       conservationViolations: resolutionStats.conservationViolations,
-      bijectionIntegrity: (resolutionStats.bijunctionIntegrity * 100).toFixed(2) + '%'
+      bijectionIntegrity: (resolutionStats.bijectionIntegrity * 100).toFixed(2) + '%'
     });
 
     // Test 7: GraphQL Server
