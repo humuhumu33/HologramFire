@@ -1,0 +1,121 @@
+name: Reports & Perf Gate
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * *'  # Nightly at 2 AM UTC
+
+# Prevent overlapping CI runs on the same branch
+concurrency:
+  group: hologram-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    # Least-privilege workflow permissions
+    permissions:
+      contents: read
+      actions: read
+      id-token: none
+    strategy:
+      matrix:
+        include:
+          - type: "pr"
+            perf_marker: "phase6_perf"
+            e2e_marker: "phase8_e2e and not uninstall"
+            enforce_budgets: false
+            sample_size: "small"
+          - type: "main"
+            perf_marker: "phase6_perf"
+            e2e_marker: "phase8_e2e"
+            enforce_budgets: true
+            sample_size: "full"
+          - type: "nightly"
+            perf_marker: "phase6_perf"
+            e2e_marker: "phase8_e2e"
+            enforce_budgets: true
+            sample_size: "full"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: 18, cache: 'pnpm' }
+
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+
+      - run: pnpm -C core install --frozen-lockfile
+      - run: pnpm -C core build
+
+      - run: pip install -r requirements.txt || true
+
+      # Phase 6 perf with environment-based sample sizes
+      - name: Performance Tests
+        env:
+          GQL_SAMPLES: ${{ matrix.type == 'pr' && '20' || '100' }}
+          GQL_WARMUP: ${{ matrix.type == 'pr' && '3' || '10' }}
+          ENC_MB: ${{ matrix.type == 'pr' && '1' || '4' }}
+        run: python -m pytest -m "${{ matrix.perf_marker }}" -q || true
+
+      # Phase 8 E2E (only run if secrets present and not fork PR)
+      - name: E2E Tests
+        if: ${{ github.event.pull_request.head.repo.fork == false && secrets.GRAPHQL_URL && secrets.IPFS_API }}
+        env:
+          GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
+          IPFS_API: ${{ secrets.IPFS_API }}
+          E2E_APP_NAME: demo/app/hello
+        run: python -m pytest -m "${{ matrix.e2e_marker }}" -q
+
+      - name: Build HTML report
+        run: python scripts/aggregate_reports.py
+
+      - name: CI Summary
+        run: python scripts/ci_summary.py
+
+      - name: Slack/Teams Notification
+        if: always()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: python scripts/slack_job_step.py
+
+      - name: Baseline Comparison
+        if: matrix.type != 'nightly'
+        run: python scripts/baseline_compare.py || true
+
+      - name: Perf Gate (Strict for main/nightly)
+        if: matrix.enforce_budgets
+        env:
+          SLO_VERIFY_P95_MS: ${{ matrix.type == 'main' && '8' || '10' }}
+          SLO_ENCODE_P95_MS: ${{ matrix.type == 'main' && '80' || '100' }}
+          SLO_GQL_P95_MS: ${{ matrix.type == 'main' && '80' || '100' }}
+        run: python scripts/check_perf_budget.py
+
+      - name: Perf Gate (Lenient for PRs)
+        if: ${{ !matrix.enforce_budgets }}
+        env:
+          SLO_VERIFY_P95_MS: "15"
+          SLO_ENCODE_P95_MS: "150"
+          SLO_GQL_P95_MS: "150"
+        run: python scripts/check_perf_budget.py
+
+      - name: Check artifact size
+        run: |
+          test -f reports/e2e/events.jsonl && \
+          [ $(wc -c < reports/e2e/events.jsonl) -lt 5242880 ] || \
+          { echo "events.jsonl too large"; exit 1; }
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: hologram-reports-${{ matrix.type }}
+          path: reports
+          retention-days: 14
+          if-no-files-found: warn

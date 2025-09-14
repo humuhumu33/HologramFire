@@ -81,6 +81,11 @@ __pycache__/
 *$py.class
 *.so
 
+# Windows development artifacts
+C:\t\
+C:\pnpm-store\
+*.ps1.bak
+
 # Go build artifacts
 *.exe
 *.exe~

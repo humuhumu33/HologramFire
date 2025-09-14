@@ -1,0 +1,71 @@
+repos:
+  - repo: local
+    hooks:
+      - id: secrets-check
+        name: Secrets Check
+        entry: python scripts/secrets_redactor.py --pre-commit
+        language: system
+        files: \.(py|js|ts|json|yaml|yml|md|txt)$
+        pass_filenames: true
+        always_run: false
+        stages: [pre-commit]
+        
+      - id: flake-check
+        name: Flake Check
+        entry: python scripts/flake_detector.py detect
+        language: system
+        files: tests/
+        pass_filenames: false
+        always_run: false
+        stages: [pre-commit]
+        
+      - id: proof-chain-check
+        name: Proof Chain Check
+        entry: python -m pytest -m "proof_chain_mandatory" -q
+        language: system
+        files: tests/
+        pass_filenames: false
+        always_run: false
+        stages: [pre-commit]
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: |
+          (?x)^(
+            \.secrets\.baseline|
+            \.git/|
+            node_modules/|
+            \.venv/|
+            venv/|
+            __pycache__/|
+            \.pytest_cache/|
+            \.mypy_cache/|
+            \.coverage|
+            reports/
+          )$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: debug-statements
+      - id: check-docstring-first
+      - id: check-ast
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: debug-statements
+      - id: check-docstring-first
+      - id: check-ast

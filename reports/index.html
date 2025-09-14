@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Hologram Reports</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;padding:20px;}
+  h2{margin-top:28px}
+  table{border-collapse:collapse;width:100%;margin:10px 0}
+  th,td{border:1px solid #ddd;padding:8px;font-size:14px;vertical-align:top}
+  th{background:#f6f7f9;text-align:left}
+  code,pre{background:#f6f7f9;border:1px solid #e5e7eb;border-radius:6px;padding:3px 6px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+  .card{border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+</style>
+</head>
+<body>
+<h1>Hologram – Reports</h1>
+
+<div class="grid">
+  <div class="card">
+    <h3>Perf CSV files</h3>
+    <p>(none)</p>
+  </div>
+  <div class="card">
+    <h3>E2E events</h3>
+    <p>0 total events</p>
+  </div>
+</div>
+
+<h2>Perf – Best p95 per metric</h2>
+<table><thead><tr><th>suite</th><th>metric</th><th>p50_ms</th><th>p95_ms</th><th>p99_ms</th><th>avg_ms</th><th>n</th><th>_file</th><th>note</th></tr></thead><tbody></tbody></table>
+
+<h2>Perf – All rows</h2>
+<table><thead><tr><th>suite</th><th>metric</th><th>p50_ms</th><th>p95_ms</th><th>p99_ms</th><th>avg_ms</th><th>n</th><th>_file</th><th>note</th></tr></thead><tbody></tbody></table>
+
+<h2>E2E – Event counts</h2>
+<table><thead><tr><th>suite</th><th>event</th><th>count</th></tr></thead><tbody></tbody></table>
+
+<h2>E2E – Last events (per type)</h2>
+<table><thead><tr><th>suite</th><th>event</th><th>ts</th><th>cid</th><th>name</th><th>variant</th></tr></thead><tbody></tbody></table>
+
+<h2>E2E – Raw events (latest 50)</h2>
+<pre></pre>
+
+</body>
+</html>

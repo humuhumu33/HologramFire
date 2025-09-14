@@ -1,0 +1,29 @@
+name: Phase 8 E2E
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    if: ${{ secrets.GRAPHQL_URL && secrets.IPFS_API }}
+    env:
+      GRAPHQL_URL: ${{ secrets.GRAPHQL_URL }}
+      IPFS_API: ${{ secrets.IPFS_API }}
+      E2E_APP_NAME: demo/app/hello
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - run: pnpm -C core install --frozen-lockfile
+      - run: pnpm -C core build
+      - run: pip install -r requirements.txt || true
+      - run: python -m pytest -m phase8_e2e -v
+      - name: Upload E2E artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-artifacts
+          path: reports/e2e/events.jsonl
+          if-no-files-found: ignore

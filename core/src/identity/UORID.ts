@@ -20,6 +20,18 @@ export function buildUorId(payload: unknown): UorId {
   return { v: 1 as const, r, digest };
 }
 
+/** Build UOR-ID from bytes (for bridge compatibility) */
+export function buildUorIdFromBytes(data: Uint8Array): UorId | string {
+  const bytes = Buffer.from(data);
+  const vec = Array.from(bytes.values());
+  const r = classifyR96(vec);
+  const digest = ccmHash(bytes.toString("hex"), "uorid");
+  const uorId = { v: 1 as const, r, digest };
+  
+  // Return as string for bridge compatibility
+  return encodeUorId(uorId);
+}
+
 /** Encode to a string: uor:v1:r<r>:<digest> */
 export function encodeUorId(id: UorId): string {
   if (id.v !== 1) throw new Error("Unsupported UOR-ID version");

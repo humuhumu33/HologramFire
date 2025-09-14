@@ -1,0 +1,17 @@
+{
+  "schema": "https://hologram.foundation/schemas/service",
+  "name": "demo/app/hello-9e6414a5",
+  "version": "1.0.0",
+  "created": 1757844838,
+  "entrypoints": {
+    "default": "main"
+  },
+  "permissions": [
+    "read:user"
+  ],
+  "meta": {
+    "kind": "demo",
+    "phase": "8"
+  },
+  "sha256": "a2a72b21e9a8243ec8c63b3f7c3ef5c2d30c4ad34c136326105bc8faf5cba71a"
+}

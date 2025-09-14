@@ -1,5 +1,7 @@
 # Hologram
 
+![Hologram Pipeline](https://img.shields.io/badge/Hologram%20Pipeline-FAIL-red?style=flat-square&label=Last%20run&message=Never)
+
 A comprehensive system for holographic data validation, proof generation, and computational verification. Hologram provides atomic traceability, quantum-resistant cryptography, and performance optimization for modern applications requiring high integrity and verifiable computations.
 
 ## What This Is
@@ -92,6 +94,73 @@ npm install
 
 # Build the project
 npm run build
+```
+
+### 🚀 Operational Quickstart
+
+**Daily Smoke Test:**
+```bash
+# Local verification
+export IPFS_API=http://127.0.0.1:5001
+export GRAPHQL_URL=http://localhost:4000/graphql
+python -m pytest -m "phase6_perf or phase8_e2e" -q
+python scripts/aggregate_reports.py && python scripts/check_perf_budget.py
+
+# Windows dev quickstart (paths-safe)
+```powershell
+# one-time (admin): enable long paths + git longpaths
+# …or skip if on a managed device
+# .\tools\windows_path_hotfix.ps1 -AdminOnly
+
+# daily dev shell (user)
+.\tools\windows_dev_shell.ps1
+
+# run pipeline
+python -m pytest -m "phase6_perf or phase8_e2e" -q
+python scripts/aggregate_reports.py
+python scripts/check_perf_budget.py
+```
+
+> If you see a path-length error, verify `subst X:` is active and `PYTEST_ADDOPTS` shows short temp paths.
+
+# Windows convenience
+.\tools\reports.ps1
+.\tools\perf-gate.ps1
+```
+
+**Quick Triage:**
+```bash
+# E2E summary
+python scripts/summarize_e2e.py
+
+# Performance check
+python scripts/check_perf_budget.py
+
+# Flake report
+python scripts/flake_detector.py report
+
+# Status badge
+python scripts/status_badge.py markdown
+```
+
+**Configuration:**
+```bash
+# PR (lenient)
+export SLO_VERIFY_P95_MS=15 SLO_ENCODE_P95_MS=150 SLO_GQL_P95_MS=150
+export GQL_SAMPLES=20 GQL_WARMUP=3 ENC_MB=1
+
+# Main/Nightly (strict)
+export SLO_VERIFY_P95_MS=8 SLO_ENCODE_P95_MS=80 SLO_GQL_P95_MS=80
+export GQL_SAMPLES=100 GQL_WARMUP=10 ENC_MB=4
+```
+
+**Ops Toggles:**
+```bash
+# Get environment-specific configuration
+python scripts/ops_toggles.py pr      # PR configuration
+python scripts/ops_toggles.py main    # Main branch configuration
+python scripts/ops_toggles.py nightly # Nightly configuration
+python scripts/ops_toggles.py dev     # Development configuration
 ```
 
 ### Basic Usage
