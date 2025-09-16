@@ -6,7 +6,7 @@
  * Demonstrates the Atlas API functionality programmatically
  */
 
-const { AtlasDemoEngine } = require('../src/AtlasDemoEngine');
+const { AtlasDemoEngine } = require('../dist/AtlasDemoEngine');
 
 class AtlasAPIDemo {
     constructor() {

@@ -9,7 +9,7 @@
 const readline = require('readline');
 const chalk = require('chalk');
 const cliProgress = require('cli-progress');
-const { AtlasDemoEngine } = require('../src/AtlasDemoEngine');
+const { AtlasDemoEngine } = require('../dist/AtlasDemoEngine');
 
 class AtlasCLIDemo {
     constructor() {

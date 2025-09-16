@@ -6,7 +6,7 @@
  * Comprehensive tests to verify all demo functionality works correctly
  */
 
-const { AtlasDemoEngine } = require('../src/AtlasDemoEngine');
+const { AtlasDemoEngine } = require('../dist/AtlasDemoEngine');
 
 class AtlasDemoTestSuite {
     constructor() {

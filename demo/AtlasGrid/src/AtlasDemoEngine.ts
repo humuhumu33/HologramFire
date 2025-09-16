@@ -93,10 +93,10 @@ export class AtlasDemoEngine {
     };
   }
 
-  /**
-   * Generate deterministic coordinates for content
-   */
-  private generateCoordinates(content: ContentInput): { page: number; cycle: number } {
+    /**
+     * Generate deterministic coordinates for content
+     */
+    generateCoordinates(content: ContentInput): { page: number; cycle: number } {
     // Use content hash to generate deterministic coordinates
     const contentHash = createHash('sha256').update(content.data).digest('hex');
     const hashBytes = Buffer.from(contentHash, 'hex');
@@ -112,10 +112,10 @@ export class AtlasDemoEngine {
     return { page, cycle };
   }
 
-  /**
-   * Classify content using R96 (96 equivalence classes)
-   */
-  private classifyContent(content: ContentInput): number {
+    /**
+     * Classify content using R96 (96 equivalence classes)
+     */
+    classifyContent(content: ContentInput): number {
     // Convert content data to byte array for R96 classification
     const dataBytes = Buffer.from(content.data, 'utf8');
     const byteArray = Array.from(dataBytes);
@@ -129,10 +129,10 @@ export class AtlasDemoEngine {
     return (acc + this.R) % this.R;
   }
 
-  /**
-   * Select Klein window based on content
-   */
-  private selectKleinWindow(content: ContentInput): number {
+    /**
+     * Select Klein window based on content
+     */
+    selectKleinWindow(content: ContentInput): number {
     const hash = createHash('sha256').update(content.data).digest('hex');
     const hashBytes = Buffer.from(hash, 'hex');
     return hashBytes.readUInt32BE(8) % 192; // 192 Klein windows
@@ -154,10 +154,10 @@ export class AtlasDemoEngine {
     return createHash('sha256').update(input).digest('hex').substring(0, 32);
   }
 
-  /**
-   * Analyze byte content for demo visualization
-   */
-  private analyzeBytes(data: string): {
+    /**
+     * Analyze byte content for demo visualization
+     */
+    analyzeBytes(data: string): {
     totalBytes: number;
     uniqueBytes: number;
     entropy: number;
