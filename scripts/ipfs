@@ -1,0 +1,18 @@
+@echo off
+REM IPFS Manager Batch Wrapper
+REM This provides a simple interface to the PowerShell IPFS manager
+
+if "%1"=="" (
+    echo Usage: ipfs-manager [start^|stop^|restart^|status^|cleanup^|health]
+    echo.
+    echo Commands:
+    echo   start   - Start IPFS daemon with lock cleanup
+    echo   stop    - Stop IPFS daemon gracefully
+    echo   restart - Restart IPFS daemon
+    echo   status  - Show IPFS status and health
+    echo   cleanup - Clean up stale locks and temp files
+    echo   health  - Run health check
+    goto :eof
+)
+
+powershell.exe -ExecutionPolicy Bypass -File "%~dp0ipfs-manager.ps1" %*

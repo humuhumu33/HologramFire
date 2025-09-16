@@ -9,7 +9,7 @@ describe('MatrixMultiplicationUseCase', () => {
   let useCase: any;
   let config: MatMulConfig;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     config = {
       size: 64, // Small size for testing
       block: 16,
@@ -20,7 +20,7 @@ describe('MatrixMultiplicationUseCase', () => {
       window: 50,
       targetGbps: 10
     };
-    useCase = createMatMulUseCase(config);
+    useCase = await createMatMulUseCase(config, false); // Disable logging for tests
   });
 
   describe('matrix initialization', () => {
@@ -244,10 +244,10 @@ describe('createDefaultMatMulConfig', () => {
     expect(config.size).toBe(2048);
     expect(config.block).toBe(128);
     expect(config.lanes).toBe(64);
-    expect(config.payload).toBe(4096);
-    expect(config.batch).toBe(16);
-    expect(config.workers).toBe(4);
+    expect(config.payload).toBe(8192);
+    expect(config.batch).toBe(256);
+    expect(config.workers).toBe(8);
     expect(config.window).toBe(100);
-    expect(config.targetGbps).toBe(25.0);
+    expect(config.targetGbps).toBe(1.0);
   });
 });

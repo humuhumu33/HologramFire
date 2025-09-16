@@ -67,7 +67,15 @@
     "test:proof-chain": "vitest run core/src/proof-chain/tests/ProofChainTests.ts",
     "test:chess-client": "cd examples/chess-app/client && npm test",
     "test:chess-server": "cd examples/chess-app/server && npm test",
-    "test:chess": "npm run test:chess-client && npm run test:chess-server"
+    "test:chess": "npm run test:chess-client && npm run test:chess-server",
+    "ipfs:start": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 start",
+    "ipfs:stop": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 stop",
+    "ipfs:restart": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 restart",
+    "ipfs:status": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 status",
+    "ipfs:cleanup": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 cleanup",
+    "ipfs:health": "powershell.exe -ExecutionPolicy Bypass -File scripts/ipfs-manager.ps1 health",
+    "ipfs:startup": "powershell.exe -ExecutionPolicy Bypass -File scripts/startup-ipfs.ps1",
+    "ipfs:startup:force": "powershell.exe -ExecutionPolicy Bypass -File scripts/startup-ipfs.ps1 -Force"
   },
   "devDependencies": {
     "@types/node": "^20",

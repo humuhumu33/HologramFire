@@ -1,5 +1,0 @@
-{
-  "state": "ababa",
-  "windows": [{ "start": 0, "end": 3 }, { "start": 3, "end": 5 }],
-  "expected": [["a",3],["b",2]]
-}

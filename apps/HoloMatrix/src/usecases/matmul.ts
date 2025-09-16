@@ -32,12 +32,14 @@ export class MatrixMultiplicationUseCase {
   private matrixB: Int16Array;
   // private matrixC: Int16Array; // Unused for now
   private blocks: MatrixBlock[] = [];
+  private enableLogging: boolean = true;
 
-  constructor(config: MatMulConfig) {
+  constructor(config: MatMulConfig, enableLogging: boolean = true) {
     this.config = config;
     this.matrixA = new Int16Array(config.size * config.size);
     this.matrixB = new Int16Array(config.size * config.size);
     // this.matrixC = new Int16Array(config.size * config.size); // Unused for now
+    this.enableLogging = enableLogging;
     
     // Note: initializeMatrices() and generateBlocks() will be called separately
     // to allow for async initialization
@@ -94,12 +96,16 @@ export class MatrixMultiplicationUseCase {
       
       // Yield control every batch to prevent blocking
       if (batch % 10 === 0) {
-        console.log(`  Matrix B: ${((batch + 1) / totalBatches * 100).toFixed(1)}% complete`);
+        if (this.enableLogging) {
+          console.log(`  Matrix B: ${((batch + 1) / totalBatches * 100).toFixed(1)}% complete`);
+        }
         await new Promise(resolve => setImmediate(resolve));
       }
     }
 
-    console.log(`Matrices initialized with ${totalElements.toLocaleString()} elements each`);
+    if (this.enableLogging) {
+      console.log(`Matrices initialized with ${totalElements.toLocaleString()} elements each`);
+    }
   }
 
   /**
@@ -107,7 +113,9 @@ export class MatrixMultiplicationUseCase {
    */
   private generateBlocks(): void {
     const blockCount = Math.ceil(this.config.size / this.config.block);
-    console.log(`Generating ${blockCount}×${blockCount} blocks of size ${this.config.block}×${this.config.block}`);
+    if (this.enableLogging) {
+      console.log(`Generating ${blockCount}×${blockCount} blocks of size ${this.config.block}×${this.config.block}`);
+    }
 
     // Generate blocks for matrix A
     for (let blockRow = 0; blockRow < blockCount; blockRow++) {
@@ -125,7 +133,9 @@ export class MatrixMultiplicationUseCase {
       }
     }
 
-    console.log(`Generated ${this.blocks.length} total blocks`);
+    if (this.enableLogging) {
+      console.log(`Generated ${this.blocks.length} total blocks`);
+    }
   }
 
   /**
@@ -391,8 +401,8 @@ class MatrixBlockIterator implements MatrixIterator {
 /**
  * Create a matrix multiplication use case instance
  */
-export async function createMatMulUseCase(config: MatMulConfig): Promise<MatrixMultiplicationUseCase> {
-  const useCase = new MatrixMultiplicationUseCase(config);
+export async function createMatMulUseCase(config: MatMulConfig, enableLogging: boolean = true): Promise<MatrixMultiplicationUseCase> {
+  const useCase = new MatrixMultiplicationUseCase(config, enableLogging);
   await useCase.initialize();
   return useCase;
 }

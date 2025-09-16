@@ -78,7 +78,7 @@ async function testIPFSIntegration() {
       const cid = await ipfsClient.storeContent(content);
       console.log('✅ Content stored in IPFS with CID:', cid);
     } catch (error) {
-      console.log('⚠️  IPFS storage test skipped (IPFS not available):', error.message);
+      console.log('⚠️  IPFS storage test skipped (IPFS not available):', error instanceof Error ? error.message : String(error));
     }
 
     // Test 4: IPFS Content Retrieval
@@ -91,7 +91,7 @@ async function testIPFSIntegration() {
         console.log('⚠️  Content retrieval test skipped (no content available)');
       }
     } catch (error) {
-      console.log('⚠️  IPFS retrieval test skipped (IPFS not available):', error.message);
+      console.log('⚠️  IPFS retrieval test skipped (IPFS not available):', error instanceof Error ? error.message : String(error));
     }
 
     // Test 5: IPFS Content Resolver
@@ -134,7 +134,7 @@ async function testIPFSIntegration() {
       totalResolutions: stats.totalResolutions,
       averageResolutionTime: stats.averageResolutionTime.toFixed(2) + 'ms',
       conservationViolations: stats.conservationViolations,
-      bijectionIntegrity: (stats.bijunctionIntegrity * 100).toFixed(2) + '%'
+      bijectionIntegrity: (stats.bijectionIntegrity * 100).toFixed(2) + '%'
     });
 
     if (stats.ipfsStats) {

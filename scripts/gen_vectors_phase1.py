@@ -1,6 +1,10 @@
 # Generates vectors/r96/golden.json from real prod code via the bridge.
-import json, os
+import json, os, sys
 from pathlib import Path
+
+# Add the project root to the Python path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from tests._helpers import bridge_call
 
 def main():

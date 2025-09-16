@@ -18,6 +18,7 @@
     "demo:100-streaming": "ts-node run-100-matrices-streaming.ts",
     "demo:100-ultra": "ts-node run-100-matrices-ultra-streaming.ts",
     "demo:100-fixed": "ts-node run-100-matrices-fixed.ts",
+    "demo:20": "ts-node run-20-matrices.ts",
     "demo:2048-100": "ts-node run-2048-matrices-100-test.ts",
     "demo:2048-100-simple": "ts-node run-2048-matrices-100-simple.ts",
     "demo:2048-100-64lanes-hw": "ts-node run-2048-matrices-100-64lanes-hardware.ts",

@@ -20,7 +20,7 @@ describe('Throughput Measurement Utilities', () => {
       expect(info.blockSize).toBe(128);
       expect(info.totalBlocks).toBe(768); // 16x16 blocks per matrix * 3 matrices
       expect(info.bytesPerBlock).toBe(32768); // 128*128*2 bytes
-      expect(info.totalDataBytes).toBe(25165824); // 768 * 32768 bytes
+      expect(info.totalDataBytes).toBe(276824064); // Actual data movement during matrix multiplication
     });
 
     it('should calculate correct data info for 8192x8192 matrix with 256x256 blocks', () => {
@@ -30,7 +30,7 @@ describe('Throughput Measurement Utilities', () => {
       expect(info.blockSize).toBe(256);
       expect(info.totalBlocks).toBe(3072); // 32x32 blocks per matrix * 3 matrices
       expect(info.bytesPerBlock).toBe(131072); // 256*256*2 bytes
-      expect(info.totalDataBytes).toBe(402653184); // 3072 * 131072 bytes
+      expect(info.totalDataBytes).toBe(8724152320); // Actual data movement during matrix multiplication
     });
   });
 
@@ -160,7 +160,7 @@ describe('Throughput Measurement Utilities', () => {
       const measurement = calculateThroughput(info.totalDataBytes, 1.0);
       
       expect(measurement.isValid).toBe(true);
-      expect(measurement.throughputGbps).toBeCloseTo(0.2, 1); // ~0.2 Gbit/s for 25MB in 1s
+      expect(measurement.throughputGbps).toBeCloseTo(2.2, 1); // ~2.2 Gbit/s for actual data movement
     });
 
     it('should calculate realistic throughput for 8192x8192 matrix multiplication', () => {
@@ -170,7 +170,7 @@ describe('Throughput Measurement Utilities', () => {
       const measurement = calculateThroughput(info.totalDataBytes, 10.0);
       
       expect(measurement.isValid).toBe(true);
-      expect(measurement.throughputGbps).toBeCloseTo(0.32, 1); // ~0.32 Gbit/s for 400MB in 10s
+      expect(measurement.throughputGbps).toBeCloseTo(7.0, 1); // ~7.0 Gbit/s for actual data movement
     });
 
     it('should validate against performance gates', () => {

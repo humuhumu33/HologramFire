@@ -335,7 +335,10 @@ export class IPFSClient {
   }> {
     try {
       const pinned = await this.client.pin.ls();
-      const pinnedCount = pinned.length;
+      let pinnedCount = 0;
+      for await (const _ of pinned) {
+        pinnedCount++;
+      }
       
       let totalSize = 0;
       let totalReplicationFactor = 0;

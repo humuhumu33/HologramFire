@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas-12288 Interactive Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="demo-header">
+            <h1>🗺️ Atlas-12288 Interactive Demo</h1>
+            <p class="subtitle">Watch as any data collapses into exactly 96 equivalence classes and maps to one of 12,288 coordinates</p>
+        </header>
+
+        <div class="demo-grid">
+            <!-- Input Section -->
+            <div class="demo-section">
+                <h2>📝 Data Input</h2>
+                <div class="input-group">
+                    <label for="dataName">Name:</label>
+                    <input type="text" id="dataName" placeholder="Enter data name" value="Demo Data">
+                </div>
+                <div class="input-group">
+                    <label for="dataContent">Content:</label>
+                    <textarea id="dataContent" placeholder="Enter any data to process..." rows="4">Hello, Atlas World!</textarea>
+                </div>
+                <div class="input-group">
+                    <label for="mimeType">MIME Type:</label>
+                    <select id="mimeType">
+                        <option value="text/plain">text/plain</option>
+                        <option value="application/json">application/json</option>
+                        <option value="application/octet-stream">application/octet-stream</option>
+                        <option value="text/html">text/html</option>
+                    </select>
+                </div>
+                <button id="processBtn" class="btn-primary">🚀 Process Data</button>
+                <button id="verifyBtn" class="btn-secondary">🔍 Verify Deterministic</button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="demo-section">
+                <h2>📊 Atlas Results</h2>
+                <div id="results" class="results-container">
+                    <div class="placeholder">Click "Process Data" to see results</div>
+                </div>
+            </div>
+
+            <!-- Grid Visualization -->
+            <div class="demo-section">
+                <h2>🗺️ 48×256 Grid Visualization</h2>
+                <div class="grid-container">
+                    <div id="grid" class="atlas-grid"></div>
+                    <div class="grid-info">
+                        <div class="grid-stats">
+                            <span class="stat">Total Coordinates: <strong id="totalCoords">12,288</strong></span>
+                            <span class="stat">Pages: <strong id="pages">48</strong></span>
+                            <span class="stat">Cycles: <strong id="cycles">256</strong></span>
+                            <span class="stat">R96 Classes: <strong id="r96Classes">96</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R96 Classification -->
+            <div class="demo-section">
+                <h2>🎯 R96 Classification (96 Equivalence Classes)</h2>
+                <div id="r96Visualization" class="r96-container">
+                    <div class="placeholder">Process data to see R96 classification</div>
+                </div>
+            </div>
+
+            <!-- Demo Data Sets -->
+            <div class="demo-section">
+                <h2>📋 Demo Data Sets</h2>
+                <div id="demoDataSets" class="demo-sets">
+                    <div class="placeholder">Loading demo data sets...</div>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="demo-section">
+                <h2>⚡ Performance Metrics</h2>
+                <div id="performanceMetrics" class="metrics-container">
+                    <div class="metric">
+                        <span class="metric-label">Processing Time:</span>
+                        <span class="metric-value" id="processingTime">-</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Data Size:</span>
+                        <span class="metric-value" id="dataSize">-</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Unique Bytes:</span>
+                        <span class="metric-value" id="uniqueBytes">-</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Entropy:</span>
+                        <span class="metric-value" id="entropy">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="demo-footer">
+            <p>Atlas-12288 Demo - Every piece of information maps to exactly one of 12,288 coordinates</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

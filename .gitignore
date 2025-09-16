@@ -63,17 +63,26 @@ artifacts/perf/*.json
 *coherence*.json
 !artifacts/coherence/*.json
 
-# Atlas-12288 modules (now in modules/atlas-12288/)
+# Archive directories (moved experimental/old content)
+docs/archive/
+experiments/
+tpc/
+
+# Build artifacts and temporary files
+dist/
+build/
+artifacts/
+reports/
+*.tsbuildinfo
+*.zip
+*.tar.gz
+auth_token.txt
+
+# Duplicate directories (consolidated)
 atlas-12288/
-!modules/atlas-12288/
-
-# Examples (now consolidated)
-chess-app/
-!examples/chess-app/
-
-# SDK consolidation
+fixtures/
+schemas/
 sdk/
-!hologram-sdk/sdks/
 
 # Python cache
 __pycache__/
